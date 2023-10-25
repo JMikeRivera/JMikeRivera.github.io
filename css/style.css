@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", "sans-serif";
+}
+.navbar-brand > .material-icons-outlined{
+    font-size: 40px;
+}
+
+.about > .material-icons-outlined{
+    font-size: 50px;
+}
+
+.card > img{
+    height: 350px;
+}
+
+.material-icons-outlined{
+    vertical-align: middle;
+    line-height: 1px;
+}
+
+.text-center.fw-bold.mb-2{
+    color: #efeff2;
+}
+
+.text-center.fw-bold.mb-2#estudiante{
+    color: #7f748e;
+}
+
+.text-end.fw-bold.mb-2{
+    color: #efeff2;
+}
+
+.badge.rounded-pill{
+    color: #efeff2;
+    background-color: #7f748e;
+}
+
+.material-icons-outlined#aboutIcons{
+    color: #3f3a47;
+}
+
+.btn#buttonAbout{
+    color: #efeff2;
+    background-color: #7f748e;
+}
+
+.btn#buttonProjects{
+    color: #efeff2;
+    border-color: #7f748e;
+}
+
+.btn#cardButton{
+    border-color: #7f748e;
+}
+
+#contact{
+    padding-bottom: 100px;
+}
