@@ -1,70 +1,82 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat", "sans-serif";
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", "sans-serif";
 }
-.navbar-brand > .material-icons-outlined{
-    font-size: 40px;
-}
-
-.about > .material-icons-outlined{
-    font-size: 50px;
+.navbar-brand > .material-icons-outlined {
+  font-size: 40px;
 }
 
-.card > img{
-    height: 350px;
+.about > .material-icons-outlined {
+  font-size: 50px;
 }
 
-.material-icons-outlined{
-    vertical-align: middle;
-    line-height: 1px;
+.card > img {
+  height: 350px;
 }
 
-.text-center.fw-bold.mb-2{
-    color: #efeff2;
+.material-icons-outlined {
+  vertical-align: middle;
+  line-height: 1px;
 }
 
-.text-center.fw-bold.mb-2#estudiante{
-    color: #7f748e;
+.text-center.fw-bold.mb-2 {
+  color: #efeff2;
 }
 
-.text-end.fw-bold.mb-2{
-    color: #efeff2;
+.text-center.fw-bold.mb-2#estudiante {
+  color: #7f748e;
 }
 
-.badge.rounded-pill{
-    color: #efeff2;
-    background-color: #7f748e;
+.text-end.fw-bold.mb-2 {
+  color: #efeff2;
 }
 
-.material-icons-outlined#aboutIcons{
-    color: #3f3a47;
+.badge.rounded-pill {
+  color: #efeff2;
+  background-color: #7f748e;
 }
 
-.btn#buttonAbout{
-    color: #efeff2;
-    background-color: #7f748e;
+.material-icons-outlined#aboutIcons {
+  color: #3f3a47;
 }
 
-.btn#buttonAbout:hover{
-    transform: scale(1.1)
-    transition: 0.5s
+.btn#buttonAbout {
+  color: #efeff2;
+  background-color: #7f748e;
+  transition: transform 0.5s ease-out;
 }
 
-.btn#buttonProjects{
-    color: #efeff2;
-    border-color: #7f748e;
+.btn#buttonAbout:hover {
+  transform: scale(1.1);
 }
 
-.btn#buttonProjects:hover{
-    transform: scale(1.1)
-    transition: 0.5s
+.btn#buttonProjects {
+  color: #efeff2;
+  border-color: #7f748e;
+  transition: transform 0.5s ease-out;
 }
 
-.btn#cardButton{
-    border-color: #7f748e;
+.btn#buttonProjects:hover {
+  transform: scale(1.1);
 }
 
-#contact{
-    padding-bottom: 100px;
+.btn#cardButton {
+  border-color: #7f748e;
+}
+
+.btn#cardButton:hover {
+  color: #7f748e;
+}
+
+.card#projectCard {
+  transition: rotate 1s ease-out;
+}
+
+.card#projectCard:hover {
+  rotate: 1deg;
+}
+
+#contact {
+  padding-bottom: 100px;
 }
