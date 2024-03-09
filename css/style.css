@@ -46,6 +46,10 @@ body {
     background-color: #7f748e;
 }
 
+.btn#buttonAbout:hover{
+    transform: scale(1.2)
+}
+
 .btn#buttonProjects{
     color: #efeff2;
     border-color: #7f748e;
