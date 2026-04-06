@@ -1,308 +1,1621 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SimOpti — Optimización Monte Carlo META</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --blue-50: #e6f1fb;
+        --blue-100: #b5d4f4;
+        --blue-200: #85b7eb;
+        --blue-400: #378add;
+        --blue-600: #185fa5;
+        --blue-700: #124f8c;
+        --blue-800: #0c447c;
+        --blue-900: #042c53;
+        --gray-50: #f7f8fa;
+        --gray-100: #edeef2;
+        --gray-200: #d8dade;
+        --gray-400: #9ea3ad;
+        --gray-600: #5c6270;
+        --gray-800: #2a2e38;
+        --gray-900: #16191f;
+        --green-400: #639922;
+        --green-600: #3b6d11;
+        --amber-400: #ba7517;
+        --amber-100: #fac775;
+        --red-400: #e24b4a;
+        --red-100: #f7c1c1;
+        --white: #ffffff;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --r-sm: 6px;
+        --r-md: 10px;
+        --r-lg: 14px;
+        --r-xl: 18px;
+        --font: "DM Sans", system-ui, sans-serif;
+        --mono: "DM Mono", monospace;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--font);
+        background: var(--gray-50);
+        color: var(--gray-900);
+        font-size: 14px;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
 
-        <title>Portfolio Miguel Rivera</title>
-        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-        <link rel="manifest" href="favicon/site.webmanifest">
-        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff">
-        
-        <!-- Montserrat font -->
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-        
-        <!-- Material icons -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-        
-        <!-- custom CSS -->
-        <link rel="stylesheet" href="css/style.css">
-        
-        <!-- bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container-fluid px-0">
-            <!-- navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light shadow">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/">
-                        <span class="material-icons-outlined me-1">brush</span>
-                        <span class="text-dark text-center fw-bolder mb-2">Miguel Rivera</span>
-                    </a>
-                    <button
-                    type="button"
-                    class="navbar-toggler"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="container px-3">
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto me-4 my-0 my-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link me-lg-3" href="/">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-lg-3" href="#about">Acerca</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-lg-3" href="#projects">Proyectos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-lg-3" href="#aprendizajes">Aprendizajes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-lg-3" href="#contact">Contacto</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <!-- end navbar -->
-            
-            <!-- hero -->
-            <header class="bg-dark py-5">
-                <div class="container px-5">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5">
-                                <h2 class="text-center fw-bold mb-2">¡Hola! Soy Miguel,</h2>
-                                <h2 class="text-center fw-bold mb-2" id="estudiante">estudiante de ciencias computacionales</h2>
-                                <p class="text-center lead text-muted mb4">
-                                Me interesa incorporar elementos de diseño a todos los proyectos que hago, el diseño es la manera en la que percibimos el mundo
-                                </p>
-                                <div class="d-grid gap-3 d-sm-flex justify-content-center">
-                                    <a class="btn btn-lg text-uppercase fw-bold" id="buttonAbout" href="#about">
-                                        Acerca de mí
-                                    <span class="material-icons-outlined ms-2">help_outline</span>
-                                    </a>
-                                    <a class="btn btn-lg btn-outline text-uppercase fw-bold" id="buttonProjects" href="#projects">
-                                        Mis trabajos
-                                        <span class="material-icons-outlined ms-2">manage_search</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-xxl-6 justify-content-center">
-                            <img class="img-fluid rounded-3 my-5" src="images/Cat (HD).png" alt="gato naranja">
-                        </div>
-                </div>
-            </header>
-            <!-- end hero -->
-            
-            <main>
-            <!-- About -->
-            <section class="text-center py-5" id="about">
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <h2 class="fw-bold">Acerca de mí</h2>
-                        <p class="lead text-muted mb-5">
-                            Soy un estudiante de ciencias computacionales de tercer semestre en el Tecnológico de Monterrey con mucho que aprender
-                        </p>
-                    </div>
-                </div>
-                <div class="container mb-5">
-                    <div class="row">
-                        <div class="col-lg-4 mx-auto mb-5">
-                            <div class="d-flex mb-5 about"></div>
-                                <span class="material-icons-outlined m-auto" id="aboutIcons">palette</span>
-                        <h5>Diseño</h5>
-                        <p class="text-muted mb-0">
-                            La ingeniería y el diseño son conceptos intrínsecos, me gusta explorar los límites de esta relación
-                        </p>
-                        </div>
-                        <div class="col-lg-4 mx-auto mb-5">
-                            <div class="d-flex mb-5 about"></div>
-                                <span class="material-icons-outlined m-auto" id="aboutIcons">code</span>
-                        <h5>Desarrollo</h5>
-                        <p class="text-muted mb-0">
-                            Todo proyecto tiene que tener una meta basada en la vida real, me encargo de crear código que resuelva situaciones reales
-                        </p>
-                        </div>
-                        <div class="col-lg-4 mx-auto mb-5">
-                            <div class="d-flex mb-5 about"></div>
-                                <span class="material-icons-outlined m-auto" id="aboutIcons">settings</span>
-                        <h5>Mantenimiento</h5>
-                        <p class="text-muted mb-0">
-                            Cualquier código debe tener durabilidad y facilidad de mantenimiento, me propongo mantener este estándar en todos mis proyectos 
-                        </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End about -->
+      /* ── NAV ── */
+      nav {
+        background: var(--blue-900);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+        height: 56px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+      .nav-brand svg {
+        opacity: 0.85;
+      }
+      .nav-badge {
+        background: var(--blue-700);
+        color: var(--blue-100);
+        font-size: 11px;
+        font-weight: 500;
+        padding: 2px 8px;
+        border-radius: 20px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .nav-links {
+        display: flex;
+        gap: 4px;
+      }
+      .nav-link {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.65);
+        font: inherit;
+        font-size: 13px;
+        padding: 6px 12px;
+        border-radius: var(--r-sm);
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+      .nav-link:hover,
+      .nav-link.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white);
+      }
 
-            <hr>
+      /* ── LAYOUT ── */
+      .main {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        min-height: calc(100vh - 56px);
+      }
+      .sidebar {
+        background: var(--white);
+        border-right: 1px solid var(--gray-200);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .content {
+        padding: 2rem;
+        overflow: auto;
+      }
 
-            <!-- Projects -->
-            <section class="text-center py-5" id="projects">
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <h2 class="fw-bold">Proyectos</h2>
-                        <p class="lead text-muted mb-5">
-                            Mira mis proyectos mas relevantes
-                        </p>
-                    </div>
-                </div>
-                <div class="container mb-5">
-                    <div class="row">
-                        <div class="col-lg-4 mx-auto mb-5">
-                            <div class="card h-100 shadow-lg border-0 bg-light" id="projectCard">
-                                <img class="card-img-top" src="images/Node (HD).png" alt="proyecto 1">
-                                <div class="card-body p-4">
-                                    <h5 class="card-titlem mb-3">Algoritmos y estructuras de datos</h5>
-                                    <div class="mb-2">
-                                        <div class="badge rounded-pill">C++</div>
-                                        <div class="badge rounded-pill">Estructura de datos</div>
-                                        <div class="badge rounded-pill">Ciencia de datos</div>
-                                    </div>
-                                    <p class="card-text">
-                                        Ejemplo de la definición y uso de una lista doblemente enlazada para la búsqueda de IPs
-                                    </p>
-                                </div>
-                                <div class="card-footer bg-transparent mb-3">
-                                    <a class="btn btn-sm text-uppercase" id="cardButton"
-                                    href="https://github.com/JMikeRivera/doublyLinkedList"
-                                    target="_blank">
-                                    <span class="material-icons-outlined m-1">code</span>
-                                    Código base
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mx-auto mb-5">
-                            <div class="card h-100 shadow-lg border-0 bg-light" id="projectCard">
-                                <img class="card-img-top" src="images/Doctor (HD).png" alt="proyecto 2">
-                                <div class="card-body p-4">
-                                    <h5 class="card-titlem mb-3">Simulación de campos eléctricos</h5>
-                                    <div class="mb-2">
-                                        <div class="badge rounded-pill">Matlab</div>
-                                        <div class="badge rounded-pill">Física</div>
-                                    </div>
-                                    <p class="card-text">
-                                        Para detectar casos de malaria se puede utilizar el metodo de la dielectroforesis, este programa simula el comportamiento usado en la dielectroforesis
-                                    </p>
-                                </div>
-                                <div class="card-footer bg-transparent mb-3">
-                                    <a class="btn btn-sm text-uppercase" id="cardButton"
-                                    href="https://github.com/JMikeRivera/simulationOfElectricalFields"
-                                    target="_blank">
-                                    <span class="material-icons-outlined m-1">code</span>
-                                    Código base
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mx-auto mb-5">
-                            <div class="card h-100 shadow-lg border-0 bg-light" id="projectCard">
-                                <img class="card-img-top" src="images/Games (HD).png" alt="proyecto 3">
-                                <div class="card-body p-4">
-                                    <h5 class="card-titlem mb-3">Juegos de python</h5>
-                                    <div class="mb-2">
-                                        <div class="badge rounded-pill">Python</div>
-                                        <div class="badge rounded-pill">Game development</div>
-                                        <div class="badge rounded-pill">diseño de UX/UI</div>
-                                    </div>
-                                    <p class="card-text">
-                                        He desarrollado 2 juegos en python, un memorama para ayudar a niños aprender ingles, y una recreación de 2048
-                                    </p>
-                                </div>
-                                <div class="card-footer bg-transparent mb-3">
-                                    <a class="btn btn-sm text-uppercase" id="cardButton"
-                                    href="https://github.com/JMikeRivera/pythonGames"
-                                    target="_blank">
-                                    <span class="material-icons-outlined m-1">code</span>
-                                    Código base
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End projects -->
+      /* ── SIDEBAR ── */
+      .sidebar-section {
+      }
+      .sidebar-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--gray-400);
+        margin-bottom: 0.75rem;
+      }
+      .file-drop {
+        border: 1.5px dashed var(--gray-200);
+        border-radius: var(--r-lg);
+        padding: 1.25rem;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+        background: var(--gray-50);
+      }
+      .file-drop:hover,
+      .file-drop.drag {
+        border-color: var(--blue-400);
+        background: var(--blue-50);
+      }
+      .file-drop input {
+        display: none;
+      }
+      .file-drop-icon {
+        width: 32px;
+        height: 32px;
+        margin: 0 auto 0.5rem;
+        background: var(--blue-50);
+        border-radius: var(--r-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .file-drop-icon svg {
+        color: var(--blue-600);
+      }
+      .file-drop p {
+        font-size: 12px;
+        color: var(--gray-600);
+        line-height: 1.4;
+      }
+      .file-drop p strong {
+        color: var(--blue-600);
+        font-weight: 500;
+      }
+      .file-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0.5rem 0.75rem;
+        border-radius: var(--r-md);
+        font-size: 12px;
+        margin-top: 0.5rem;
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+      }
+      .file-status.ok {
+        background: #eaf3de;
+        border-color: #c0dd97;
+        color: var(--green-600);
+      }
+      .file-status.error {
+        background: #fcebeb;
+        border-color: var(--red-100);
+        color: var(--red-400);
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .dot-ok {
+        background: var(--green-400);
+      }
+      .dot-warn {
+        background: var(--amber-400);
+      }
+      .dot-idle {
+        background: var(--gray-400);
+      }
 
-            <!-- Education -->
-            <header class="bg-dark py-5" id="aprendizajes">
-                <div class="container px-5">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5">
-                                <h2 class="text-end fw-bold mb-2">Aprendizajes como ICT</h2>
-                                <p class="text-end lead text-muted mb4">
-                                Durante mi tiempo en la etapa de exploración de ICT pude aplicar mis habilidades de programación en la modelación de
-                                situaciones reales, es importante para mi seguir explorando todo lo que la carrera tiene que ofrecer, siempre siendo fiel
-                                a mis creencias en el diseño y la eficiencia
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-xxl-6 justify-content-center">
-                            <img class="img-fluid rounded-3 my-5" src="images/Create Chatbot (HD).png" alt="chatbot">
-                        </div>
-                </div>
-            </header>
-            <!-- End education -->
+      /* ── CONFIG SLIDERS ── */
+      .cfg-row {
+        margin-bottom: 0.85rem;
+      }
+      .cfg-row label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--gray-600);
+        margin-bottom: 4px;
+      }
+      .cfg-row label span {
+        font-weight: 500;
+        color: var(--gray-800);
+        font-family: var(--mono);
+        font-size: 11px;
+      }
+      input[type="range"] {
+        width: 100%;
+        height: 4px;
+        accent-color: var(--blue-600);
+        cursor: pointer;
+      }
+      select {
+        width: 100%;
+        padding: 6px 10px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-sm);
+        font: inherit;
+        font-size: 12px;
+        color: var(--gray-800);
+        background: var(--white);
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239EA3AD' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+      }
 
-            <!-- Contact -->
-            <section class="text-center py-5" id="contact">
-                <div class="container py-5">
-                    <div class="row justify-content-center">
-                        <h2 class="fw-bold">Contacto</h2>
-                        <p class="lead text-muted mb-5">
-                            ¿Quieres saber mas acerca de mí? me encantaria escucharte
-                        </p>
-                    </div>
-                </div>
-                <div class="container mb-5">
-                    <div class="row align-items-center">
-                        <div class="col-xl-5 col-xxl-6">
-                            <img class="img-fluid rounded-3 my-5" id="contact" src="images/Nfc Payment (HD).png" alt="contacto">
-                        </div>
-                        <div class="col-lg-8 col-xl-7 col-xxl-6 mb-5">
-                            <div class="mb-5">
-                                <div class="text-uppercase mb-2">Ubicación</div>
-                                <p class="lead mb-0">Monterrey, México</p>
-                            </div>
-                            <div class="mb-5">
-                                <div class="text-uppercase mb-2">Teléfono</div>
-                                <p class="lead mb-0">+52 866-254-53-11</p>
-                            </div>
-                            <div class="mb-5">
-                                <div class="text-uppercase mb-2">E-mail</div>
-                                <a class="lead mb-0" href="mailto: smikerivera@gmail.com">smikerivera@gmail.com</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End contact -->
-            </main>
+      /* ── BUTTON ── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 1.25rem;
+        height: 38px;
+        border: none;
+        border-radius: var(--r-md);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          opacity 0.15s,
+          transform 0.1s;
+      }
+      .btn:active {
+        transform: scale(0.98);
+      }
+      .btn-primary {
+        background: var(--blue-600);
+        color: var(--white);
+      }
+      .btn-primary:hover {
+        background: var(--blue-700);
+      }
+      .btn-primary:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid var(--gray-200);
+        color: var(--gray-600);
+      }
+      .btn-ghost:hover {
+        background: var(--gray-100);
+      }
+      .btn-sm {
+        height: 30px;
+        padding: 0 0.9rem;
+        font-size: 12px;
+        border-radius: var(--r-sm);
+      }
+
+      /* ── TABS ── */
+      .tabs {
+        display: flex;
+        gap: 2px;
+        border-bottom: 1px solid var(--gray-200);
+        margin-bottom: 1.75rem;
+      }
+      .tab {
+        background: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        font: inherit;
+        font-size: 13px;
+        color: var(--gray-600);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: color 0.15s;
+        margin-bottom: -1px;
+      }
+      .tab.active {
+        color: var(--blue-600);
+        border-bottom-color: var(--blue-600);
+        font-weight: 500;
+      }
+      .tab:hover:not(.active) {
+        color: var(--gray-800);
+      }
+      .tab-panel {
+        display: none;
+      }
+      .tab-panel.active {
+        display: block;
+      }
+
+      /* ── METRIC CARDS ── */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 1.75rem;
+      }
+      .metric-card {
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-lg);
+        padding: 1rem 1.1rem;
+      }
+      .metric-card-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--gray-400);
+        margin-bottom: 0.3rem;
+      }
+      .metric-card-value {
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--gray-900);
+        font-family: var(--mono);
+      }
+      .metric-card-sub {
+        font-size: 11px;
+        color: var(--gray-400);
+        margin-top: 2px;
+      }
+      .metric-accent-blue .metric-card-value {
+        color: var(--blue-600);
+      }
+      .metric-accent-green .metric-card-value {
+        color: var(--green-600);
+      }
+      .metric-accent-amber .metric-card-value {
+        color: var(--amber-400);
+      }
+      .metric-accent-red .metric-card-value {
+        color: var(--red-400);
+      }
+
+      /* ── PROGRESS ── */
+      .progress-bar {
+        background: var(--gray-100);
+        border-radius: 20px;
+        height: 6px;
+        overflow: hidden;
+        margin: 0.5rem 0;
+      }
+      .progress-fill {
+        height: 100%;
+        background: var(--blue-600);
+        border-radius: 20px;
+        transition: width 0.3s ease;
+      }
+
+      /* ── TABLE ── */
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-lg);
+        background: var(--white);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      thead th {
+        background: var(--gray-50);
+        border-bottom: 1px solid var(--gray-200);
+        padding: 0.6rem 0.9rem;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--gray-600);
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+      }
+      tbody td {
+        padding: 0.55rem 0.9rem;
+        border-bottom: 1px solid var(--gray-100);
+        color: var(--gray-800);
+        white-space: nowrap;
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      tbody tr:hover {
+        background: var(--blue-50);
+      }
+      .td-mono {
+        font-family: var(--mono);
+        font-size: 11px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 7px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .badge-blue {
+        background: var(--blue-50);
+        color: var(--blue-800);
+      }
+      .badge-green {
+        background: #eaf3de;
+        color: var(--green-600);
+      }
+      .badge-amber {
+        background: #faeeda;
+        color: var(--amber-400);
+      }
+      .badge-red {
+        background: #fcebeb;
+        color: var(--red-400);
+      }
+      .badge-gray {
+        background: var(--gray-100);
+        color: var(--gray-600);
+      }
+      .delta-pos {
+        color: var(--green-600);
+        font-weight: 500;
+      }
+      .delta-neg {
+        color: var(--red-400);
+        font-weight: 500;
+      }
+      .delta-zero {
+        color: var(--gray-400);
+      }
+
+      /* ── LOG CONSOLE ── */
+      .console-box {
+        background: var(--gray-900);
+        color: #a6e3a1;
+        border-radius: var(--r-lg);
+        padding: 1rem 1.25rem;
+        font-family: var(--mono);
+        font-size: 11px;
+        line-height: 1.8;
+        max-height: 220px;
+        overflow-y: auto;
+        border: 1px solid var(--gray-800);
+      }
+      .console-box .log-info {
+        color: #89dceb;
+      }
+      .console-box .log-warn {
+        color: #f9e2af;
+      }
+      .console-box .log-error {
+        color: #f38ba8;
+      }
+
+      /* ── CHART ── */
+      .chart-area {
+        background: var(--white);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-lg);
+        padding: 1.25rem;
+        margin-bottom: 1.75rem;
+      }
+      .chart-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--gray-600);
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .bar-chart {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .bar-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .bar-label {
+        width: 120px;
+        font-size: 11px;
+        color: var(--gray-600);
+        text-align: right;
+        flex-shrink: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .bar-track {
+        flex: 1;
+        height: 16px;
+        background: var(--gray-100);
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        background: var(--blue-400);
+        transition: width 0.5s ease;
+      }
+      .bar-fill-green {
+        background: #97c459;
+      }
+      .bar-fill-amber {
+        background: var(--amber-100);
+      }
+      .bar-val {
+        width: 70px;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--gray-600);
+      }
+
+      /* ── EMPTY STATE ── */
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 2rem;
+        text-align: center;
+        color: var(--gray-400);
+      }
+      .empty-state svg {
+        margin-bottom: 1rem;
+        opacity: 0.4;
+      }
+      .empty-state h3 {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--gray-600);
+        margin-bottom: 0.5rem;
+      }
+      .empty-state p {
+        font-size: 13px;
+        max-width: 300px;
+        line-height: 1.5;
+      }
+
+      /* ── TOAST ── */
+      #toast {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        background: var(--gray-900);
+        color: var(--white);
+        padding: 0.75rem 1.25rem;
+        border-radius: var(--r-md);
+        font-size: 13px;
+        box-shadow: var(--shadow-md);
+        transform: translateY(2rem);
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 999;
+      }
+      #toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 900px) {
+        .main {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          border-right: none;
+          border-bottom: 1px solid var(--gray-200);
+        }
+        .metrics-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-brand">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+        SimOpti
+        <span class="nav-badge">Monte Carlo</span>
+      </div>
+      <div class="nav-links">
+        <button class="nav-link active" onclick="showTab('dashboard')">
+          Dashboard
+        </button>
+        <button class="nav-link" onclick="showTab('results')">
+          Resultados
+        </button>
+        <button class="nav-link" onclick="showTab('log')">Consola</button>
+      </div>
+    </nav>
+
+    <div class="main">
+      <!-- ══ SIDEBAR ══ -->
+      <aside class="sidebar">
+        <div class="sidebar-section">
+          <div class="sidebar-label">Políticas de inventario</div>
+          <div
+            class="file-drop"
+            id="drop-pol"
+            onclick="document.getElementById('input-pol').click()"
+          >
+            <input type="file" id="input-pol" accept=".json,.csv" />
+            <div class="file-drop-icon">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+            </div>
+            <p>
+              <strong>Haz clic o arrastra</strong><br />ui_all_pol_inv.json /
+              .csv
+            </p>
+          </div>
+          <div class="file-status" id="status-pol">
+            <span class="dot dot-idle"></span>
+            <span id="label-pol">Sin archivo</span>
+          </div>
         </div>
 
-        <hr>
-
-        <!-- Footer -->
-        <footer class="text-center py-4">
-            <div class="container px-5 mb-2">
-                Copyright &copy; 2023 Miguel Rivera
+        <div class="sidebar-section">
+          <div class="sidebar-label">Distribuciones de demanda</div>
+          <div
+            class="file-drop"
+            id="drop-dist"
+            onclick="document.getElementById('input-dist').click()"
+          >
+            <input type="file" id="input-dist" accept=".json,.csv" />
+            <div class="file-drop-icon">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
             </div>
-        </footer>
-        <!-- End footer -->
+            <p>
+              <strong>Haz clic o arrastra</strong
+              ><br />distribucion_demanda_diaria.json / .csv<br /><em
+                style="opacity: 0.6"
+                >(opcional)</em
+              >
+            </p>
+          </div>
+          <div class="file-status" id="status-dist">
+            <span class="dot dot-idle"></span>
+            <span id="label-dist">Sin archivo (usará fallback normal)</span>
+          </div>
+        </div>
 
-        <!-- custom JS -->
-        <script src="js/scripts.js"></script>
+        <div class="sidebar-section">
+          <div class="sidebar-label">Configuración</div>
 
-        <!-- bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+          <div class="cfg-row">
+            <label>Replicaciones<span id="val-reps">200</span></label>
+            <input
+              type="range"
+              min="50"
+              max="500"
+              step="50"
+              value="200"
+              id="cfg-reps"
+              oninput="
+                document.getElementById('val-reps').textContent = this.value
+              "
+            />
+          </div>
+          <div class="cfg-row">
+            <label>Horizonte (días)<span id="val-hor">6000</span></label>
+            <input
+              type="range"
+              min="1000"
+              max="10000"
+              step="500"
+              value="6000"
+              id="cfg-hor"
+              oninput="
+                document.getElementById('val-hor').textContent = this.value
+              "
+            />
+          </div>
+          <div class="cfg-row">
+            <label>Tolerancia servicio<span id="val-tol">10%</span></label>
+            <input
+              type="range"
+              min="1"
+              max="25"
+              step="1"
+              value="10"
+              id="cfg-tol"
+              oninput="
+                document.getElementById('val-tol').textContent =
+                  this.value + '%'
+              "
+            />
+          </div>
+          <div class="cfg-row">
+            <label>Peso: Servicio<span id="val-ws">55%</span></label>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="5"
+              value="55"
+              id="cfg-ws"
+              oninput="
+                document.getElementById('val-ws').textContent = this.value + '%'
+              "
+            />
+          </div>
+          <div class="cfg-row">
+            <label>Peso: Faltante<span id="val-wf">30%</span></label>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="5"
+              value="30"
+              id="cfg-wf"
+              oninput="
+                document.getElementById('val-wf').textContent = this.value + '%'
+              "
+            />
+          </div>
+        </div>
 
-    </body>
+        <div
+          style="
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+          "
+        >
+          <button
+            class="btn btn-primary"
+            id="btn-run"
+            onclick="runSimulation()"
+            disabled
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Ejecutar simulación
+          </button>
+          <button
+            class="btn btn-ghost btn-sm"
+            id="btn-export"
+            onclick="exportCSV()"
+            disabled
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Exportar CSV
+          </button>
+        </div>
+      </aside>
+
+      <!-- ══ CONTENT ══ -->
+      <main class="content">
+        <!-- TAB: Dashboard -->
+        <div class="tab-panel active" id="panel-dashboard">
+          <div class="tabs">
+            <button
+              class="tab active"
+              onclick="switchPanel('dashboard', 'dashboard')"
+            >
+              Resumen
+            </button>
+          </div>
+
+          <div class="metrics-grid" id="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-card-label">SKUs cargados</div>
+              <div class="metric-card-value" id="m-skus">—</div>
+              <div class="metric-card-sub">políticas válidas</div>
+            </div>
+            <div class="metric-card metric-accent-blue">
+              <div class="metric-card-label">Procesados</div>
+              <div class="metric-card-value" id="m-proc">—</div>
+              <div class="metric-card-sub">de la simulación actual</div>
+            </div>
+            <div class="metric-card metric-accent-green">
+              <div class="metric-card-label">Score promedio</div>
+              <div class="metric-card-value" id="m-score">—</div>
+              <div class="metric-card-sub">sobre 100 pts</div>
+            </div>
+            <div class="metric-card metric-accent-amber">
+              <div class="metric-card-label">Δ META promedio</div>
+              <div class="metric-card-value" id="m-delta">—</div>
+              <div class="metric-card-sub">vs. política actual</div>
+            </div>
+          </div>
+
+          <div
+            id="progress-section"
+            style="display: none; margin-bottom: 1.5rem"
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                font-size: 12px;
+                color: var(--gray-600);
+                margin-bottom: 4px;
+              "
+            >
+              <span>Progreso de simulación</span>
+              <span id="progress-pct">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div
+                class="progress-fill"
+                id="progress-fill"
+                style="width: 0%"
+              ></div>
+            </div>
+            <div
+              style="font-size: 11px; color: var(--gray-400); margin-top: 4px"
+              id="progress-detail"
+            >
+              Iniciando…
+            </div>
+          </div>
+
+          <div class="chart-area" id="dist-chart" style="display: none">
+            <div class="chart-title">Distribución por tipo de demanda</div>
+            <div class="bar-chart" id="dist-bars"></div>
+          </div>
+
+          <div class="chart-area" id="score-chart" style="display: none">
+            <div class="chart-title">Score compuesto — Top SKUs</div>
+            <div class="bar-chart" id="score-bars"></div>
+          </div>
+
+          <div id="empty-dash" class="empty-state">
+            <svg
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.2"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <polyline points="9 9 9 15 12 12 15 15 15 9" />
+            </svg>
+            <h3>Sin datos aún</h3>
+            <p>
+              Carga el archivo de políticas y ejecuta la simulación para ver
+              resultados aquí.
+            </p>
+          </div>
+        </div>
+
+        <!-- TAB: Resultados -->
+        <div class="tab-panel" id="panel-results">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 1.25rem;
+              flex-wrap: wrap;
+              gap: 0.5rem;
+            "
+          >
+            <div>
+              <input
+                type="text"
+                id="search-table"
+                placeholder="Buscar SKU, Ubicación o Producto…"
+                style="
+                  padding: 6px 12px;
+                  border: 1px solid var(--gray-200);
+                  border-radius: var(--r-md);
+                  font: inherit;
+                  font-size: 12px;
+                  width: 260px;
+                  outline: none;
+                "
+                oninput="filterTable()"
+              />
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
+              <select
+                id="filter-dist"
+                style="width: auto; font-size: 12px"
+                onchange="filterTable()"
+              >
+                <option value="">Todas las distribuciones</option>
+                <option>POISSON</option>
+                <option>NB</option>
+                <option>ZINB</option>
+                <option>NO_HISTORY</option>
+                <option>ZERO_ONLY</option>
+                <option>NORMAL_FALLBACK</option>
+              </select>
+              <select
+                id="filter-feasible"
+                style="width: auto; font-size: 12px"
+                onchange="filterTable()"
+              >
+                <option value="">Todos</option>
+                <option value="true">Factibles</option>
+                <option value="false">No factibles</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap" style="max-height: 600px; overflow-y: auto">
+            <table id="results-table">
+              <thead>
+                <tr>
+                  <th onclick="sortTable('SKU')">SKU ↕</th>
+                  <th onclick="sortTable('Ubicacion')">Ubicación ↕</th>
+                  <th onclick="sortTable('Producto')">Producto ↕</th>
+                  <th>Distribución</th>
+                  <th onclick="sortTable('metaInitial')">META actual ↕</th>
+                  <th onclick="sortTable('metaOptimized')">META óptimo ↕</th>
+                  <th onclick="sortTable('deltaMeta')">Δ META ↕</th>
+                  <th onclick="sortTable('serviceAchieved')">Servicio ↕</th>
+                  <th onclick="sortTable('totalScore')">Score ↕</th>
+                  <th>Factible</th>
+                </tr>
+              </thead>
+              <tbody id="results-tbody">
+                <tr>
+                  <td
+                    colspan="10"
+                    style="
+                      text-align: center;
+                      padding: 3rem;
+                      color: var(--gray-400);
+                    "
+                  >
+                    Aún no hay resultados. Ejecuta la simulación primero.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB: Consola -->
+        <div class="tab-panel" id="panel-log">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 0.75rem;
+            "
+          >
+            <span
+              style="
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: var(--gray-400);
+              "
+              >Salida del proceso</span
+            >
+            <button class="btn btn-ghost btn-sm" onclick="clearLog()">
+              Limpiar
+            </button>
+          </div>
+          <div class="console-box" id="log-box">
+            <div class="log-info">
+              [SimOpti] Listo. Carga los archivos para comenzar.
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="toast"></div>
+
+    <script>
+      // ═══════════════════════════════════════════════════
+      // STATE
+      // ═══════════════════════════════════════════════════
+      let policyData = null;
+      let distData = null;
+      let results = [];
+      let sortKey = "totalScore";
+      let sortDir = -1;
+      let running = false;
+      let workerPool = [];
+
+      // ═══════════════════════════════════════════════════
+      // TABS / NAV
+      // ═══════════════════════════════════════════════════
+      function showTab(name) {
+        document
+          .querySelectorAll(".nav-link")
+          .forEach((b) => b.classList.remove("active"));
+        event.target.classList.add("active");
+        document
+          .querySelectorAll(".tab-panel")
+          .forEach((p) => p.classList.remove("active"));
+        document.getElementById("panel-" + name).classList.add("active");
+      }
+
+      function switchPanel(panelId, tabId) {}
+
+      // ═══════════════════════════════════════════════════
+      // FILE LOADING
+      // ═══════════════════════════════════════════════════
+      function setupDrop(dropId, inputId, onLoad) {
+        const drop = document.getElementById(dropId);
+        const input = document.getElementById(inputId);
+        drop.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          drop.classList.add("drag");
+        });
+        drop.addEventListener("dragleave", () => drop.classList.remove("drag"));
+        drop.addEventListener("drop", (e) => {
+          e.preventDefault();
+          drop.classList.remove("drag");
+          if (e.dataTransfer.files[0])
+            readFile(e.dataTransfer.files[0], onLoad);
+        });
+        input.addEventListener("change", () => {
+          if (input.files[0]) readFile(input.files[0], onLoad);
+        });
+      }
+
+      function readFile(file, cb) {
+        const reader = new FileReader();
+        reader.onload = (e) => cb(file.name, e.target.result);
+        reader.readAsText(file, "UTF-8");
+      }
+
+      function parseFileContent(name, raw) {
+        const ext = name.split(".").pop().toLowerCase();
+        if (ext === "json") {
+          try {
+            return JSON.parse(raw);
+          } catch {
+            toast("Error: JSON inválido en " + name);
+            return null;
+          }
+        }
+        if (ext === "csv") return csvToObjects(raw);
+        toast("Formato no soportado: " + name);
+        return null;
+      }
+
+      function csvToObjects(csv) {
+        const lines = csv.trim().split(/\r?\n/);
+        if (lines.length < 2) return [];
+        const headers = lines[0]
+          .split(",")
+          .map((h) => h.trim().replace(/^"|"$/g, ""));
+        return lines.slice(1).map((line) => {
+          const vals = splitCSVLine(line);
+          const obj = {};
+          headers.forEach((h, i) => {
+            let v = (vals[i] || "").trim().replace(/^"|"$/g, "");
+            const n = Number(v);
+            obj[h] = v === "" ? null : isNaN(n) ? v : n;
+          });
+          return obj;
+        });
+      }
+
+      function splitCSVLine(line) {
+        const result = [],
+          re = /,(?=(?:[^"]*"[^"]*")*[^"]*$)/;
+        return line.split(re);
+      }
+
+      function setStatus(statusId, labelId, ok, text) {
+        const el = document.getElementById(statusId);
+        el.className = "file-status " + (ok ? "ok" : "error");
+        el.querySelector(".dot").className =
+          "dot " + (ok ? "dot-ok" : "dot-warn");
+        document.getElementById(labelId).textContent = text;
+      }
+
+      setupDrop("drop-pol", "input-pol", (name, raw) => {
+        const data = parseFileContent(name, raw);
+        if (!data) return;
+        const valid = Array.isArray(data) ? data : data.data || [];
+        // filter out Ignorado=1
+        policyData = valid.filter(
+          (r) => r.Ignorado !== 1 && r.Ignorado !== "1",
+        );
+        setStatus(
+          "status-pol",
+          "label-pol",
+          true,
+          `${policyData.length} SKUs cargados`,
+        );
+        document.getElementById("m-skus").textContent = policyData.length;
+        document.getElementById("empty-dash").style.display = "none";
+        updateRunButton();
+        log(
+          `[INFO] Políticas cargadas: ${policyData.length} SKUs válidos (archivo: ${name})`,
+          "info",
+        );
+      });
+
+      setupDrop("drop-dist", "input-dist", (name, raw) => {
+        const data = parseFileContent(name, raw);
+        if (!data) return;
+        distData = Array.isArray(data) ? data : data.data || [];
+        setStatus(
+          "status-dist",
+          "label-dist",
+          true,
+          `${distData.length} distribuciones cargadas`,
+        );
+        updateRunButton();
+        log(
+          `[INFO] Distribuciones cargadas: ${distData.length} (archivo: ${name})`,
+          "info",
+        );
+      });
+
+      function updateRunButton() {
+        document.getElementById("btn-run").disabled =
+          !policyData || policyData.length === 0 || running;
+      }
+
+      // ═══════════════════════════════════════════════════
+      // LOG
+      // ═══════════════════════════════════════════════════
+      function log(msg, type = "info") {
+        const box = document.getElementById("log-box");
+        const div = document.createElement("div");
+        div.className =
+          type === "warn"
+            ? "log-warn"
+            : type === "error"
+              ? "log-error"
+              : "log-info";
+        div.textContent = msg;
+        box.appendChild(div);
+        box.scrollTop = box.scrollHeight;
+      }
+      function clearLog() {
+        document.getElementById("log-box").innerHTML = "";
+      }
+      function toast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 3000);
+      }
+
+      // ═══════════════════════════════════════════════════
+      // SIMULATION ENGINE (inline Web Worker via Blob)
+      // ═══════════════════════════════════════════════════
+      const WORKER_CODE = `
+function clamp(x,lo,hi){return Math.max(lo,Math.min(hi,x))}
+function normalizeServiceLevel(x){const v=Number(x);if(!Number.isFinite(v))return 0;if(v>1.0001)return v/100;return v}
+function randUniform(){return Math.random()}
+function randNormal(m=0,s=1){const u1=Math.max(randUniform(),1e-12),u2=randUniform();return m+s*Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2)}
+function samplePoisson(lambda){const lam=Math.max(0,lambda||0);if(lam<=0)return 0;if(lam<30){const L=Math.exp(-lam);let k=0,p=1;do{k++;p*=randUniform();}while(p>L);return k-1;}return Math.max(0,Math.round(randNormal(lam,Math.sqrt(lam))))}
+function sampleGamma(shape,scale=1){let k=Number(shape)||0;const theta=Math.max(Number(scale)||0,0);if(k<=0||theta<=0)return 0;if(k<1){const u=Math.max(randUniform(),1e-12);return sampleGamma(k+1,theta)*Math.pow(u,1/k)}const d=k-1/3,c=1/Math.sqrt(9*d);while(true){let x,v;do{x=randNormal(0,1);v=1+c*x;}while(v<=0);v=v*v*v;const u=randUniform();if(u<1-0.0331*Math.pow(x,4))return d*v*theta;if(Math.log(u)<0.5*x*x+d*(1-v+Math.log(v)))return d*v*theta;}}
+function sampleNB(n,p){const nn=Number(n),pp=Number(p);if(!Number.isFinite(nn)||!Number.isFinite(pp))return null;if(nn<=0||pp<=0||pp>=1)return null;return samplePoisson(sampleGamma(nn,(1-pp)/pp))}
+function fallbackNormal(mu,sigma,k){const m=Math.max(Number(mu)||0,0),s=Math.max(Number(sigma)||0,0);let d=randNormal(m,Math.max(s,1e-9));return Math.max(0,clamp(d,Math.max(0,m-k*s),Math.max(0,m+k*s)))}
+function sampleDemand(row,cfg){const dist=row.distInfo;if(!dist||!dist.distribucion){return fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp)}const t=String(dist.distribucion).toUpperCase(),p0=clamp(Number(dist.p0)||0,0,1),lambda=Math.max(0,Number(dist.parametros&&dist.parametros.lambda)||0),nb_n=Number(dist.parametros&&dist.parametros.nb_n),nb_p=Number(dist.parametros&&dist.parametros.nb_p);if(t==='NO_HISTORY')return fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp);if(t==='ZERO_ONLY')return 0;if(t==='POISSON')return lambda>0?samplePoisson(lambda):fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp);if(t==='NB'){const nb=sampleNB(nb_n,nb_p);return nb!=null?nb:fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp)}if(t==='ZINB'){if(randUniform()<=p0)return 0;const nb=sampleNB(nb_n,nb_p);return nb!=null?nb:fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp)}return fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp)}
+function simulate(row,meta,cfg){const S=Math.max(0,meta),R=Math.max(1,Math.round(Number(row.Frecuencia_Revision_dias)||1)),LT=Math.max(0,Math.round(Number(row.Lead_Time_Abasto)||0)),totalCycles=Math.max(1,Math.floor(cfg.horizonDays/R));let onHand=S,pipeline=[],okCycles=0,stockoutCycles=0,totalDemand=0,totalServed=0,totalOrdered=0,totalDelivered=0,totalShortageUnits=0,endingSum=0,days=0;for(let cycle=1;cycle<=totalCycles;cycle++){let hadStockout=false;for(let d=1;d<=R;d++){const day=(cycle-1)*R+d;for(let i=pipeline.length-1;i>=0;i--){if(pipeline[i].arrivesOnDay===day){onHand+=pipeline[i].qty;totalDelivered+=pipeline[i].qty;pipeline.splice(i,1)}}const demand=Math.max(0,sampleDemand(row,cfg));totalDemand+=demand;if(onHand>=demand){onHand-=demand;totalServed+=demand}else{totalServed+=onHand;totalShortageUnits+=demand-onHand;onHand=0;hadStockout=true}endingSum+=onHand;days++}if(!hadStockout)okCycles++;else stockoutCycles++;const pipeQty=pipeline.reduce((a,p)=>a+p.qty,0),invPos=onHand+pipeQty,orderQty=Math.max(0,S-invPos);if(orderQty>0)pipeline.push({arrivesOnDay:cycle*R+LT,qty:orderQty});totalOrdered+=orderQty||0;}const cycleServiceLevel=okCycles/Math.max(1,totalCycles),avgEndingInventory=endingSum/Math.max(1,days),shortageRatio=totalShortageUnits/Math.max(1,totalDemand);return{cycleServiceLevel,avgEndingInventory,totalDemand,totalServed,totalOrdered,totalDelivered,totalShortageUnits,shortageRatio,totalCycles,stockoutCycles,okCycles,simulatedDays:days}}
+function score(row,meta,metrics,cfg){const w=cfg.scoring.weights,target=clamp(normalizeServiceLevel(row.Nivel_Servicio),0,1),tol=Math.max(1e-9,cfg.scoring.serviceTolerance),svcGap=metrics.cycleServiceLevel-target,svcScore=clamp(1-Math.abs(svcGap)/tol,0,1),shortRatio=clamp(metrics.shortageRatio,0,1),shortScore=clamp(1-shortRatio,0,1),expectedNeed=Math.max(1,(Number(row.Demanda_Promedio_Diaria)||1)*((Number(row.Lead_Time_Abasto)||1)+(Number(row.Frecuencia_Revision_dias)||1))),overstockUnits=Math.max(0,(Number(metrics.avgEndingInventory)||0)-expectedNeed),overstockRatio=overstockUnits/expectedNeed,overstockScore=1/(1+overstockRatio);let total=svcScore*w.service+shortScore*w.shortage+overstockScore*w.overstock;const metaRatio=meta/Math.max(1,expectedNeed);if(cfg.scoring.penalizeMetaFarAboveNeed){if(metaRatio>10)total*=0.6;if(metaRatio>20)total*=0.3;if(metaRatio>50)total*=0.1}if(Math.abs(svcGap)>tol)total*=0.25;return{serviceScore:svcScore,shortageScore:shortScore,overstockScore,totalScore:total,serviceGap:svcGap,shortageRatio:shortRatio,overstockRatio,expectedNeed,metaToNeedRatio:metaRatio}}
+function evalMeta(row,meta,cfg,reps){const r=Math.max(1,Math.round(reps));const acc={cycleServiceLevel:0,avgEndingInventory:0,totalDemand:0,totalServed:0,totalOrdered:0,totalDelivered:0,totalShortageUnits:0,shortageRatio:0,stockoutCycles:0,okCycles:0};for(let i=0;i<r;i++){const m=simulate(row,meta,cfg);for(const k of Object.keys(acc))acc[k]+=m[k]||0}for(const k of Object.keys(acc))acc[k]/=r;const sc=score(row,meta,acc,cfg);return{meta,metrics:acc,scores:sc}}
+function uniqueSorted(vals){return[...new Set(vals.filter(x=>Number.isFinite(x)).map(x=>Math.max(0,Math.round(x))))].sort((a,b)=>a-b)}
+function candidates(row,cfg){const meta0=Math.max(0,Math.round(Number(row.META)||0)),d=Math.max(0,Number(row.Demanda_Promedio_Diaria)||0),R=Math.max(1,Number(row.Frecuencia_Revision_dias)||1),LT=Math.max(0,Number(row.Lead_Time_Abasto)||0),need=Math.max(0,d*(R+LT));return uniqueSorted([0,meta0,meta0*0.25,meta0*0.5,meta0*0.75,meta0*0.9,meta0*1.1,meta0*1.25,meta0*1.5,meta0*2,need*0.25,need*0.5,need*0.75,need,need*1.25,need*1.5,need*2,need*3])}
+function neighbors(meta,cfg){const m=Math.max(0,Math.round(meta||0)),abs=[1,2,5,10,20,35,50,75,100],pct=[0.85,0.9,0.95,0.98,1.02,1.05,1.1,1.15],vals=[m];for(const s of abs)vals.push(m-s,m+s);for(const p of pct)vals.push(m*p);return uniqueSorted(vals)}
+function compare(a,b,target){if(!a)return b;if(!b)return a;const sa=a.scores.totalScore,sb=b.scores.totalScore;if(sb>sa)return b;if(sb<sa)return a;const ga=Math.abs((a.metrics.cycleServiceLevel||0)-target),gb=Math.abs((b.metrics.cycleServiceLevel||0)-target);if(gb<ga)return b;if(gb>ga)return a;if((b.scores.shortageRatio||0)<(a.scores.shortageRatio||0))return b;if((b.scores.shortageRatio||0)>(a.scores.shortageRatio||0))return a;return(b.meta<a.meta)?b:a}
+function optimize(row,cfg){const target=clamp(normalizeServiceLevel(row.Nivel_Servicio),0,1);const cache=new Map();let iters=0;function ev(meta,reps){const m=Math.max(0,Math.round(meta)),r=Math.max(1,Math.round(reps)),key=m+'|'+r;if(cache.has(key))return cache.get(key);const res=evalMeta(row,m,cfg,r);cache.set(key,res);iters++;return res}const coarseReps=cfg.coarseReplications||40,topK=cfg.scoring.topKCoarse||4;const initCands=candidates(row,cfg);let coarse=initCands.map(m=>ev(m,coarseReps));coarse.sort((a,b)=>b.scores.totalScore-a.scores.totalScore);let seeds=coarse.slice(0,topK).map(x=>x.meta);seeds=uniqueSorted([...seeds,Math.round(Number(row.META)||0)]);const refined=uniqueSorted(seeds.flatMap(m=>neighbors(m,cfg)));const refineRes=refined.map(m=>ev(m,coarseReps));refineRes.sort((a,b)=>b.scores.totalScore-a.scores.totalScore);const finalists=uniqueSorted([...refineRes.slice(0,topK).map(x=>x.meta),Math.round(Number(row.META)||0)]);const finalCands=uniqueSorted(finalists.flatMap(m=>neighbors(m,cfg)));let best=null;for(const m of finalCands){const ev2=ev(m,cfg.nReplications);best=compare(best,ev2,target)}if(!best)best=ev(Math.max(0,Math.round(Number(row.META)||0)),cfg.nReplications);const distType=String(row.distInfo&&row.distInfo.distribucion||'NORMAL_FALLBACK').toUpperCase();return{metaInitial:Number(row.META)||0,metaOptimized:Math.max(0,Math.round(best.meta)),metaOptimizedRaw:best.meta,deltaMeta:Math.max(0,Math.round(best.meta))-(Number(row.META)||0),serviceTarget:target,serviceAchieved:best.metrics.cycleServiceLevel,serviceGap:best.metrics.cycleServiceLevel-target,feasible:best.metrics.cycleServiceLevel>=target,serviceFloorMet:Math.abs(best.scores.serviceGap||0)<=cfg.scoring.serviceTolerance,avgEndingInventory:best.metrics.avgEndingInventory,avgShortageUnits:best.scores.shortageUnits||0,shortageRatio:best.scores.shortageRatio,avgOverstockUnits:best.scores.overstockUnits||0,overstockRatio:best.scores.overstockRatio,expectedNeed:best.scores.expectedNeed,serviceScore:best.scores.serviceScore,shortageScore:best.scores.shortageScore,overstockScore:best.scores.overstockScore,totalScore:best.scores.totalScore,totalScorePct:best.scores.totalScore*100,distributionType:distType,distributionFallback:!row.distInfo||distType==='NO_HISTORY',iterations:iters,cacheSize:cache.size}}
+self.onmessage=function(e){const{jobId,row,cfg}=e.data;try{const res=optimize(row,cfg);self.postMessage({jobId,res})}catch(err){self.postMessage({jobId,error:err.message})}}
+`;
+
+      function makeWorker() {
+        const blob = new Blob([WORKER_CODE], {
+          type: "application/javascript",
+        });
+        return new Worker(URL.createObjectURL(blob));
+      }
+
+      // ═══════════════════════════════════════════════════
+      // RUN SIMULATION
+      // ═══════════════════════════════════════════════════
+      function buildCFG() {
+        const ws = Number(document.getElementById("cfg-ws").value) / 100;
+        const wf = Number(document.getElementById("cfg-wf").value) / 100;
+        const wo = Math.max(0, 1 - ws - wf);
+        return {
+          nReplications: Number(document.getElementById("cfg-reps").value),
+          coarseReplications: 40,
+          horizonDays: Number(document.getElementById("cfg-hor").value),
+          kStdClamp: 2,
+          minMeta: 0,
+          maxMeta: 1e9,
+          rounding: "round",
+          scoring: {
+            weights: { service: ws, shortage: wf, overstock: wo },
+            serviceTolerance:
+              Number(document.getElementById("cfg-tol").value) / 100,
+            topKCoarse: 4,
+            penalizeMetaFarAboveNeed: true,
+          },
+        };
+      }
+
+      function buildDistMap() {
+        if (!distData || distData.length === 0) return new Map();
+        const map = new Map();
+        for (const d of distData) {
+          const u = (d.Ubicacion || "").toString().trim();
+          const p = (d.Producto || "").toString().trim();
+          if (u && p) map.set(u + "_" + p, d);
+          if (d.SKU) map.set(d.SKU, d);
+        }
+        return map;
+      }
+
+      function enrichRow(row, distMap) {
+        const u = (row.Ubicacion || "").toString().trim();
+        const p = (row.Producto || "").toString().trim();
+        let distInfo = null;
+        if (distMap.has(u + "_" + p)) distInfo = distMap.get(u + "_" + p);
+        else if (row.SKU && distMap.has(row.SKU))
+          distInfo = distMap.get(row.SKU);
+        return { ...row, distInfo };
+      }
+
+      async function runSimulation() {
+        if (running || !policyData) return;
+        running = true;
+        results = [];
+        document.getElementById("btn-run").disabled = true;
+        document.getElementById("btn-export").disabled = true;
+        document.getElementById("progress-section").style.display = "block";
+        document.getElementById("empty-dash").style.display = "none";
+
+        const cfg = buildCFG();
+        const distMap = buildDistMap();
+        const rows = policyData
+          .filter(
+            (r) => r.SKU != null && r.META != null && r.Nivel_Servicio != null,
+          )
+          .map((r) => enrichRow(r, distMap));
+
+        log(
+          `[INFO] Iniciando simulación Monte Carlo: ${rows.length} SKUs`,
+          "info",
+        );
+        log(
+          `[INFO] Replicaciones: ${cfg.nReplications} | Horizonte: ${cfg.horizonDays} días`,
+          "info",
+        );
+        log(
+          `[INFO] Pesos: Servicio=${(cfg.scoring.weights.service * 100).toFixed(0)}% | Faltante=${(cfg.scoring.weights.shortage * 100).toFixed(0)}% | Sobreinv=${(cfg.scoring.weights.overstock * 100).toFixed(0)}%`,
+          "info",
+        );
+
+        const numWorkers = Math.min(
+          navigator.hardwareConcurrency || 4,
+          8,
+          rows.length,
+        );
+        const workers = Array.from({ length: numWorkers }, makeWorker);
+        let idx = 0,
+          done = 0;
+
+        function updateProgress() {
+          const pct =
+            rows.length > 0 ? Math.round((done / rows.length) * 100) : 0;
+          document.getElementById("progress-pct").textContent = pct + "%";
+          document.getElementById("progress-fill").style.width = pct + "%";
+          document.getElementById("progress-detail").textContent =
+            `${done} de ${rows.length} SKUs procesados`;
+          document.getElementById("m-proc").textContent = done;
+        }
+
+        await new Promise((resolve) => {
+          function pump(w) {
+            if (idx >= rows.length) return;
+            const row = rows[idx++];
+            const jobId = idx;
+            w.postMessage({ jobId, row, cfg });
+            w.onmessage = function (e) {
+              const { res, error } = e.data;
+              if (error) {
+                log(`[ERROR] SKU ${row.SKU}: ${error}`, "error");
+              } else {
+                const rec = {
+                  SKU: row.SKU,
+                  Ubicacion: row.Ubicacion,
+                  Producto: row.Producto,
+                  Clasificacion: row.Clasificacion,
+                  distInfo: row.distInfo,
+                  ...res,
+                };
+                results.push(rec);
+              }
+              done++;
+              updateProgress();
+              if (done % 50 === 0)
+                log(`[INFO] Procesados ${done}/${rows.length}…`, "info");
+              if (done === rows.length) {
+                workers.forEach((ww) => ww.terminate());
+                resolve();
+              } else {
+                pump(w);
+              }
+            };
+          }
+          workers.forEach((w) => pump(w));
+        });
+
+        log(
+          `[INFO] Simulación completada. ${results.length} resultados generados.`,
+          "info",
+        );
+        running = false;
+        document.getElementById("btn-run").disabled = false;
+        document.getElementById("btn-export").disabled = results.length === 0;
+        toast(`Simulación completada: ${results.length} SKUs procesados`);
+        renderDashboard();
+        renderTable(results);
+      }
+
+      // ═══════════════════════════════════════════════════
+      // DASHBOARD
+      // ═══════════════════════════════════════════════════
+      function renderDashboard() {
+        if (results.length === 0) return;
+
+        const avgScore =
+          results.reduce((a, r) => a + (r.totalScore || 0), 0) / results.length;
+        const avgDelta =
+          results.reduce((a, r) => a + (r.deltaMeta || 0), 0) / results.length;
+        document.getElementById("m-score").textContent = (
+          avgScore * 100
+        ).toFixed(1);
+        document.getElementById("m-delta").textContent =
+          (avgDelta >= 0 ? "+" : "") + avgDelta.toFixed(1);
+
+        // Distribution chart
+        const distCounts = {};
+        results.forEach((r) => {
+          const t = r.distributionType || "NORMAL_FALLBACK";
+          distCounts[t] = (distCounts[t] || 0) + 1;
+        });
+        const maxCount = Math.max(...Object.values(distCounts));
+        const distColors = {
+          POISSON: "bar-fill",
+          NB: "bar-fill-green",
+          ZINB: "bar-fill-amber",
+          NO_HISTORY: "",
+          ZERO_ONLY: "",
+          NORMAL_FALLBACK: "",
+        };
+        document.getElementById("dist-bars").innerHTML = Object.entries(
+          distCounts,
+        )
+          .sort((a, b) => b[1] - a[1])
+          .map(
+            ([t, c]) => `<div class="bar-row">
+      <div class="bar-label">${t}</div>
+      <div class="bar-track"><div class="bar-fill ${distColors[t] || ""}" style="width:${((c / maxCount) * 100).toFixed(1)}%"></div></div>
+      <div class="bar-val">${c} SKUs</div>
+    </div>`,
+          )
+          .join("");
+        document.getElementById("dist-chart").style.display = "block";
+
+        // Top score chart
+        const top10 = [...results]
+          .sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0))
+          .slice(0, 12);
+        const maxScore = top10[0]?.totalScore || 1;
+        document.getElementById("score-bars").innerHTML = top10
+          .map(
+            (r) => `<div class="bar-row">
+    <div class="bar-label" title="${r.SKU}">${r.SKU || r.Producto || "—"}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:${(((r.totalScore || 0) / maxScore) * 100).toFixed(1)}%"></div></div>
+    <div class="bar-val">${((r.totalScore || 0) * 100).toFixed(1)} pts</div>
+  </div>`,
+          )
+          .join("");
+        document.getElementById("score-chart").style.display = "block";
+      }
+
+      // ═══════════════════════════════════════════════════
+      // RESULTS TABLE
+      // ═══════════════════════════════════════════════════
+      function distBadge(t) {
+        const cls = {
+          POISSON: "badge-blue",
+          NB: "badge-green",
+          ZINB: "badge-amber",
+          ZERO_ONLY: "badge-gray",
+          NO_HISTORY: "badge-gray",
+          NORMAL_FALLBACK: "badge-gray",
+        };
+        return `<span class="badge ${cls[t] || "badge-gray"}">${t}</span>`;
+      }
+
+      function renderTable(data) {
+        const tbody = document.getElementById("results-tbody");
+        if (!data || data.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="10" style="text-align:center;padding:3rem;color:var(--gray-400)">Sin resultados.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data
+          .map((r) => {
+            const delta = r.deltaMeta || 0;
+            const deltaClass =
+              delta > 0 ? "delta-pos" : delta < 0 ? "delta-neg" : "delta-zero";
+            const deltaStr = (delta > 0 ? "+" : "") + delta.toFixed(0);
+            const svc = ((r.serviceAchieved || 0) * 100).toFixed(1) + "%";
+            const score = ((r.totalScore || 0) * 100).toFixed(1);
+            return `<tr>
+      <td class="td-mono">${r.SKU || "—"}</td>
+      <td>${r.Ubicacion || "—"}</td>
+      <td>${r.Producto || "—"}</td>
+      <td>${distBadge(r.distributionType || "NORMAL_FALLBACK")}</td>
+      <td class="td-mono">${(r.metaInitial || 0).toFixed(0)}</td>
+      <td class="td-mono" style="font-weight:500;color:var(--blue-600)">${(r.metaOptimized || 0).toFixed(0)}</td>
+      <td class="td-mono ${deltaClass}">${deltaStr}</td>
+      <td class="td-mono">${svc}</td>
+      <td class="td-mono">${score}</td>
+      <td>${r.feasible ? '<span class="badge badge-green">Sí</span>' : '<span class="badge badge-red">No</span>'}</td>
+    </tr>`;
+          })
+          .join("");
+      }
+
+      let filteredResults = [];
+
+      function filterTable() {
+        const q = document.getElementById("search-table").value.toLowerCase();
+        const dist = document.getElementById("filter-dist").value;
+        const feas = document.getElementById("filter-feasible").value;
+        filteredResults = results.filter((r) => {
+          const text = `${r.SKU} ${r.Ubicacion} ${r.Producto}`.toLowerCase();
+          if (q && !text.includes(q)) return false;
+          if (dist && r.distributionType !== dist) return false;
+          if (feas !== "" && String(r.feasible) !== feas) return false;
+          return true;
+        });
+        renderTable(filteredResults);
+      }
+
+      function sortTable(key) {
+        if (sortKey === key) sortDir *= -1;
+        else {
+          sortKey = key;
+          sortDir = -1;
+        }
+        const data = filteredResults.length > 0 ? filteredResults : results;
+        data.sort((a, b) => {
+          const va = a[key] ?? "",
+            vb = b[key] ?? "";
+          if (typeof va === "number") return (va - vb) * sortDir;
+          return String(va).localeCompare(String(vb)) * sortDir;
+        });
+        renderTable(data);
+      }
+
+      // ═══════════════════════════════════════════════════
+      // EXPORT CSV
+      // ═══════════════════════════════════════════════════
+      function exportCSV() {
+        if (!results.length) return;
+        const headers = [
+          "SKU",
+          "Ubicacion",
+          "Producto",
+          "distributionType",
+          "metaInitial",
+          "metaOptimized",
+          "deltaMeta",
+          "serviceTarget",
+          "serviceAchieved",
+          "serviceGap",
+          "feasible",
+          "avgEndingInventory",
+          "shortageRatio",
+          "overstockRatio",
+          "totalScore",
+          "totalScorePct",
+          "serviceScore",
+          "shortageScore",
+          "overstockScore",
+          "expectedNeed",
+          "iterations",
+        ];
+        const rows = results.map((r) =>
+          headers
+            .map((h) => {
+              const v = r[h];
+              if (v === null || v === undefined) return "";
+              if (typeof v === "boolean") return v ? "TRUE" : "FALSE";
+              if (typeof v === "number") return v.toFixed(4);
+              return `"${String(v).replace(/"/g, '""')}"`;
+            })
+            .join(","),
+        );
+        const csv = headers.join(",") + "\n" + rows.join("\n");
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(
+          new Blob([csv], { type: "text/csv;charset=utf-8" }),
+        );
+        a.download = `resultados_simulaciones_${new Date().toISOString().slice(0, 10)}.csv`;
+        a.click();
+        toast("CSV exportado correctamente");
+      }
+    </script>
+  </body>
 </html>
