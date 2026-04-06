@@ -13,7 +13,6 @@
       :root {
         --blue-50: #e6f1fb;
         --blue-100: #b5d4f4;
-        --blue-200: #85b7eb;
         --blue-400: #378add;
         --blue-600: #185fa5;
         --blue-700: #124f8c;
@@ -26,19 +25,19 @@
         --gray-600: #5c6270;
         --gray-800: #2a2e38;
         --gray-900: #16191f;
+        --green-50: #eaf3de;
         --green-400: #639922;
         --green-600: #3b6d11;
-        --amber-400: #ba7517;
+        --amber-50: #faeeda;
         --amber-100: #fac775;
-        --red-400: #e24b4a;
+        --amber-400: #ba7517;
+        --red-50: #fcebeb;
         --red-100: #f7c1c1;
-        --white: #ffffff;
-        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --red-400: #e24b4a;
+        --white: #fff;
         --r-sm: 6px;
         --r-md: 10px;
         --r-lg: 14px;
-        --r-xl: 18px;
         --font: "DM Sans", system-ui, sans-serif;
         --mono: "DM Mono", monospace;
       }
@@ -57,11 +56,9 @@
         line-height: 1.6;
         min-height: 100vh;
       }
-
-      /* ── NAV ── */
       nav {
         background: var(--blue-900);
-        color: var(--white);
+        color: #fff;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -77,16 +74,11 @@
         gap: 10px;
         font-size: 15px;
         font-weight: 600;
-        letter-spacing: 0.01em;
-      }
-      .nav-brand svg {
-        opacity: 0.85;
       }
       .nav-badge {
         background: var(--blue-700);
         color: var(--blue-100);
         font-size: 11px;
-        font-weight: 500;
         padding: 2px 8px;
         border-radius: 20px;
         letter-spacing: 0.04em;
@@ -94,67 +86,59 @@
       }
       .nav-links {
         display: flex;
-        gap: 4px;
+        gap: 2px;
       }
       .nav-link {
         background: none;
         border: none;
-        color: rgba(255, 255, 255, 0.65);
+        color: rgba(255, 255, 255, 0.6);
         font: inherit;
         font-size: 13px;
-        padding: 6px 12px;
+        padding: 6px 14px;
         border-radius: var(--r-sm);
         cursor: pointer;
-        transition:
-          background 0.15s,
-          color 0.15s;
+        transition: 0.15s;
       }
       .nav-link:hover,
       .nav-link.active {
         background: rgba(255, 255, 255, 0.1);
-        color: var(--white);
+        color: #fff;
       }
-
-      /* ── LAYOUT ── */
       .main {
         display: grid;
-        grid-template-columns: 280px 1fr;
+        grid-template-columns: 300px 1fr;
         min-height: calc(100vh - 56px);
       }
       .sidebar {
-        background: var(--white);
+        background: #fff;
         border-right: 1px solid var(--gray-200);
         padding: 1.5rem;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1.1rem;
+        overflow-y: auto;
       }
       .content {
         padding: 2rem;
         overflow: auto;
       }
-
-      /* ── SIDEBAR ── */
-      .sidebar-section {
-      }
-      .sidebar-label {
-        font-size: 11px;
+      .s-lbl {
+        font-size: 10px;
         font-weight: 600;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.09em;
         text-transform: uppercase;
         color: var(--gray-400);
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.55rem;
       }
       .file-drop {
         border: 1.5px dashed var(--gray-200);
         border-radius: var(--r-lg);
-        padding: 1.25rem;
+        padding: 0.85rem;
         text-align: center;
         cursor: pointer;
-        transition:
-          border-color 0.2s,
-          background 0.2s;
         background: var(--gray-50);
+        transition: 0.2s;
+        user-select: none;
       }
       .file-drop:hover,
       .file-drop.drag {
@@ -164,81 +148,72 @@
       .file-drop input {
         display: none;
       }
-      .file-drop-icon {
-        width: 32px;
-        height: 32px;
-        margin: 0 auto 0.5rem;
+      .drop-icon {
+        width: 26px;
+        height: 26px;
+        margin: 0 auto 0.35rem;
         background: var(--blue-50);
-        border-radius: var(--r-md);
+        border-radius: var(--r-sm);
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-      .file-drop-icon svg {
         color: var(--blue-600);
       }
       .file-drop p {
-        font-size: 12px;
+        font-size: 11px;
         color: var(--gray-600);
-        line-height: 1.4;
+        line-height: 1.35;
       }
       .file-drop p strong {
         color: var(--blue-600);
         font-weight: 500;
       }
-      .file-status {
+      .fs {
         display: flex;
         align-items: center;
-        gap: 6px;
-        padding: 0.5rem 0.75rem;
+        gap: 5px;
+        padding: 0.35rem 0.65rem;
         border-radius: var(--r-md);
-        font-size: 12px;
-        margin-top: 0.5rem;
+        font-size: 10px;
+        margin-top: 0.35rem;
         background: var(--gray-50);
         border: 1px solid var(--gray-200);
       }
-      .file-status.ok {
-        background: #eaf3de;
+      .fs.ok {
+        background: var(--green-50);
         border-color: #c0dd97;
         color: var(--green-600);
       }
-      .file-status.error {
-        background: #fcebeb;
+      .fs.err {
+        background: var(--red-50);
         border-color: var(--red-100);
         color: var(--red-400);
       }
       .dot {
-        width: 6px;
-        height: 6px;
+        width: 5px;
+        height: 5px;
         border-radius: 50%;
         flex-shrink: 0;
+        background: var(--gray-400);
       }
       .dot-ok {
         background: var(--green-400);
       }
-      .dot-warn {
-        background: var(--amber-400);
-      }
-      .dot-idle {
-        background: var(--gray-400);
-      }
-
-      /* ── CONFIG SLIDERS ── */
       .cfg-row {
-        margin-bottom: 0.85rem;
+        margin-bottom: 0.6rem;
       }
       .cfg-row label {
         display: flex;
         justify-content: space-between;
-        font-size: 12px;
+        font-size: 11px;
         color: var(--gray-600);
-        margin-bottom: 4px;
+        margin-bottom: 2px;
       }
       .cfg-row label span {
         font-weight: 500;
         color: var(--gray-800);
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: 10px;
       }
       input[type="range"] {
         width: 100%;
@@ -246,94 +221,53 @@
         accent-color: var(--blue-600);
         cursor: pointer;
       }
-      select {
-        width: 100%;
-        padding: 6px 10px;
-        border: 1px solid var(--gray-200);
-        border-radius: var(--r-sm);
-        font: inherit;
-        font-size: 12px;
-        color: var(--gray-800);
-        background: var(--white);
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239EA3AD' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 8px center;
+      .w-note {
+        font-size: 10px;
+        color: var(--gray-400);
+        text-align: right;
+        margin-top: 1px;
       }
-
-      /* ── BUTTON ── */
       .btn {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 0 1.25rem;
-        height: 38px;
+        padding: 0 1rem;
+        height: 34px;
         border: none;
         border-radius: var(--r-md);
         font: inherit;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 500;
         cursor: pointer;
-        transition:
-          opacity 0.15s,
-          transform 0.1s;
+        transition: 0.15s;
       }
       .btn:active {
         transform: scale(0.98);
       }
-      .btn-primary {
+      .btn-p {
         background: var(--blue-600);
-        color: var(--white);
+        color: #fff;
       }
-      .btn-primary:hover {
+      .btn-p:hover:not(:disabled) {
         background: var(--blue-700);
       }
-      .btn-primary:disabled {
-        opacity: 0.45;
+      .btn-p:disabled {
+        opacity: 0.4;
         cursor: not-allowed;
       }
-      .btn-ghost {
+      .btn-g {
         background: transparent;
         border: 1px solid var(--gray-200);
         color: var(--gray-600);
       }
-      .btn-ghost:hover {
+      .btn-g:hover {
         background: var(--gray-100);
       }
       .btn-sm {
-        height: 30px;
-        padding: 0 0.9rem;
-        font-size: 12px;
+        height: 26px;
+        padding: 0 0.7rem;
+        font-size: 10px;
         border-radius: var(--r-sm);
-      }
-
-      /* ── TABS ── */
-      .tabs {
-        display: flex;
-        gap: 2px;
-        border-bottom: 1px solid var(--gray-200);
-        margin-bottom: 1.75rem;
-      }
-      .tab {
-        background: none;
-        border: none;
-        padding: 0.5rem 1rem;
-        font: inherit;
-        font-size: 13px;
-        color: var(--gray-600);
-        cursor: pointer;
-        border-bottom: 2px solid transparent;
-        transition: color 0.15s;
-        margin-bottom: -1px;
-      }
-      .tab.active {
-        color: var(--blue-600);
-        border-bottom-color: var(--blue-600);
-        font-weight: 500;
-      }
-      .tab:hover:not(.active) {
-        color: var(--gray-800);
       }
       .tab-panel {
         display: none;
@@ -341,85 +275,104 @@
       .tab-panel.active {
         display: block;
       }
-
-      /* ── METRIC CARDS ── */
-      .metrics-grid {
+      .tab-bar {
+        display: flex;
+        gap: 2px;
+        border-bottom: 1px solid var(--gray-200);
+        margin-bottom: 1.4rem;
+      }
+      .tab-btn {
+        background: none;
+        border: none;
+        padding: 0.4rem 0.9rem;
+        font: inherit;
+        font-size: 12px;
+        color: var(--gray-600);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+        transition: 0.15s;
+      }
+      .tab-btn.active {
+        color: var(--blue-600);
+        border-bottom-color: var(--blue-600);
+        font-weight: 500;
+      }
+      .tab-btn:hover:not(.active) {
+        color: var(--gray-800);
+      }
+      .mg {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-        margin-bottom: 1.75rem;
+        gap: 10px;
+        margin-bottom: 1.4rem;
       }
-      .metric-card {
-        background: var(--white);
+      .mc {
+        background: #fff;
         border: 1px solid var(--gray-200);
         border-radius: var(--r-lg);
-        padding: 1rem 1.1rem;
+        padding: 0.8rem 0.9rem;
       }
-      .metric-card-label {
-        font-size: 11px;
+      .mc-lbl {
+        font-size: 10px;
         font-weight: 600;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: var(--gray-400);
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.2rem;
       }
-      .metric-card-value {
-        font-size: 22px;
+      .mc-val {
+        font-size: 20px;
         font-weight: 600;
-        color: var(--gray-900);
         font-family: var(--mono);
+        color: var(--gray-900);
       }
-      .metric-card-sub {
-        font-size: 11px;
+      .mc-sub {
+        font-size: 10px;
         color: var(--gray-400);
-        margin-top: 2px;
       }
-      .metric-accent-blue .metric-card-value {
+      .mc.blue .mc-val {
         color: var(--blue-600);
       }
-      .metric-accent-green .metric-card-value {
+      .mc.green .mc-val {
         color: var(--green-600);
       }
-      .metric-accent-amber .metric-card-value {
+      .mc.amber .mc-val {
         color: var(--amber-400);
       }
-      .metric-accent-red .metric-card-value {
+      .mc.red .mc-val {
         color: var(--red-400);
       }
-
-      /* ── PROGRESS ── */
-      .progress-bar {
+      .prog-bar {
         background: var(--gray-100);
         border-radius: 20px;
-        height: 6px;
+        height: 5px;
         overflow: hidden;
-        margin: 0.5rem 0;
+        margin: 0.35rem 0;
       }
-      .progress-fill {
+      .prog-fill {
         height: 100%;
         background: var(--blue-600);
         border-radius: 20px;
-        transition: width 0.3s ease;
+        transition: width 0.2s;
       }
-
-      /* ── TABLE ── */
-      .table-wrap {
+      .tw {
         overflow-x: auto;
         border: 1px solid var(--gray-200);
         border-radius: var(--r-lg);
-        background: var(--white);
+        background: #fff;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 12px;
+        font-size: 11px;
       }
       thead th {
         background: var(--gray-50);
         border-bottom: 1px solid var(--gray-200);
-        padding: 0.6rem 0.9rem;
+        padding: 0.5rem 0.75rem;
         text-align: left;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 600;
         letter-spacing: 0.05em;
         text-transform: uppercase;
@@ -427,9 +380,14 @@
         white-space: nowrap;
         position: sticky;
         top: 0;
+        cursor: pointer;
+        user-select: none;
+      }
+      thead th:hover {
+        color: var(--blue-600);
       }
       tbody td {
-        padding: 0.55rem 0.9rem;
+        padding: 0.45rem 0.75rem;
         border-bottom: 1px solid var(--gray-100);
         color: var(--gray-800);
         white-space: nowrap;
@@ -440,103 +398,94 @@
       tbody tr:hover {
         background: var(--blue-50);
       }
-      .td-mono {
+      .td-m {
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: 10px;
       }
       .badge {
         display: inline-block;
-        padding: 2px 7px;
+        padding: 1px 6px;
         border-radius: 20px;
-        font-size: 10px;
-        font-weight: 500;
-        text-transform: uppercase;
+        font-size: 9px;
+        font-weight: 600;
         letter-spacing: 0.04em;
+        text-transform: uppercase;
       }
-      .badge-blue {
+      .bb {
         background: var(--blue-50);
         color: var(--blue-800);
       }
-      .badge-green {
-        background: #eaf3de;
+      .bg {
+        background: var(--green-50);
         color: var(--green-600);
       }
-      .badge-amber {
-        background: #faeeda;
+      .ba {
+        background: var(--amber-50);
         color: var(--amber-400);
       }
-      .badge-red {
-        background: #fcebeb;
+      .br {
+        background: var(--red-50);
         color: var(--red-400);
       }
-      .badge-gray {
+      .bx {
         background: var(--gray-100);
         color: var(--gray-600);
       }
-      .delta-pos {
+      .dp {
         color: var(--green-600);
         font-weight: 500;
       }
-      .delta-neg {
+      .dn {
         color: var(--red-400);
         font-weight: 500;
       }
-      .delta-zero {
+      .d0 {
         color: var(--gray-400);
       }
-
-      /* ── LOG CONSOLE ── */
-      .console-box {
+      .logbox {
         background: var(--gray-900);
         color: #a6e3a1;
         border-radius: var(--r-lg);
-        padding: 1rem 1.25rem;
+        padding: 0.8rem 1rem;
         font-family: var(--mono);
-        font-size: 11px;
-        line-height: 1.8;
-        max-height: 220px;
+        font-size: 10px;
+        line-height: 1.9;
+        max-height: 520px;
         overflow-y: auto;
-        border: 1px solid var(--gray-800);
       }
-      .console-box .log-info {
+      .li {
         color: #89dceb;
       }
-      .console-box .log-warn {
+      .lw {
         color: #f9e2af;
       }
-      .console-box .log-error {
+      .le {
         color: #f38ba8;
       }
-
-      /* ── CHART ── */
-      .chart-area {
-        background: var(--white);
+      .chart-box {
+        background: #fff;
         border: 1px solid var(--gray-200);
         border-radius: var(--r-lg);
-        padding: 1.25rem;
-        margin-bottom: 1.75rem;
+        padding: 1rem;
+        margin-bottom: 1.1rem;
       }
-      .chart-title {
-        font-size: 12px;
+      .ct {
+        font-size: 10px;
         font-weight: 600;
-        color: var(--gray-600);
-        margin-bottom: 1rem;
+        color: var(--gray-400);
+        margin-bottom: 0.75rem;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
       }
-      .bar-chart {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-      .bar-row {
+      .br-row {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
+        margin-bottom: 4px;
       }
-      .bar-label {
-        width: 120px;
-        font-size: 11px;
+      .br-lbl {
+        width: 115px;
+        font-size: 10px;
         color: var(--gray-600);
         text-align: right;
         flex-shrink: 0;
@@ -544,35 +493,37 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-      .bar-track {
+      .br-track {
         flex: 1;
-        height: 16px;
+        height: 13px;
         background: var(--gray-100);
-        border-radius: 4px;
+        border-radius: 3px;
         overflow: hidden;
-        position: relative;
       }
-      .bar-fill {
+      .br-fill {
         height: 100%;
-        border-radius: 4px;
-        background: var(--blue-400);
-        transition: width 0.5s ease;
+        border-radius: 3px;
+        transition: width 0.5s;
       }
-      .bar-fill-green {
+      .f-blue {
+        background: var(--blue-400);
+      }
+      .f-green {
         background: #97c459;
       }
-      .bar-fill-amber {
+      .f-amber {
         background: var(--amber-100);
       }
-      .bar-val {
-        width: 70px;
+      .f-gray {
+        background: var(--gray-200);
+      }
+      .br-val {
+        width: 72px;
         font-family: var(--mono);
-        font-size: 11px;
+        font-size: 10px;
         color: var(--gray-600);
       }
-
-      /* ── EMPTY STATE ── */
-      .empty-state {
+      .empty {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -581,36 +532,34 @@
         text-align: center;
         color: var(--gray-400);
       }
-      .empty-state svg {
-        margin-bottom: 1rem;
-        opacity: 0.4;
+      .empty svg {
+        margin-bottom: 0.75rem;
+        opacity: 0.35;
       }
-      .empty-state h3 {
-        font-size: 15px;
+      .empty h3 {
+        font-size: 14px;
         font-weight: 500;
         color: var(--gray-600);
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.35rem;
       }
-      .empty-state p {
-        font-size: 13px;
-        max-width: 300px;
+      .empty p {
+        font-size: 12px;
+        max-width: 270px;
         line-height: 1.5;
       }
-
-      /* ── TOAST ── */
       #toast {
         position: fixed;
         bottom: 1.5rem;
         right: 1.5rem;
         background: var(--gray-900);
-        color: var(--white);
-        padding: 0.75rem 1.25rem;
+        color: #fff;
+        padding: 0.6rem 1rem;
         border-radius: var(--r-md);
-        font-size: 13px;
-        box-shadow: var(--shadow-md);
-        transform: translateY(2rem);
+        font-size: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(1.5rem);
         opacity: 0;
-        transition: all 0.3s ease;
+        transition: 0.25s;
         pointer-events: none;
         z-index: 999;
       }
@@ -618,9 +567,47 @@
         transform: translateY(0);
         opacity: 1;
       }
-
-      /* ── RESPONSIVE ── */
-      @media (max-width: 900px) {
+      .toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.85rem;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .tl {
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+      }
+      input[type="text"] {
+        padding: 5px 9px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-md);
+        font: inherit;
+        font-size: 11px;
+        outline: none;
+        color: var(--gray-800);
+      }
+      input[type="text"]:focus {
+        border-color: var(--blue-400);
+      }
+      select {
+        padding: 4px 26px 4px 9px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-md);
+        font: inherit;
+        font-size: 11px;
+        color: var(--gray-800);
+        background: #fff;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239EA3AD' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 6px center;
+        outline: none;
+      }
+      @media (max-width: 860px) {
         .main {
           grid-template-columns: 1fr;
         }
@@ -628,7 +615,7 @@
           border-right: none;
           border-bottom: 1px solid var(--gray-200);
         }
-        .metrics-grid {
+        .mg {
           grid-template-columns: repeat(2, 1fr);
         }
       }
@@ -638,8 +625,8 @@
     <nav>
       <div class="nav-brand">
         <svg
-          width="22"
-          height="22"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -650,34 +637,41 @@
           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
         </svg>
         SimOpti
-        <span class="nav-badge">Monte Carlo</span>
+        <span class="nav-badge">Monte Carlo META</span>
       </div>
       <div class="nav-links">
-        <button class="nav-link active" onclick="showTab('dashboard')">
+        <button class="nav-link active" onclick="navTo('dashboard', this)">
           Dashboard
         </button>
-        <button class="nav-link" onclick="showTab('results')">
+        <button class="nav-link" onclick="navTo('results', this)">
           Resultados
         </button>
-        <button class="nav-link" onclick="showTab('log')">Consola</button>
+        <button class="nav-link" onclick="navTo('log', this)">Consola</button>
       </div>
     </nav>
 
     <div class="main">
-      <!-- ══ SIDEBAR ══ -->
       <aside class="sidebar">
-        <div class="sidebar-section">
-          <div class="sidebar-label">Políticas de inventario</div>
+        <div>
+          <div class="s-lbl">Políticas de inventario</div>
           <div
             class="file-drop"
-            id="drop-pol"
-            onclick="document.getElementById('input-pol').click()"
+            id="dp-pol"
+            onclick="document.getElementById('fp-pol').click()"
+            ondragover="dov(event, this)"
+            ondragleave="dol(this)"
+            ondrop="ddr(event, this, 'pol')"
           >
-            <input type="file" id="input-pol" accept=".json,.csv" />
-            <div class="file-drop-icon">
+            <input
+              type="file"
+              id="fp-pol"
+              accept=".json,.csv"
+              onchange="loadFile('pol', this.files[0])"
+            />
+            <div class="drop-icon">
               <svg
-                width="16"
-                height="16"
+                width="13"
+                height="13"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -690,28 +684,38 @@
               </svg>
             </div>
             <p>
-              <strong>Haz clic o arrastra</strong><br />ui_all_pol_inv.json /
-              .csv
+              <strong>Clic o arrastra</strong><br />ui_all_pol_inv.json/.csv
             </p>
           </div>
-          <div class="file-status" id="status-pol">
-            <span class="dot dot-idle"></span>
-            <span id="label-pol">Sin archivo</span>
+          <div class="fs" id="fs-pol">
+            <span class="dot" id="fd-pol"></span
+            ><span id="fl-pol">Sin archivo</span>
           </div>
         </div>
 
-        <div class="sidebar-section">
-          <div class="sidebar-label">Distribuciones de demanda</div>
+        <div>
+          <div class="s-lbl">
+            Distribuciones de demanda
+            <em style="font-style: normal; opacity: 0.6">(opcional)</em>
+          </div>
           <div
             class="file-drop"
-            id="drop-dist"
-            onclick="document.getElementById('input-dist').click()"
+            id="dp-dist"
+            onclick="document.getElementById('fp-dist').click()"
+            ondragover="dov(event, this)"
+            ondragleave="dol(this)"
+            ondrop="ddr(event, this, 'dist')"
           >
-            <input type="file" id="input-dist" accept=".json,.csv" />
-            <div class="file-drop-icon">
+            <input
+              type="file"
+              id="fp-dist"
+              accept=".json,.csv"
+              onchange="loadFile('dist', this.files[0])"
+            />
+            <div class="drop-icon">
               <svg
-                width="16"
-                height="16"
+                width="13"
+                height="13"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -721,93 +725,133 @@
               </svg>
             </div>
             <p>
-              <strong>Haz clic o arrastra</strong
-              ><br />distribucion_demanda_diaria.json / .csv<br /><em
-                style="opacity: 0.6"
-                >(opcional)</em
-              >
+              <strong>Clic o arrastra</strong
+              ><br />distribucion_demanda_diaria.json/.csv
             </p>
           </div>
-          <div class="file-status" id="status-dist">
-            <span class="dot dot-idle"></span>
-            <span id="label-dist">Sin archivo (usará fallback normal)</span>
+          <div class="fs" id="fs-dist">
+            <span class="dot" id="fd-dist"></span
+            ><span id="fl-dist">Sin archivo — usará fallback normal</span>
           </div>
         </div>
 
-        <div class="sidebar-section">
-          <div class="sidebar-label">Configuración</div>
-
+        <div>
+          <div class="s-lbl">Simulación</div>
           <div class="cfg-row">
-            <label>Replicaciones<span id="val-reps">200</span></label>
-            <input
+            <label>Replicaciones finales<span id="vr">200</span></label
+            ><input
               type="range"
+              id="cr"
               min="50"
-              max="500"
+              max="600"
               step="50"
               value="200"
-              id="cfg-reps"
-              oninput="
-                document.getElementById('val-reps').textContent = this.value
-              "
+              oninput="document.getElementById('vr').textContent = this.value"
             />
           </div>
           <div class="cfg-row">
-            <label>Horizonte (días)<span id="val-hor">6000</span></label>
-            <input
+            <label>Replicaciones gruesas<span id="vcr">40</span></label
+            ><input
               type="range"
-              min="1000"
-              max="10000"
+              id="ccr"
+              min="10"
+              max="100"
+              step="10"
+              value="40"
+              oninput="document.getElementById('vcr').textContent = this.value"
+            />
+          </div>
+          <div class="cfg-row">
+            <label>Horizonte (días)<span id="vh">6000</span></label
+            ><input
+              type="range"
+              id="ch"
+              min="500"
+              max="12000"
               step="500"
               value="6000"
-              id="cfg-hor"
-              oninput="
-                document.getElementById('val-hor').textContent = this.value
-              "
+              oninput="document.getElementById('vh').textContent = this.value"
             />
           </div>
           <div class="cfg-row">
-            <label>Tolerancia servicio<span id="val-tol">10%</span></label>
-            <input
+            <label>Top-K candidatos<span id="vk">4</span></label
+            ><input
               type="range"
+              id="ck"
+              min="2"
+              max="8"
+              step="1"
+              value="4"
+              oninput="document.getElementById('vk').textContent = this.value"
+            />
+          </div>
+          <div class="cfg-row">
+            <label>Tolerancia servicio<span id="vt">10%</span></label
+            ><input
+              type="range"
+              id="ct"
               min="1"
-              max="25"
+              max="30"
               step="1"
               value="10"
-              id="cfg-tol"
               oninput="
-                document.getElementById('val-tol').textContent =
-                  this.value + '%'
+                document.getElementById('vt').textContent = this.value + '%'
               "
             />
           </div>
           <div class="cfg-row">
-            <label>Peso: Servicio<span id="val-ws">55%</span></label>
-            <input
+            <label>Clamp σ (fallback normal)<span id="vkc">2</span></label
+            ><input
               type="range"
+              id="ckc"
+              min="1"
+              max="4"
+              step="1"
+              value="2"
+              oninput="document.getElementById('vkc').textContent = this.value"
+            />
+          </div>
+        </div>
+
+        <div>
+          <div class="s-lbl">Pesos del score compuesto</div>
+          <div class="cfg-row">
+            <label>Servicio<span id="vws">55%</span></label
+            ><input
+              type="range"
+              id="ws"
               min="0"
               max="100"
               step="5"
               value="55"
-              id="cfg-ws"
-              oninput="
-                document.getElementById('val-ws').textContent = this.value + '%'
-              "
+              oninput="onW()"
             />
           </div>
           <div class="cfg-row">
-            <label>Peso: Faltante<span id="val-wf">30%</span></label>
-            <input
+            <label>Faltante / Shortage<span id="vwf">30%</span></label
+            ><input
               type="range"
+              id="wf"
               min="0"
               max="100"
               step="5"
               value="30"
-              id="cfg-wf"
-              oninput="
-                document.getElementById('val-wf').textContent = this.value + '%'
-              "
+              oninput="onW()"
             />
           </div>
+          <div class="cfg-row">
+            <label>Sobreinventario<span id="vwo">15%</span></label
+            ><input
+              type="range"
+              id="wo"
+              min="0"
+              max="100"
+              step="5"
+              value="15"
+              oninput="onW()"
+            />
+          </div>
+          <div class="w-note" id="wn">Normalizados: 55% / 30% / 15%</div>
         </div>
 
         <div
@@ -815,18 +859,13 @@
             margin-top: auto;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.35rem;
           "
         >
-          <button
-            class="btn btn-primary"
-            id="btn-run"
-            onclick="runSimulation()"
-            disabled
-          >
+          <button class="btn btn-p" id="btn-run" onclick="runSim()" disabled>
             <svg
-              width="14"
-              height="14"
+              width="11"
+              height="11"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -837,14 +876,14 @@
             Ejecutar simulación
           </button>
           <button
-            class="btn btn-ghost btn-sm"
-            id="btn-export"
+            class="btn btn-g btn-sm"
+            id="btn-exp"
             onclick="exportCSV()"
             disabled
           >
             <svg
-              width="12"
-              height="12"
+              width="10"
+              height="10"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -854,92 +893,81 @@
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Exportar CSV
+            Exportar CSV completo
           </button>
         </div>
       </aside>
 
-      <!-- ══ CONTENT ══ -->
       <main class="content">
-        <!-- TAB: Dashboard -->
+        <!-- DASHBOARD -->
         <div class="tab-panel active" id="panel-dashboard">
-          <div class="tabs">
-            <button
-              class="tab active"
-              onclick="switchPanel('dashboard', 'dashboard')"
-            >
-              Resumen
-            </button>
-          </div>
-
-          <div class="metrics-grid" id="metrics-grid">
-            <div class="metric-card">
-              <div class="metric-card-label">SKUs cargados</div>
-              <div class="metric-card-value" id="m-skus">—</div>
-              <div class="metric-card-sub">políticas válidas</div>
+          <div class="mg">
+            <div class="mc">
+              <div class="mc-lbl">SKUs cargados</div>
+              <div class="mc-val" id="m-skus">—</div>
+              <div class="mc-sub">políticas válidas</div>
             </div>
-            <div class="metric-card metric-accent-blue">
-              <div class="metric-card-label">Procesados</div>
-              <div class="metric-card-value" id="m-proc">—</div>
-              <div class="metric-card-sub">de la simulación actual</div>
+            <div class="mc blue">
+              <div class="mc-lbl">Procesados</div>
+              <div class="mc-val" id="m-proc">—</div>
+              <div class="mc-sub">simulación actual</div>
             </div>
-            <div class="metric-card metric-accent-green">
-              <div class="metric-card-label">Score promedio</div>
-              <div class="metric-card-value" id="m-score">—</div>
-              <div class="metric-card-sub">sobre 100 pts</div>
+            <div class="mc green">
+              <div class="mc-lbl">Score promedio</div>
+              <div class="mc-val" id="m-score">—</div>
+              <div class="mc-sub">sobre 100 pts</div>
             </div>
-            <div class="metric-card metric-accent-amber">
-              <div class="metric-card-label">Δ META promedio</div>
-              <div class="metric-card-value" id="m-delta">—</div>
-              <div class="metric-card-sub">vs. política actual</div>
+            <div class="mc amber">
+              <div class="mc-lbl">Δ META promedio</div>
+              <div class="mc-val" id="m-delta">—</div>
+              <div class="mc-sub">vs. política actual</div>
             </div>
           </div>
-
-          <div
-            id="progress-section"
-            style="display: none; margin-bottom: 1.5rem"
-          >
+          <div id="prog-wrap" style="display: none; margin-bottom: 1.1rem">
             <div
               style="
                 display: flex;
                 justify-content: space-between;
-                font-size: 12px;
+                font-size: 11px;
                 color: var(--gray-600);
-                margin-bottom: 4px;
+                margin-bottom: 2px;
               "
             >
-              <span>Progreso de simulación</span>
-              <span id="progress-pct">0%</span>
+              <span id="prog-lbl">Iniciando…</span><span id="prog-pct">0%</span>
             </div>
-            <div class="progress-bar">
-              <div
-                class="progress-fill"
-                id="progress-fill"
-                style="width: 0%"
-              ></div>
+            <div class="prog-bar">
+              <div class="prog-fill" id="prog-fill" style="width: 0%"></div>
             </div>
+          </div>
+          <div id="charts-wrap" style="display: none">
             <div
-              style="font-size: 11px; color: var(--gray-400); margin-top: 4px"
-              id="progress-detail"
+              style="
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+                margin-bottom: 1.1rem;
+              "
             >
-              Iniciando…
+              <div class="chart-box">
+                <div class="ct">Distribución por tipo de demanda</div>
+                <div id="dist-bars"></div>
+              </div>
+              <div class="chart-box">
+                <div class="ct">Top SKUs — score compuesto</div>
+                <div id="score-bars"></div>
+              </div>
+            </div>
+            <div class="chart-box">
+              <div class="ct">
+                Cobertura de matching (distribución vs políticas)
+              </div>
+              <div id="match-bars"></div>
             </div>
           </div>
-
-          <div class="chart-area" id="dist-chart" style="display: none">
-            <div class="chart-title">Distribución por tipo de demanda</div>
-            <div class="bar-chart" id="dist-bars"></div>
-          </div>
-
-          <div class="chart-area" id="score-chart" style="display: none">
-            <div class="chart-title">Score compuesto — Top SKUs</div>
-            <div class="bar-chart" id="score-bars"></div>
-          </div>
-
-          <div id="empty-dash" class="empty-state">
+          <div class="empty" id="empty-dash">
             <svg
-              width="48"
-              height="48"
+              width="44"
+              height="44"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -950,47 +978,24 @@
             </svg>
             <h3>Sin datos aún</h3>
             <p>
-              Carga el archivo de políticas y ejecuta la simulación para ver
-              resultados aquí.
+              Carga el archivo de políticas y ejecuta la simulación para ver los
+              resultados.
             </p>
           </div>
         </div>
 
-        <!-- TAB: Resultados -->
+        <!-- RESULTADOS -->
         <div class="tab-panel" id="panel-results">
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-bottom: 1.25rem;
-              flex-wrap: wrap;
-              gap: 0.5rem;
-            "
-          >
-            <div>
+          <div class="toolbar">
+            <div class="tl">
               <input
                 type="text"
-                id="search-table"
-                placeholder="Buscar SKU, Ubicación o Producto…"
-                style="
-                  padding: 6px 12px;
-                  border: 1px solid var(--gray-200);
-                  border-radius: var(--r-md);
-                  font: inherit;
-                  font-size: 12px;
-                  width: 260px;
-                  outline: none;
-                "
-                oninput="filterTable()"
+                id="srch"
+                placeholder="Buscar SKU, Ubicación, Producto…"
+                style="width: 220px"
+                oninput="applyF()"
               />
-            </div>
-            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap">
-              <select
-                id="filter-dist"
-                style="width: auto; font-size: 12px"
-                onchange="filterTable()"
-              >
+              <select id="f-dist" onchange="applyF()">
                 <option value="">Todas las distribuciones</option>
                 <option>POISSON</option>
                 <option>NB</option>
@@ -999,44 +1004,55 @@
                 <option>ZERO_ONLY</option>
                 <option>NORMAL_FALLBACK</option>
               </select>
-              <select
-                id="filter-feasible"
-                style="width: auto; font-size: 12px"
-                onchange="filterTable()"
-              >
+              <select id="f-feas" onchange="applyF()">
                 <option value="">Todos</option>
                 <option value="true">Factibles</option>
                 <option value="false">No factibles</option>
               </select>
+              <select id="f-fb" onchange="applyF()">
+                <option value="">Con/sin fallback</option>
+                <option value="false">Distribución real</option>
+                <option value="true">Fallback normal</option>
+              </select>
             </div>
+            <span
+              style="font-size: 10px; color: var(--gray-400)"
+              id="tc"
+            ></span>
           </div>
-          <div class="table-wrap" style="max-height: 600px; overflow-y: auto">
-            <table id="results-table">
+          <div class="tw" style="max-height: 560px; overflow-y: auto">
+            <table>
               <thead>
                 <tr>
-                  <th onclick="sortTable('SKU')">SKU ↕</th>
-                  <th onclick="sortTable('Ubicacion')">Ubicación ↕</th>
-                  <th onclick="sortTable('Producto')">Producto ↕</th>
-                  <th>Distribución</th>
-                  <th onclick="sortTable('metaInitial')">META actual ↕</th>
-                  <th onclick="sortTable('metaOptimized')">META óptimo ↕</th>
-                  <th onclick="sortTable('deltaMeta')">Δ META ↕</th>
-                  <th onclick="sortTable('serviceAchieved')">Servicio ↕</th>
-                  <th onclick="sortTable('totalScore')">Score ↕</th>
-                  <th>Factible</th>
+                  <th onclick="srt('SKU')">SKU</th>
+                  <th onclick="srt('Ubicacion')">Ubicación</th>
+                  <th onclick="srt('Producto')">Producto</th>
+                  <th onclick="srt('distributionType')">Distribución</th>
+                  <th>Fallback</th>
+                  <th onclick="srt('matchSource')">Match</th>
+                  <th onclick="srt('metaInitial')">META actual</th>
+                  <th onclick="srt('metaOptimized')">META óptimo</th>
+                  <th onclick="srt('deltaMeta')">Δ META</th>
+                  <th onclick="srt('serviceTarget')">Target svc</th>
+                  <th onclick="srt('serviceAchieved')">Svc logrado</th>
+                  <th onclick="srt('serviceGap')">Gap svc</th>
+                  <th onclick="srt('shortageRatio')">Shortage ratio</th>
+                  <th onclick="srt('overstockRatio')">Overstock ratio</th>
+                  <th onclick="srt('totalScorePct')">Score</th>
+                  <th onclick="srt('feasible')">Factible</th>
                 </tr>
               </thead>
-              <tbody id="results-tbody">
+              <tbody id="res-tbody">
                 <tr>
                   <td
-                    colspan="10"
+                    colspan="16"
                     style="
                       text-align: center;
                       padding: 3rem;
                       color: var(--gray-400);
                     "
                   >
-                    Aún no hay resultados. Ejecuta la simulación primero.
+                    Ejecuta la simulación primero.
                   </td>
                 </tr>
               </tbody>
@@ -1044,578 +1060,1167 @@
           </div>
         </div>
 
-        <!-- TAB: Consola -->
+        <!-- LOG -->
         <div class="tab-panel" id="panel-log">
           <div
             style="
               display: flex;
               justify-content: space-between;
               align-items: center;
-              margin-bottom: 0.75rem;
+              margin-bottom: 0.5rem;
             "
           >
             <span
               style="
-                font-size: 12px;
+                font-size: 10px;
                 font-weight: 600;
-                letter-spacing: 0.06em;
+                letter-spacing: 0.08em;
                 text-transform: uppercase;
                 color: var(--gray-400);
               "
-              >Salida del proceso</span
+              >Consola de proceso</span
             >
-            <button class="btn btn-ghost btn-sm" onclick="clearLog()">
+            <button
+              class="btn btn-g btn-sm"
+              onclick="document.getElementById('logbox').innerHTML = ''"
+            >
               Limpiar
             </button>
           </div>
-          <div class="console-box" id="log-box">
-            <div class="log-info">
+          <div class="logbox" id="logbox">
+            <div class="li">
               [SimOpti] Listo. Carga los archivos para comenzar.
             </div>
           </div>
         </div>
       </main>
     </div>
-
     <div id="toast"></div>
 
     <script>
-      // ═══════════════════════════════════════════════════
-      // STATE
-      // ═══════════════════════════════════════════════════
-      let policyData = null;
-      let distData = null;
-      let results = [];
-      let sortKey = "totalScore";
-      let sortDir = -1;
-      let running = false;
-      let workerPool = [];
+      // ═══════ STATE ═══════════════════════════════════════════
+      var policyData = null,
+        distData = null,
+        results = [],
+        displayRows = [];
+      var sortKey = "totalScore",
+        sortDir = -1,
+        running = false;
 
-      // ═══════════════════════════════════════════════════
-      // TABS / NAV
-      // ═══════════════════════════════════════════════════
-      function showTab(name) {
-        document
-          .querySelectorAll(".nav-link")
-          .forEach((b) => b.classList.remove("active"));
-        event.target.classList.add("active");
-        document
-          .querySelectorAll(".tab-panel")
-          .forEach((p) => p.classList.remove("active"));
-        document.getElementById("panel-" + name).classList.add("active");
+      // ═══════ NAV ═════════════════════════════════════════════
+      function navTo(panel, btn) {
+        document.querySelectorAll(".nav-link").forEach(function (b) {
+          b.classList.remove("active");
+        });
+        btn.classList.add("active");
+        document.querySelectorAll(".tab-panel").forEach(function (p) {
+          p.classList.remove("active");
+        });
+        document.getElementById("panel-" + panel).classList.add("active");
       }
 
-      function switchPanel(panelId, tabId) {}
-
-      // ═══════════════════════════════════════════════════
-      // FILE LOADING
-      // ═══════════════════════════════════════════════════
-      function setupDrop(dropId, inputId, onLoad) {
-        const drop = document.getElementById(dropId);
-        const input = document.getElementById(inputId);
-        drop.addEventListener("dragover", (e) => {
-          e.preventDefault();
-          drop.classList.add("drag");
-        });
-        drop.addEventListener("dragleave", () => drop.classList.remove("drag"));
-        drop.addEventListener("drop", (e) => {
-          e.preventDefault();
-          drop.classList.remove("drag");
-          if (e.dataTransfer.files[0])
-            readFile(e.dataTransfer.files[0], onLoad);
-        });
-        input.addEventListener("change", () => {
-          if (input.files[0]) readFile(input.files[0], onLoad);
-        });
+      // ═══════ WEIGHTS ══════════════════════════════════════════
+      function onW() {
+        var ws = +document.getElementById("ws").value;
+        var wf = +document.getElementById("wf").value;
+        var wo = +document.getElementById("wo").value;
+        var tot = ws + wf + wo || 1;
+        document.getElementById("vws").textContent = ws + "%";
+        document.getElementById("vwf").textContent = wf + "%";
+        document.getElementById("vwo").textContent = wo + "%";
+        var n = document.getElementById("wn");
+        n.textContent =
+          "Normalizados: " +
+          ((ws / tot) * 100).toFixed(0) +
+          "% / " +
+          ((wf / tot) * 100).toFixed(0) +
+          "% / " +
+          ((wo / tot) * 100).toFixed(0) +
+          "%";
+        n.style.color =
+          ws + wf + wo === 0 ? "var(--red-400)" : "var(--gray-400)";
       }
 
-      function readFile(file, cb) {
-        const reader = new FileReader();
-        reader.onload = (e) => cb(file.name, e.target.result);
-        reader.readAsText(file, "UTF-8");
+      // ═══════ DRAG & DROP ═════════════════════════════════════
+      function dov(e, el) {
+        e.preventDefault();
+        el.classList.add("drag");
+      }
+      function dol(el) {
+        el.classList.remove("drag");
+      }
+      function ddr(e, el, key) {
+        e.preventDefault();
+        el.classList.remove("drag");
+        var f = e.dataTransfer.files[0];
+        if (f) loadFile(key, f);
       }
 
-      function parseFileContent(name, raw) {
-        const ext = name.split(".").pop().toLowerCase();
+      // ═══════ FILE LOADING ════════════════════════════════════
+      function loadFile(key, file) {
+        if (!file) return;
+        var r = new FileReader();
+        r.onload = function (e) {
+          processFile(key, file.name, e.target.result);
+        };
+        r.readAsText(file, "UTF-8");
+      }
+      function processFile(key, name, raw) {
+        var ext = name.split(".").pop().toLowerCase();
+        var data;
         if (ext === "json") {
           try {
-            return JSON.parse(raw);
-          } catch {
+            data = JSON.parse(raw);
+          } catch (e) {
+            setStatus(key, false, "JSON inválido");
             toast("Error: JSON inválido en " + name);
-            return null;
+            return;
           }
+          if (!Array.isArray(data))
+            data =
+              data.data ||
+              data.rows ||
+              data.documents ||
+              Object.values(data)[0];
+        } else if (ext === "csv") {
+          data = parseCSV(raw);
+        } else {
+          toast("Formato no soportado: " + ext);
+          return;
         }
-        if (ext === "csv") return csvToObjects(raw);
-        toast("Formato no soportado: " + name);
-        return null;
-      }
+        if (!Array.isArray(data)) {
+          setStatus(key, false, "No es un array");
+          return;
+        }
 
-      function csvToObjects(csv) {
-        const lines = csv.trim().split(/\r?\n/);
-        if (lines.length < 2) return [];
-        const headers = lines[0]
-          .split(",")
-          .map((h) => h.trim().replace(/^"|"$/g, ""));
-        return lines.slice(1).map((line) => {
-          const vals = splitCSVLine(line);
-          const obj = {};
-          headers.forEach((h, i) => {
-            let v = (vals[i] || "").trim().replace(/^"|"$/g, "");
-            const n = Number(v);
-            obj[h] = v === "" ? null : isNaN(n) ? v : n;
+        if (key === "pol") {
+          // Exclude Ignorado=1, keep rows with enough data to simulate
+          policyData = data.filter(function (r) {
+            if (r.Ignorado === 1 || r.Ignorado === "1" || r.Ignorado === true)
+              return false;
+            var hasSku = normPart(r.SKU) != null;
+            var hasUP =
+              normPart(r.Ubicacion) != null && normPart(r.Producto) != null;
+            return (
+              (hasSku || hasUP) && r.Nivel_Servicio != null && r.META != null
+            );
           });
-          return obj;
-        });
+          setStatus(
+            "pol",
+            true,
+            policyData.length +
+              " SKUs válidos (" +
+              (data.length - policyData.length) +
+              " excluidos)",
+          );
+          document.getElementById("m-skus").textContent = policyData.length;
+          document.getElementById("empty-dash").style.display = "none";
+          log(
+            "[INFO] Políticas: " +
+              policyData.length +
+              " SKUs válidos de " +
+              data.length +
+              " totales (archivo: " +
+              name +
+              ")",
+            "i",
+          );
+        } else {
+          distData = data;
+          setStatus("dist", true, data.length + " distribuciones cargadas");
+          log(
+            "[INFO] Distribuciones: " +
+              data.length +
+              " registros (archivo: " +
+              name +
+              ")",
+            "i",
+          );
+        }
+        updateBtn();
       }
-
-      function splitCSVLine(line) {
-        const result = [],
-          re = /,(?=(?:[^"]*"[^"]*")*[^"]*$)/;
-        return line.split(re);
+      function setStatus(key, ok, text) {
+        var fs = document.getElementById("fs-" + key);
+        var fd = document.getElementById("fd-" + key);
+        fs.className = "fs" + (ok ? " ok" : " err");
+        fd.className = "dot" + (ok ? " dot-ok" : "");
+        document.getElementById("fl-" + key).textContent = text;
       }
-
-      function setStatus(statusId, labelId, ok, text) {
-        const el = document.getElementById(statusId);
-        el.className = "file-status " + (ok ? "ok" : "error");
-        el.querySelector(".dot").className =
-          "dot " + (ok ? "dot-ok" : "dot-warn");
-        document.getElementById(labelId).textContent = text;
-      }
-
-      setupDrop("drop-pol", "input-pol", (name, raw) => {
-        const data = parseFileContent(name, raw);
-        if (!data) return;
-        const valid = Array.isArray(data) ? data : data.data || [];
-        // filter out Ignorado=1
-        policyData = valid.filter(
-          (r) => r.Ignorado !== 1 && r.Ignorado !== "1",
-        );
-        setStatus(
-          "status-pol",
-          "label-pol",
-          true,
-          `${policyData.length} SKUs cargados`,
-        );
-        document.getElementById("m-skus").textContent = policyData.length;
-        document.getElementById("empty-dash").style.display = "none";
-        updateRunButton();
-        log(
-          `[INFO] Políticas cargadas: ${policyData.length} SKUs válidos (archivo: ${name})`,
-          "info",
-        );
-      });
-
-      setupDrop("drop-dist", "input-dist", (name, raw) => {
-        const data = parseFileContent(name, raw);
-        if (!data) return;
-        distData = Array.isArray(data) ? data : data.data || [];
-        setStatus(
-          "status-dist",
-          "label-dist",
-          true,
-          `${distData.length} distribuciones cargadas`,
-        );
-        updateRunButton();
-        log(
-          `[INFO] Distribuciones cargadas: ${distData.length} (archivo: ${name})`,
-          "info",
-        );
-      });
-
-      function updateRunButton() {
+      function updateBtn() {
         document.getElementById("btn-run").disabled =
           !policyData || policyData.length === 0 || running;
       }
 
-      // ═══════════════════════════════════════════════════
-      // LOG
-      // ═══════════════════════════════════════════════════
-      function log(msg, type = "info") {
-        const box = document.getElementById("log-box");
-        const div = document.createElement("div");
-        div.className =
-          type === "warn"
-            ? "log-warn"
-            : type === "error"
-              ? "log-error"
-              : "log-info";
-        div.textContent = msg;
-        box.appendChild(div);
-        box.scrollTop = box.scrollHeight;
-      }
-      function clearLog() {
-        document.getElementById("log-box").innerHTML = "";
-      }
-      function toast(msg) {
-        const t = document.getElementById("toast");
-        t.textContent = msg;
-        t.classList.add("show");
-        setTimeout(() => t.classList.remove("show"), 3000);
-      }
-
-      // ═══════════════════════════════════════════════════
-      // SIMULATION ENGINE (inline Web Worker via Blob)
-      // ═══════════════════════════════════════════════════
-      const WORKER_CODE = `
-function clamp(x,lo,hi){return Math.max(lo,Math.min(hi,x))}
-function normalizeServiceLevel(x){const v=Number(x);if(!Number.isFinite(v))return 0;if(v>1.0001)return v/100;return v}
-function randUniform(){return Math.random()}
-function randNormal(m=0,s=1){const u1=Math.max(randUniform(),1e-12),u2=randUniform();return m+s*Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2)}
-function samplePoisson(lambda){const lam=Math.max(0,lambda||0);if(lam<=0)return 0;if(lam<30){const L=Math.exp(-lam);let k=0,p=1;do{k++;p*=randUniform();}while(p>L);return k-1;}return Math.max(0,Math.round(randNormal(lam,Math.sqrt(lam))))}
-function sampleGamma(shape,scale=1){let k=Number(shape)||0;const theta=Math.max(Number(scale)||0,0);if(k<=0||theta<=0)return 0;if(k<1){const u=Math.max(randUniform(),1e-12);return sampleGamma(k+1,theta)*Math.pow(u,1/k)}const d=k-1/3,c=1/Math.sqrt(9*d);while(true){let x,v;do{x=randNormal(0,1);v=1+c*x;}while(v<=0);v=v*v*v;const u=randUniform();if(u<1-0.0331*Math.pow(x,4))return d*v*theta;if(Math.log(u)<0.5*x*x+d*(1-v+Math.log(v)))return d*v*theta;}}
-function sampleNB(n,p){const nn=Number(n),pp=Number(p);if(!Number.isFinite(nn)||!Number.isFinite(pp))return null;if(nn<=0||pp<=0||pp>=1)return null;return samplePoisson(sampleGamma(nn,(1-pp)/pp))}
-function fallbackNormal(mu,sigma,k){const m=Math.max(Number(mu)||0,0),s=Math.max(Number(sigma)||0,0);let d=randNormal(m,Math.max(s,1e-9));return Math.max(0,clamp(d,Math.max(0,m-k*s),Math.max(0,m+k*s)))}
-function sampleDemand(row,cfg){const dist=row.distInfo;if(!dist||!dist.distribucion){return fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp)}const t=String(dist.distribucion).toUpperCase(),p0=clamp(Number(dist.p0)||0,0,1),lambda=Math.max(0,Number(dist.parametros&&dist.parametros.lambda)||0),nb_n=Number(dist.parametros&&dist.parametros.nb_n),nb_p=Number(dist.parametros&&dist.parametros.nb_p);if(t==='NO_HISTORY')return fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp);if(t==='ZERO_ONLY')return 0;if(t==='POISSON')return lambda>0?samplePoisson(lambda):fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp);if(t==='NB'){const nb=sampleNB(nb_n,nb_p);return nb!=null?nb:fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp)}if(t==='ZINB'){if(randUniform()<=p0)return 0;const nb=sampleNB(nb_n,nb_p);return nb!=null?nb:fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp)}return fallbackNormal(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp)}
-function simulate(row,meta,cfg){const S=Math.max(0,meta),R=Math.max(1,Math.round(Number(row.Frecuencia_Revision_dias)||1)),LT=Math.max(0,Math.round(Number(row.Lead_Time_Abasto)||0)),totalCycles=Math.max(1,Math.floor(cfg.horizonDays/R));let onHand=S,pipeline=[],okCycles=0,stockoutCycles=0,totalDemand=0,totalServed=0,totalOrdered=0,totalDelivered=0,totalShortageUnits=0,endingSum=0,days=0;for(let cycle=1;cycle<=totalCycles;cycle++){let hadStockout=false;for(let d=1;d<=R;d++){const day=(cycle-1)*R+d;for(let i=pipeline.length-1;i>=0;i--){if(pipeline[i].arrivesOnDay===day){onHand+=pipeline[i].qty;totalDelivered+=pipeline[i].qty;pipeline.splice(i,1)}}const demand=Math.max(0,sampleDemand(row,cfg));totalDemand+=demand;if(onHand>=demand){onHand-=demand;totalServed+=demand}else{totalServed+=onHand;totalShortageUnits+=demand-onHand;onHand=0;hadStockout=true}endingSum+=onHand;days++}if(!hadStockout)okCycles++;else stockoutCycles++;const pipeQty=pipeline.reduce((a,p)=>a+p.qty,0),invPos=onHand+pipeQty,orderQty=Math.max(0,S-invPos);if(orderQty>0)pipeline.push({arrivesOnDay:cycle*R+LT,qty:orderQty});totalOrdered+=orderQty||0;}const cycleServiceLevel=okCycles/Math.max(1,totalCycles),avgEndingInventory=endingSum/Math.max(1,days),shortageRatio=totalShortageUnits/Math.max(1,totalDemand);return{cycleServiceLevel,avgEndingInventory,totalDemand,totalServed,totalOrdered,totalDelivered,totalShortageUnits,shortageRatio,totalCycles,stockoutCycles,okCycles,simulatedDays:days}}
-function score(row,meta,metrics,cfg){const w=cfg.scoring.weights,target=clamp(normalizeServiceLevel(row.Nivel_Servicio),0,1),tol=Math.max(1e-9,cfg.scoring.serviceTolerance),svcGap=metrics.cycleServiceLevel-target,svcScore=clamp(1-Math.abs(svcGap)/tol,0,1),shortRatio=clamp(metrics.shortageRatio,0,1),shortScore=clamp(1-shortRatio,0,1),expectedNeed=Math.max(1,(Number(row.Demanda_Promedio_Diaria)||1)*((Number(row.Lead_Time_Abasto)||1)+(Number(row.Frecuencia_Revision_dias)||1))),overstockUnits=Math.max(0,(Number(metrics.avgEndingInventory)||0)-expectedNeed),overstockRatio=overstockUnits/expectedNeed,overstockScore=1/(1+overstockRatio);let total=svcScore*w.service+shortScore*w.shortage+overstockScore*w.overstock;const metaRatio=meta/Math.max(1,expectedNeed);if(cfg.scoring.penalizeMetaFarAboveNeed){if(metaRatio>10)total*=0.6;if(metaRatio>20)total*=0.3;if(metaRatio>50)total*=0.1}if(Math.abs(svcGap)>tol)total*=0.25;return{serviceScore:svcScore,shortageScore:shortScore,overstockScore,totalScore:total,serviceGap:svcGap,shortageRatio:shortRatio,overstockRatio,expectedNeed,metaToNeedRatio:metaRatio}}
-function evalMeta(row,meta,cfg,reps){const r=Math.max(1,Math.round(reps));const acc={cycleServiceLevel:0,avgEndingInventory:0,totalDemand:0,totalServed:0,totalOrdered:0,totalDelivered:0,totalShortageUnits:0,shortageRatio:0,stockoutCycles:0,okCycles:0};for(let i=0;i<r;i++){const m=simulate(row,meta,cfg);for(const k of Object.keys(acc))acc[k]+=m[k]||0}for(const k of Object.keys(acc))acc[k]/=r;const sc=score(row,meta,acc,cfg);return{meta,metrics:acc,scores:sc}}
-function uniqueSorted(vals){return[...new Set(vals.filter(x=>Number.isFinite(x)).map(x=>Math.max(0,Math.round(x))))].sort((a,b)=>a-b)}
-function candidates(row,cfg){const meta0=Math.max(0,Math.round(Number(row.META)||0)),d=Math.max(0,Number(row.Demanda_Promedio_Diaria)||0),R=Math.max(1,Number(row.Frecuencia_Revision_dias)||1),LT=Math.max(0,Number(row.Lead_Time_Abasto)||0),need=Math.max(0,d*(R+LT));return uniqueSorted([0,meta0,meta0*0.25,meta0*0.5,meta0*0.75,meta0*0.9,meta0*1.1,meta0*1.25,meta0*1.5,meta0*2,need*0.25,need*0.5,need*0.75,need,need*1.25,need*1.5,need*2,need*3])}
-function neighbors(meta,cfg){const m=Math.max(0,Math.round(meta||0)),abs=[1,2,5,10,20,35,50,75,100],pct=[0.85,0.9,0.95,0.98,1.02,1.05,1.1,1.15],vals=[m];for(const s of abs)vals.push(m-s,m+s);for(const p of pct)vals.push(m*p);return uniqueSorted(vals)}
-function compare(a,b,target){if(!a)return b;if(!b)return a;const sa=a.scores.totalScore,sb=b.scores.totalScore;if(sb>sa)return b;if(sb<sa)return a;const ga=Math.abs((a.metrics.cycleServiceLevel||0)-target),gb=Math.abs((b.metrics.cycleServiceLevel||0)-target);if(gb<ga)return b;if(gb>ga)return a;if((b.scores.shortageRatio||0)<(a.scores.shortageRatio||0))return b;if((b.scores.shortageRatio||0)>(a.scores.shortageRatio||0))return a;return(b.meta<a.meta)?b:a}
-function optimize(row,cfg){const target=clamp(normalizeServiceLevel(row.Nivel_Servicio),0,1);const cache=new Map();let iters=0;function ev(meta,reps){const m=Math.max(0,Math.round(meta)),r=Math.max(1,Math.round(reps)),key=m+'|'+r;if(cache.has(key))return cache.get(key);const res=evalMeta(row,m,cfg,r);cache.set(key,res);iters++;return res}const coarseReps=cfg.coarseReplications||40,topK=cfg.scoring.topKCoarse||4;const initCands=candidates(row,cfg);let coarse=initCands.map(m=>ev(m,coarseReps));coarse.sort((a,b)=>b.scores.totalScore-a.scores.totalScore);let seeds=coarse.slice(0,topK).map(x=>x.meta);seeds=uniqueSorted([...seeds,Math.round(Number(row.META)||0)]);const refined=uniqueSorted(seeds.flatMap(m=>neighbors(m,cfg)));const refineRes=refined.map(m=>ev(m,coarseReps));refineRes.sort((a,b)=>b.scores.totalScore-a.scores.totalScore);const finalists=uniqueSorted([...refineRes.slice(0,topK).map(x=>x.meta),Math.round(Number(row.META)||0)]);const finalCands=uniqueSorted(finalists.flatMap(m=>neighbors(m,cfg)));let best=null;for(const m of finalCands){const ev2=ev(m,cfg.nReplications);best=compare(best,ev2,target)}if(!best)best=ev(Math.max(0,Math.round(Number(row.META)||0)),cfg.nReplications);const distType=String(row.distInfo&&row.distInfo.distribucion||'NORMAL_FALLBACK').toUpperCase();return{metaInitial:Number(row.META)||0,metaOptimized:Math.max(0,Math.round(best.meta)),metaOptimizedRaw:best.meta,deltaMeta:Math.max(0,Math.round(best.meta))-(Number(row.META)||0),serviceTarget:target,serviceAchieved:best.metrics.cycleServiceLevel,serviceGap:best.metrics.cycleServiceLevel-target,feasible:best.metrics.cycleServiceLevel>=target,serviceFloorMet:Math.abs(best.scores.serviceGap||0)<=cfg.scoring.serviceTolerance,avgEndingInventory:best.metrics.avgEndingInventory,avgShortageUnits:best.scores.shortageUnits||0,shortageRatio:best.scores.shortageRatio,avgOverstockUnits:best.scores.overstockUnits||0,overstockRatio:best.scores.overstockRatio,expectedNeed:best.scores.expectedNeed,serviceScore:best.scores.serviceScore,shortageScore:best.scores.shortageScore,overstockScore:best.scores.overstockScore,totalScore:best.scores.totalScore,totalScorePct:best.scores.totalScore*100,distributionType:distType,distributionFallback:!row.distInfo||distType==='NO_HISTORY',iterations:iters,cacheSize:cache.size}}
-self.onmessage=function(e){const{jobId,row,cfg}=e.data;try{const res=optimize(row,cfg);self.postMessage({jobId,res})}catch(err){self.postMessage({jobId,error:err.message})}}
-`;
-
-      function makeWorker() {
-        const blob = new Blob([WORKER_CODE], {
-          type: "application/javascript",
+      // ═══════ CSV PARSER (robust, RFC-4180 compatible) ════════
+      function parseCSV(raw) {
+        var lines = raw
+          .replace(/\r\n/g, "\n")
+          .replace(/\r/g, "\n")
+          .trim()
+          .split("\n");
+        if (lines.length < 2) return [];
+        var headers = splitRow(lines[0]).map(function (h) {
+          return h.trim().replace(/^["']|["']$/g, "");
         });
-        return new Worker(URL.createObjectURL(blob));
+        return lines
+          .slice(1)
+          .filter(function (l) {
+            return l.trim();
+          })
+          .map(function (line) {
+            var vals = splitRow(line);
+            var obj = {};
+            headers.forEach(function (h, i) {
+              var v = (vals[i] || "").trim().replace(/^["']|["']$/g, "");
+              if (
+                v === "" ||
+                v === "null" ||
+                v === "NULL" ||
+                v === "undefined"
+              ) {
+                obj[h] = null;
+                return;
+              }
+              var n = Number(v);
+              obj[h] = !isNaN(n) && v !== "" ? n : v;
+            });
+            return obj;
+          });
+      }
+      function splitRow(line) {
+        var res = [],
+          cur = "",
+          inQ = false;
+        for (var i = 0; i < line.length; i++) {
+          var c = line[i];
+          if (c === '"') {
+            inQ = !inQ;
+          } else if (c === "," && !inQ) {
+            res.push(cur);
+            cur = "";
+          } else cur += c;
+        }
+        res.push(cur);
+        return res;
       }
 
-      // ═══════════════════════════════════════════════════
-      // RUN SIMULATION
-      // ═══════════════════════════════════════════════════
+      // ═══════ KEY NORMALIZATION (mirrors backend exactly) ══════
+      function normPart(v) {
+        if (v === undefined || v === null) return null;
+        var s = String(v).trim();
+        return s.length ? s : null;
+      }
+      function buildKey(u, p) {
+        var uu = normPart(u),
+          pp = normPart(p);
+        if (!uu || !pp) return null;
+        return uu + "_" + pp;
+      }
+      // Parse SKU in "Producto@Ubicacion" or "Ubicacion_Producto" formats (mirrors backend parsePolicySku)
+      function parseSKUToKey(sku) {
+        var s = normPart(sku);
+        if (!s) return null;
+        if (s.indexOf("@") !== -1) {
+          var parts = s.split("@");
+          if (parts.length === 2) {
+            var prod = normPart(parts[0]),
+              ubic = normPart(parts[1]);
+            if (ubic && prod)
+              return {
+                key: ubic + "_" + prod,
+                Ubicacion: ubic,
+                Producto: prod,
+              };
+          }
+        }
+        if (s.indexOf("_") !== -1) {
+          var idx = s.indexOf("_");
+          var ubic2 = normPart(s.slice(0, idx)),
+            prod2 = normPart(s.slice(idx + 1));
+          if (ubic2 && prod2)
+            return {
+              key: ubic2 + "_" + prod2,
+              Ubicacion: ubic2,
+              Producto: prod2,
+            };
+        }
+        return null;
+      }
+
+      // ═══════ DIST MAP BUILD & MATCH (mirrors backend) ═════════
+      function buildDistMap(arr) {
+        var map = new Map();
+        if (!arr) return map;
+        arr.forEach(function (d) {
+          var k = buildKey(d.Ubicacion, d.Producto);
+          if (k) map.set(k, d);
+          var sku = normPart(d.SKU);
+          if (sku && !map.has(sku)) map.set(sku, d);
+          if (sku) {
+            var p = parseSKUToKey(sku);
+            if (p && !map.has(p.key)) map.set(p.key, d);
+          }
+        });
+        return map;
+      }
+      function matchDist(row, distMap) {
+        var k1 = buildKey(row.Ubicacion, row.Producto);
+        if (k1 && distMap.has(k1))
+          return { distInfo: distMap.get(k1), matchSource: "composite" };
+        var sku = normPart(row.SKU);
+        if (sku && distMap.has(sku))
+          return { distInfo: distMap.get(sku), matchSource: "sku_exact" };
+        if (sku) {
+          var p = parseSKUToKey(sku);
+          if (p && distMap.has(p.key))
+            return { distInfo: distMap.get(p.key), matchSource: "sku_parse" };
+        }
+        return { distInfo: null, matchSource: null };
+      }
+
+      // ═══════ CONFIG FROM UI ═══════════════════════════════════
       function buildCFG() {
-        const ws = Number(document.getElementById("cfg-ws").value) / 100;
-        const wf = Number(document.getElementById("cfg-wf").value) / 100;
-        const wo = Math.max(0, 1 - ws - wf);
+        var ws = +document.getElementById("ws").value;
+        var wf = +document.getElementById("wf").value;
+        var wo = +document.getElementById("wo").value;
+        var tot = ws + wf + wo || 1;
         return {
-          nReplications: Number(document.getElementById("cfg-reps").value),
-          coarseReplications: 40,
-          horizonDays: Number(document.getElementById("cfg-hor").value),
-          kStdClamp: 2,
+          nReplications: +document.getElementById("cr").value,
+          coarseReplications: +document.getElementById("ccr").value,
+          horizonDays: +document.getElementById("ch").value,
+          kStdClamp: +document.getElementById("ckc").value,
           minMeta: 0,
           maxMeta: 1e9,
           rounding: "round",
           scoring: {
-            weights: { service: ws, shortage: wf, overstock: wo },
-            serviceTolerance:
-              Number(document.getElementById("cfg-tol").value) / 100,
-            topKCoarse: 4,
+            weights: {
+              service: ws / tot,
+              shortage: wf / tot,
+              overstock: wo / tot,
+            },
+            serviceTolerance: +document.getElementById("ct").value / 100,
+            topKCoarse: +document.getElementById("ck").value,
             penalizeMetaFarAboveNeed: true,
           },
         };
       }
 
-      function buildDistMap() {
-        if (!distData || distData.length === 0) return new Map();
-        const map = new Map();
-        for (const d of distData) {
-          const u = (d.Ubicacion || "").toString().trim();
-          const p = (d.Producto || "").toString().trim();
-          if (u && p) map.set(u + "_" + p, d);
-          if (d.SKU) map.set(d.SKU, d);
-        }
-        return map;
+      // ═══════ LOG / TOAST ═════════════════════════════════════
+      function log(msg, t) {
+        var box = document.getElementById("logbox");
+        var d = document.createElement("div");
+        d.className = t === "w" ? "lw" : t === "e" ? "le" : "li";
+        d.textContent = msg;
+        box.appendChild(d);
+        box.scrollTop = box.scrollHeight;
+      }
+      function toast(msg) {
+        var el = document.getElementById("toast");
+        el.textContent = msg;
+        el.classList.add("show");
+        setTimeout(function () {
+          el.classList.remove("show");
+        }, 3000);
       }
 
-      function enrichRow(row, distMap) {
-        const u = (row.Ubicacion || "").toString().trim();
-        const p = (row.Producto || "").toString().trim();
-        let distInfo = null;
-        if (distMap.has(u + "_" + p)) distInfo = distMap.get(u + "_" + p);
-        else if (row.SKU && distMap.has(row.SKU))
-          distInfo = distMap.get(row.SKU);
-        return { ...row, distInfo };
-      }
+      // ═══════ WEB WORKER SOURCE ═══════════════════════════════
+      // This is a faithful port of the worker section of run_montecarlo_meta.js
+      // Every function matches the backend naming and logic exactly.
+      var WORKER_SRC = [
+        "'use strict';",
+        "function clamp(x,lo,hi){return Math.max(lo,Math.min(hi,x))}",
+        "function normSvc(x){var v=Number(x);if(!isFinite(v))return 0;return v>1.0001?v/100:v}",
 
-      async function runSimulation() {
-        if (running || !policyData) return;
+        // ── RNG ──
+        "function randNormal(m,s){",
+        "  var u1=Math.max(Math.random(),1e-12),u2=Math.random();",
+        "  return m+s*Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);",
+        "}",
+
+        // ── samplePoisson: exact for lambda<30, normal approx for >=30 ──
+        "function samplePoisson(lambda){",
+        "  var lam=Math.max(0,Number(lambda)||0);",
+        "  if(lam<=0)return 0;",
+        "  if(lam<30){var L=Math.exp(-lam),k=0,p=1;do{k++;p*=Math.random();}while(p>L);return k-1;}",
+        "  return Math.max(0,Math.round(randNormal(lam,Math.sqrt(lam))));",
+        "}",
+
+        // ── sampleGamma: Marsaglia-Tsang algorithm ──
+        "function sampleGamma(shape,scale){",
+        "  var k=Number(shape)||0,theta=Math.max(Number(scale)||0,0);",
+        "  if(k<=0||theta<=0)return 0;",
+        "  if(k<1){var u=Math.max(Math.random(),1e-12);return sampleGamma(k+1,theta)*Math.pow(u,1/k);}",
+        "  var d=k-1/3,c=1/Math.sqrt(9*d);",
+        "  while(true){var x,v;do{x=randNormal(0,1);v=1+c*x;}while(v<=0);",
+        "    v=v*v*v;var u=Math.random();",
+        "    if(u<1-0.0331*Math.pow(x,4))return d*v*theta;",
+        "    if(Math.log(u)<0.5*x*x+d*(1-v+Math.log(v)))return d*v*theta;",
+        "  }",
+        "}",
+
+        // ── sampleNegativeBinomial: Gamma-Poisson mixture (real-valued n) ──
+        "function sampleNB(n,p){",
+        "  var nn=Number(n),pp=Number(p);",
+        "  if(!isFinite(nn)||!isFinite(pp))return null;",
+        "  if(nn<=0||pp<=0||pp>=1)return null;",
+        "  return samplePoisson(sampleGamma(nn,(1-pp)/pp));",
+        "}",
+
+        // ── normalFallback: truncated normal ──
+        "function normalFallback(mu,sigma,k){",
+        "  var m=Math.max(Number(mu)||0,0),s=Math.max(Number(sigma)||0,0);",
+        "  var d=randNormal(m,Math.max(s,1e-9));",
+        "  return Math.max(0,clamp(d,Math.max(0,m-k*s),Math.max(0,m+k*s)));",
+        "}",
+
+        // ── sampleDailyDemand: exact dispatch from backend ──
+        "function sampleDailyDemand(row,cfg){",
+        "  var dist=row.distInfo;",
+        "  if(!dist||!dist.distribucion)return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NORMAL_FALLBACK',fallback:true};",
+        "  var t=String(dist.distribucion).toUpperCase();",
+        "  var p0=clamp(Number(dist.p0)||0,0,1);",
+        "  var lam=Math.max(0,Number(dist.parametros&&dist.parametros.lambda)||0);",
+        "  var nb_n=Number(dist.parametros&&dist.parametros.nb_n);",
+        "  var nb_p=Number(dist.parametros&&dist.parametros.nb_p);",
+        "  if(t==='NO_HISTORY')return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NO_HISTORY_FALLBACK',fallback:true};",
+        "  if(t==='ZERO_ONLY')return{demand:0,usedDist:'ZERO_ONLY',fallback:false};",
+        "  if(t==='POISSON'){",
+        "    if(lam>0)return{demand:samplePoisson(lam),usedDist:'POISSON',fallback:false};",
+        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'POISSON_FALLBACK',fallback:true};",
+        "  }",
+        "  if(t==='NB'){",
+        "    var nb=sampleNB(nb_n,nb_p);",
+        "    if(nb!=null)return{demand:nb,usedDist:'NB',fallback:false};",
+        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NB_FALLBACK',fallback:true};",
+        "  }",
+        "  if(t==='ZINB'){",
+        "    if(Math.random()<=p0)return{demand:0,usedDist:'ZINB',fallback:false};",
+        "    var nb2=sampleNB(nb_n,nb_p);",
+        "    if(nb2!=null)return{demand:nb2,usedDist:'ZINB',fallback:false};",
+        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'ZINB_FALLBACK',fallback:true};",
+        "  }",
+        "  return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'UNKNOWN_FALLBACK',fallback:true};",
+        "}",
+
+        // ── applyDelivery: full delivery, no partial fills ──
+        "function applyDelivery(qty){return Math.max(0,Number(qty)||0);}",
+
+        // ── simulateMetricsByCycle: exact replica of backend ──
+        "function simulateMetricsByCycle(row,meta,cfg){",
+        "  var S=Math.max(0,meta);",
+        "  var R=Math.max(1,Math.round(Number(row.Frecuencia_Revision_dias)||1));",
+        "  var LT=Math.max(0,Math.round(Number(row.Lead_Time_Abasto)||0));",
+        "  var totalCycles=Math.max(1,Math.floor(cfg.horizonDays/R));",
+        "  var onHand=S,pipeline=[];",
+        "  var okCycles=0,stockoutCycles=0;",
+        "  var totalDemand=0,totalServed=0,totalOrdered=0,totalDelivered=0,totalShortageUnits=0;",
+        "  var endingInventorySum=0,simulatedDays=0;",
+        "  for(var cycle=1;cycle<=totalCycles;cycle++){",
+        "    var cycleHadStockout=false;",
+        "    for(var d=1;d<=R;d++){",
+        "      var day=(cycle-1)*R+d;",
+        "      for(var i=pipeline.length-1;i>=0;i--){",
+        "        if(pipeline[i].arrivesOnDay===day){",
+        "          var del=applyDelivery(pipeline[i].qty);",
+        "          onHand+=del;totalDelivered+=del;pipeline.splice(i,1);",
+        "        }",
+        "      }",
+        "      var sampled=sampleDailyDemand(row,cfg);",
+        "      var demand=Math.max(0,Number(sampled.demand)||0);",
+        "      totalDemand+=demand;",
+        "      if(onHand>=demand){onHand-=demand;totalServed+=demand;}",
+        "      else{totalServed+=onHand;totalShortageUnits+=demand-onHand;onHand=0;cycleHadStockout=true;}",
+        "      endingInventorySum+=onHand;simulatedDays++;",
+        "    }",
+        "    if(!cycleHadStockout)okCycles++;else stockoutCycles++;",
+        "    var pipeQty=pipeline.reduce(function(a,p){return a+p.qty;},0);",
+        "    var invPos=onHand+pipeQty;",
+        "    var orderQty=Math.max(0,S-invPos);",
+        "    if(orderQty>0){pipeline.push({arrivesOnDay:cycle*R+LT,qty:orderQty});totalOrdered+=orderQty;}",
+        "  }",
+        "  return{",
+        "    cycleServiceLevel:okCycles/Math.max(1,totalCycles),",
+        "    customerFillRate:totalServed/Math.max(1,totalDemand),",
+        "    avgEndingInventory:endingInventorySum/Math.max(1,simulatedDays),",
+        "    totalDemand:totalDemand,totalServed:totalServed,totalOrdered:totalOrdered,totalDelivered:totalDelivered,",
+        "    totalShortageUnits:totalShortageUnits,",
+        "    shortageRatio:totalShortageUnits/Math.max(1,totalDemand),",
+        "    totalCycles:totalCycles,stockoutCycles:stockoutCycles,okCycles:okCycles,simulatedDays:simulatedDays",
+        "  };",
+        "}",
+
+        // ── computeCompositeScore: exact replica of backend ──
+        "function computeCompositeScore(row,meta,metrics,cfg){",
+        "  var w=cfg.scoring.weights;",
+        "  var target=clamp(normSvc(row.Nivel_Servicio),0,1);",
+        "  var tol=Math.max(1e-9,Number(cfg.scoring.serviceTolerance)||0.1);",
+        "  var svcGap=metrics.cycleServiceLevel-target;",
+        "  var svcGapAbs=Math.abs(svcGap);",
+        "  var svcScore=clamp(1-svcGapAbs/tol,0,1);",
+        "  var shortUnits=Math.max(0,Number(metrics.totalShortageUnits)||Math.max(0,(Number(metrics.totalDemand)||0)-(Number(metrics.totalServed)||0)));",
+        "  var shortRatio=clamp(shortUnits/Math.max(1,Number(metrics.totalDemand)||0),0,1);",
+        "  var shortScore=clamp(1-shortRatio,0,1);",
+        "  var expNeed=(Number(row.Demanda_Promedio_Diaria)||1)*((Number(row.Lead_Time_Abasto)||1)+(Number(row.Frecuencia_Revision_dias)||1));",
+        "  var ovUnits=Math.max(0,(Number(metrics.avgEndingInventory)||0)-expNeed);",
+        "  var ovRatio=ovUnits/Math.max(1,expNeed);",
+        "  var ovScore=1/(1+ovRatio);",
+        "  var total=svcScore*w.service+shortScore*w.shortage+ovScore*w.overstock;",
+        "  var mRatio=meta/Math.max(1,expNeed);",
+        "  if(cfg.scoring.penalizeMetaFarAboveNeed){",
+        "    if(mRatio>10)total*=0.6;",
+        "    if(mRatio>20)total*=0.3;",
+        "    if(mRatio>50)total*=0.1;",
+        "  }",
+        "  if(svcGapAbs>tol)total*=0.25;",
+        "  return{serviceScore:svcScore,shortageScore:shortScore,overstockScore:ovScore,totalScore:total,totalScorePct:total*100,",
+        "    serviceGap:svcGap,serviceGapAbs:svcGapAbs,serviceTolerance:tol,",
+        "    shortageUnits:shortUnits,shortageRatio:shortRatio,",
+        "    overstockRatio:ovRatio,overstockUnits:ovUnits,",
+        "    metaToNeedRatio:mRatio,expectedNeed:expNeed};",
+        "}",
+
+        // ── evaluateMetaScore ──
+        "function evalMeta(row,meta,cfg,reps){",
+        "  var r=Math.max(1,Math.round(reps));",
+        "  var acc={cycleServiceLevel:0,customerFillRate:0,avgEndingInventory:0,",
+        "    totalDemand:0,totalServed:0,totalOrdered:0,totalDelivered:0,",
+        "    totalShortageUnits:0,shortageRatio:0,totalCycles:0,stockoutCycles:0,okCycles:0,simulatedDays:0};",
+        "  for(var i=0;i<r;i++){var m=simulateMetricsByCycle(row,meta,cfg);for(var k in acc)acc[k]+=(m[k]||0);}",
+        "  for(var k in acc)acc[k]/=r;",
+        "  var sc=computeCompositeScore(row,meta,acc,cfg);",
+        "  return{meta:meta,metrics:acc,scores:sc,repsUsed:r};",
+        "}",
+
+        // ── compareEvaluations: tiebreak mirrors backend ──
+        "function cmpEval(a,b,target){",
+        "  if(!a)return b;if(!b)return a;",
+        "  var sa=Number(a.scores&&a.scores.totalScore)||0,sb=Number(b.scores&&b.scores.totalScore)||0;",
+        "  if(sb>sa)return b;if(sb<sa)return a;",
+        "  var ga=Math.abs((Number(a.metrics&&a.metrics.cycleServiceLevel)||0)-target);",
+        "  var gb=Math.abs((Number(b.metrics&&b.metrics.cycleServiceLevel)||0)-target);",
+        "  if(gb<ga)return b;if(gb>ga)return a;",
+        "  var shA=Number(a.scores&&a.scores.shortageRatio)||0,shB=Number(b.scores&&b.scores.shortageRatio)||0;",
+        "  if(shB<shA)return b;if(shB>shA)return a;",
+        "  var ovA=Number(a.scores&&a.scores.overstockRatio)||0,ovB=Number(b.scores&&b.scores.overstockRatio)||0;",
+        "  if(ovB<ovA)return b;if(ovB>ovA)return a;",
+        "  return(b.meta<a.meta)?b:a;",
+        "}",
+
+        // ── uniqueSorted ──
+        "function uniqSort(vals){",
+        "  return[...new Set(vals.filter(function(x){return isFinite(x);}).map(function(x){return Math.max(0,Math.round(x));}))].sort(function(a,b){return a-b;});",
+        "}",
+
+        // ── generateInitialCandidates ──
+        "function initCands(row,cfg){",
+        "  var m0=clamp(Math.round(Number(row.META)||0),cfg.minMeta,cfg.maxMeta);",
+        "  var dd=Math.max(0,Number(row.Demanda_Promedio_Diaria)||0);",
+        "  var R=Math.max(1,Math.round(Number(row.Frecuencia_Revision_dias)||1));",
+        "  var LT=Math.max(0,Math.round(Number(row.Lead_Time_Abasto)||0));",
+        "  var need=Math.max(0,dd*(R+LT));",
+        "  var cs=[cfg.minMeta,m0,m0*0.25,m0*0.5,m0*0.75,m0*0.9,m0*1.1,m0*1.25,m0*1.5,m0*2,",
+        "    need*0.25,need*0.5,need*0.75,need,need*1.25,need*1.5,need*2,need*3];",
+        "  return uniqSort(cs.map(function(x){return clamp(Math.round(x),cfg.minMeta,cfg.maxMeta);}));",
+        "}",
+
+        // ── generateNeighborCandidates ──
+        "function neighbors(base,cfg){",
+        "  var m=Math.max(0,Math.round(base||0));",
+        "  var abs=[1,2,5,10,20,35,50,75,100];",
+        "  var pct=[0.85,0.9,0.95,0.98,1.02,1.05,1.1,1.15];",
+        "  var vs=[m];",
+        "  abs.forEach(function(s){vs.push(m-s,m+s);});",
+        "  pct.forEach(function(p){vs.push(m*p);});",
+        "  return uniqSort(vs.map(function(x){return clamp(Math.round(x),cfg.minMeta,cfg.maxMeta);}));",
+        "}",
+
+        // ── optimizeMeta: 3-phase strategy from backend ──
+        "function optimizeMeta(row,cfg){",
+        "  var target=clamp(normSvc(row.Nivel_Servicio),0,1);",
+        "  var cache=new Map();var iterations=0;",
+        "  function ec(meta,reps){",
+        "    var m=clamp(Math.round(meta),cfg.minMeta,cfg.maxMeta);",
+        "    var r=Math.max(1,Math.round(reps));",
+        "    var key=m+'|'+r;",
+        "    if(cache.has(key))return cache.get(key);",
+        "    var res=evalMeta(row,m,cfg,r);var full=Object.assign({meta:m},res);",
+        "    cache.set(key,full);iterations++;return full;",
+        "  }",
+        "  var cReps=Math.min(cfg.coarseReplications||cfg.nReplications,cfg.nReplications);",
+        "  var topK=Math.max(1,Math.round((cfg.scoring&&cfg.scoring.topKCoarse)||4));",
+        "  var meta0=Math.round(Number(row.META)||0);",
+        "  // Phase 1: coarse",
+        "  var ic=initCands(row,cfg);",
+        "  var cr=ic.map(function(m){return ec(m,cReps);});",
+        "  cr.sort(function(a,b){return b.scores.totalScore-a.scores.totalScore;});",
+        "  var seeds=cr.slice(0,topK).map(function(x){return x.meta;});",
+        "  if(seeds.indexOf(meta0)===-1)seeds.push(meta0);",
+        "  seeds=uniqSort(seeds);",
+        "  // Phase 2: refine",
+        "  var rcands=uniqSort(seeds.reduce(function(a,m){return a.concat(neighbors(m,cfg));},[]));",
+        "  var rr=rcands.map(function(m){return ec(m,cReps);});",
+        "  rr.sort(function(a,b){return b.scores.totalScore-a.scores.totalScore;});",
+        "  var fin=rr.slice(0,topK).map(function(x){return x.meta;});",
+        "  if(fin.indexOf(meta0)===-1)fin.push(meta0);",
+        "  // Phase 3: final full-rep evaluation",
+        "  var fcands=uniqSort(fin.reduce(function(a,m){return a.concat(neighbors(m,cfg));},[]));",
+        "  var best=null;",
+        "  fcands.forEach(function(m){best=cmpEval(best,ec(m,cfg.nReplications),target);});",
+        "  if(!best)best=ec(meta0,cfg.nReplications);",
+        "  var fMeta=best.meta;",
+        "  if(cfg.rounding==='ceil')fMeta=Math.ceil(fMeta);",
+        "  else if(cfg.rounding==='round')fMeta=Math.round(fMeta);",
+        "  else if(cfg.rounding==='floor')fMeta=Math.floor(fMeta);",
+        "  fMeta=Math.max(0,fMeta);",
+        "  var distType=String(row.distInfo&&row.distInfo.distribucion||'NORMAL_FALLBACK').toUpperCase();",
+        "  return{",
+        "    metaInitial:Number(row.META)||0,metaOptimized:fMeta,metaOptimizedRaw:best.meta,",
+        "    deltaMeta:fMeta-(Number(row.META)||0),",
+        "    serviceTarget:target,serviceAchieved:best.metrics.cycleServiceLevel,",
+        "    serviceGap:best.metrics.cycleServiceLevel-target,",
+        "    feasible:best.metrics.cycleServiceLevel>=target,",
+        "    serviceFloorMet:best.scores.serviceGapAbs<=best.scores.serviceTolerance,",
+        "    serviceGapAbs:best.scores.serviceGapAbs,",
+        "    customerFillRateAchieved:best.metrics.customerFillRate,",
+        "    avgEndingInventory:best.metrics.avgEndingInventory,",
+        "    avgShortageUnits:best.scores.shortageUnits,",
+        "    shortageRatio:best.scores.shortageRatio,shortageScore:best.scores.shortageScore,",
+        "    avgOverstockUnits:best.scores.overstockUnits,",
+        "    overstockRatio:best.scores.overstockRatio,overstockScore:best.scores.overstockScore,",
+        "    expectedNeed:best.scores.expectedNeed,metaToNeedRatio:best.scores.metaToNeedRatio,",
+        "    serviceScore:best.scores.serviceScore,totalScore:best.scores.totalScore,totalScorePct:best.scores.totalScorePct,",
+        "    avgTotalDemand:best.metrics.totalDemand,avgTotalServed:best.metrics.totalServed,",
+        "    avgTotalOrdered:best.metrics.totalOrdered,avgTotalDelivered:best.metrics.totalDelivered,",
+        "    avgStockoutCycles:best.metrics.stockoutCycles,avgOkCycles:best.metrics.okCycles,",
+        "    avgTotalCycles:best.metrics.totalCycles,avgSimulatedDays:best.metrics.simulatedDays,",
+        "    iterations:iterations,cacheSize:cache.size,",
+        "    coarseReplications:cReps,finalReplications:cfg.nReplications,",
+        "    distributionType:distType,distributionFallback:!row.distInfo||distType==='NO_HISTORY'",
+        "  };",
+        "}",
+
+        // ── message handler ──
+        "self.onmessage=function(e){",
+        "  var d=e.data;",
+        "  try{var res=optimizeMeta(d.row,d.cfg);self.postMessage({jobId:d.jobId,res:res});}",
+        "  catch(err){self.postMessage({jobId:d.jobId,error:String(err&&err.message||err)});}",
+        "};",
+      ].join("\n");
+
+      // ═══════ RUN SIMULATION ══════════════════════════════════
+      function runSim() {
+        if (running || !policyData || !policyData.length) return;
         running = true;
         results = [];
+        displayRows = [];
         document.getElementById("btn-run").disabled = true;
-        document.getElementById("btn-export").disabled = true;
-        document.getElementById("progress-section").style.display = "block";
+        document.getElementById("btn-exp").disabled = true;
+        document.getElementById("prog-wrap").style.display = "block";
+        document.getElementById("charts-wrap").style.display = "none";
         document.getElementById("empty-dash").style.display = "none";
 
-        const cfg = buildCFG();
-        const distMap = buildDistMap();
-        const rows = policyData
-          .filter(
-            (r) => r.SKU != null && r.META != null && r.Nivel_Servicio != null,
-          )
-          .map((r) => enrichRow(r, distMap));
+        var cfg = buildCFG();
+        var distMap = buildDistMap(distData);
 
+        var mc = 0,
+          mse = 0,
+          msp = 0,
+          mf = 0;
+        var enriched = policyData.map(function (row) {
+          var m = matchDist(row, distMap);
+          if (m.distInfo) {
+            if (m.matchSource === "composite") mc++;
+            else if (m.matchSource === "sku_exact") mse++;
+            else if (m.matchSource === "sku_parse") msp++;
+          } else mf++;
+          return Object.assign({}, row, {
+            distInfo: m.distInfo,
+            matchSource: m.matchSource,
+          });
+        });
+
+        log("[INFO] Iniciando simulación: " + enriched.length + " SKUs", "i");
         log(
-          `[INFO] Iniciando simulación Monte Carlo: ${rows.length} SKUs`,
-          "info",
+          "[INFO] Reps finales: " +
+            cfg.nReplications +
+            " | Reps gruesas: " +
+            cfg.coarseReplications +
+            " | Horizonte: " +
+            cfg.horizonDays +
+            " días",
+          "i",
         );
         log(
-          `[INFO] Replicaciones: ${cfg.nReplications} | Horizonte: ${cfg.horizonDays} días`,
-          "info",
+          "[INFO] Pesos — Servicio: " +
+            (cfg.scoring.weights.service * 100).toFixed(0) +
+            "% | Faltante: " +
+            (cfg.scoring.weights.shortage * 100).toFixed(0) +
+            "% | Sobreinv: " +
+            (cfg.scoring.weights.overstock * 100).toFixed(0) +
+            "%",
+          "i",
         );
         log(
-          `[INFO] Pesos: Servicio=${(cfg.scoring.weights.service * 100).toFixed(0)}% | Faltante=${(cfg.scoring.weights.shortage * 100).toFixed(0)}% | Sobreinv=${(cfg.scoring.weights.overstock * 100).toFixed(0)}%`,
-          "info",
+          "[INFO] Match — composite: " +
+            mc +
+            " | sku_exact: " +
+            mse +
+            " | sku_parse: " +
+            msp +
+            " | fallback: " +
+            mf,
+          "i",
         );
 
-        const numWorkers = Math.min(
+        var numW = Math.min(
           navigator.hardwareConcurrency || 4,
           8,
-          rows.length,
+          enriched.length,
         );
-        const workers = Array.from({ length: numWorkers }, makeWorker);
-        let idx = 0,
-          done = 0;
+        var blob = new Blob([WORKER_SRC], { type: "application/javascript" });
+        var burl = URL.createObjectURL(blob);
+        var workers = [];
+        for (var i = 0; i < numW; i++) workers.push(new Worker(burl));
 
-        function updateProgress() {
-          const pct =
-            rows.length > 0 ? Math.round((done / rows.length) * 100) : 0;
-          document.getElementById("progress-pct").textContent = pct + "%";
-          document.getElementById("progress-fill").style.width = pct + "%";
-          document.getElementById("progress-detail").textContent =
-            `${done} de ${rows.length} SKUs procesados`;
-          document.getElementById("m-proc").textContent = done;
+        var idx = 0,
+          done = 0,
+          total = enriched.length;
+
+        function setP(n) {
+          var pct = total > 0 ? Math.round((n / total) * 100) : 0;
+          document.getElementById("prog-pct").textContent = pct + "%";
+          document.getElementById("prog-fill").style.width = pct + "%";
+          document.getElementById("prog-lbl").textContent =
+            n + " / " + total + " SKUs procesados";
+          document.getElementById("m-proc").textContent = n;
         }
 
-        await new Promise((resolve) => {
-          function pump(w) {
-            if (idx >= rows.length) return;
-            const row = rows[idx++];
-            const jobId = idx;
-            w.postMessage({ jobId, row, cfg });
-            w.onmessage = function (e) {
-              const { res, error } = e.data;
-              if (error) {
-                log(`[ERROR] SKU ${row.SKU}: ${error}`, "error");
-              } else {
-                const rec = {
-                  SKU: row.SKU,
-                  Ubicacion: row.Ubicacion,
-                  Producto: row.Producto,
-                  Clasificacion: row.Clasificacion,
-                  distInfo: row.distInfo,
-                  ...res,
-                };
-                results.push(rec);
-              }
-              done++;
-              updateProgress();
-              if (done % 50 === 0)
-                log(`[INFO] Procesados ${done}/${rows.length}…`, "info");
-              if (done === rows.length) {
-                workers.forEach((ww) => ww.terminate());
-                resolve();
-              } else {
-                pump(w);
-              }
-            };
-          }
-          workers.forEach((w) => pump(w));
+        var resolve;
+        var p = new Promise(function (res) {
+          resolve = res;
         });
 
-        log(
-          `[INFO] Simulación completada. ${results.length} resultados generados.`,
-          "info",
-        );
-        running = false;
-        document.getElementById("btn-run").disabled = false;
-        document.getElementById("btn-export").disabled = results.length === 0;
-        toast(`Simulación completada: ${results.length} SKUs procesados`);
-        renderDashboard();
-        renderTable(results);
+        function pump(w) {
+          if (idx >= total) return;
+          var row = enriched[idx++];
+          w.postMessage({ jobId: idx, row: row, cfg: cfg });
+          w.onmessage = function (e) {
+            if (e.data.error) {
+              log(
+                "[ERROR] " +
+                  (row.SKU || row.Ubicacion || "?") +
+                  ": " +
+                  e.data.error,
+                "e",
+              );
+            } else {
+              var r = e.data.res;
+              results.push(
+                Object.assign(
+                  {
+                    SKU: row.SKU,
+                    Ubicacion: row.Ubicacion,
+                    Producto: row.Producto,
+                    Clasificacion: row.Clasificacion,
+                    matchSource: row.matchSource,
+                    distKey:
+                      buildKey(row.Ubicacion, row.Producto) || row.SKU || null,
+                    distribucion_demanda: row.distInfo
+                      ? row.distInfo.distribucion
+                      : null,
+                    distribucion_parametros: row.distInfo
+                      ? row.distInfo.parametros
+                      : null,
+                    distribucion_p0: row.distInfo ? row.distInfo.p0 : null,
+                    distribucion_mu: row.distInfo ? row.distInfo.mu : null,
+                    distribucion_variance: row.distInfo
+                      ? row.distInfo.variance
+                      : null,
+                  },
+                  r,
+                ),
+              );
+            }
+            done++;
+            setP(done);
+            if (done % 100 === 0)
+              log("[INFO] Procesados " + done + "/" + total + "…", "i");
+            if (done === total) {
+              workers.forEach(function (ww) {
+                ww.terminate();
+              });
+              URL.revokeObjectURL(burl);
+              resolve();
+            } else pump(w);
+          };
+        }
+        workers.forEach(function (w) {
+          pump(w);
+        });
+
+        p.then(function () {
+          log(
+            "[INFO] Simulación completada. " +
+              results.length +
+              " resultados. " +
+              mf +
+              " SKUs usaron fallback normal.",
+            "i",
+          );
+          running = false;
+          document.getElementById("btn-run").disabled = false;
+          document.getElementById("btn-exp").disabled = results.length === 0;
+          toast("Completado: " + results.length + " SKUs procesados");
+          renderDash();
+          applyF();
+        });
       }
 
-      // ═══════════════════════════════════════════════════
-      // DASHBOARD
-      // ═══════════════════════════════════════════════════
-      function renderDashboard() {
-        if (results.length === 0) return;
-
-        const avgScore =
-          results.reduce((a, r) => a + (r.totalScore || 0), 0) / results.length;
-        const avgDelta =
-          results.reduce((a, r) => a + (r.deltaMeta || 0), 0) / results.length;
-        document.getElementById("m-score").textContent = (
-          avgScore * 100
-        ).toFixed(1);
+      // ═══════ DASHBOARD ═══════════════════════════════════════
+      function renderDash() {
+        if (!results.length) return;
+        var avgSc =
+          results.reduce(function (a, r) {
+            return a + (r.totalScore || 0);
+          }, 0) / results.length;
+        var avgDl =
+          results.reduce(function (a, r) {
+            return a + (r.deltaMeta || 0);
+          }, 0) / results.length;
+        document.getElementById("m-score").textContent = (avgSc * 100).toFixed(
+          1,
+        );
         document.getElementById("m-delta").textContent =
-          (avgDelta >= 0 ? "+" : "") + avgDelta.toFixed(1);
+          (avgDl >= 0 ? "+" : "") + avgDl.toFixed(1);
 
-        // Distribution chart
-        const distCounts = {};
-        results.forEach((r) => {
-          const t = r.distributionType || "NORMAL_FALLBACK";
-          distCounts[t] = (distCounts[t] || 0) + 1;
+        // dist breakdown
+        var dc = {};
+        results.forEach(function (r) {
+          var t = r.distributionType || "NORMAL_FALLBACK";
+          dc[t] = (dc[t] || 0) + 1;
         });
-        const maxCount = Math.max(...Object.values(distCounts));
-        const distColors = {
-          POISSON: "bar-fill",
-          NB: "bar-fill-green",
-          ZINB: "bar-fill-amber",
-          NO_HISTORY: "",
-          ZERO_ONLY: "",
-          NORMAL_FALLBACK: "",
+        var mdist = Math.max.apply(null, Object.values(dc).concat([1]));
+        var dcol = {
+          POISSON: "f-blue",
+          NB: "f-green",
+          ZINB: "f-amber",
+          ZERO_ONLY: "f-gray",
+          NO_HISTORY: "f-gray",
+          NORMAL_FALLBACK: "f-gray",
         };
-        document.getElementById("dist-bars").innerHTML = Object.entries(
-          distCounts,
-        )
-          .sort((a, b) => b[1] - a[1])
-          .map(
-            ([t, c]) => `<div class="bar-row">
-      <div class="bar-label">${t}</div>
-      <div class="bar-track"><div class="bar-fill ${distColors[t] || ""}" style="width:${((c / maxCount) * 100).toFixed(1)}%"></div></div>
-      <div class="bar-val">${c} SKUs</div>
-    </div>`,
-          )
-          .join("");
-        document.getElementById("dist-chart").style.display = "block";
-
-        // Top score chart
-        const top10 = [...results]
-          .sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0))
-          .slice(0, 12);
-        const maxScore = top10[0]?.totalScore || 1;
-        document.getElementById("score-bars").innerHTML = top10
-          .map(
-            (r) => `<div class="bar-row">
-    <div class="bar-label" title="${r.SKU}">${r.SKU || r.Producto || "—"}</div>
-    <div class="bar-track"><div class="bar-fill" style="width:${(((r.totalScore || 0) / maxScore) * 100).toFixed(1)}%"></div></div>
-    <div class="bar-val">${((r.totalScore || 0) * 100).toFixed(1)} pts</div>
-  </div>`,
-          )
-          .join("");
-        document.getElementById("score-chart").style.display = "block";
-      }
-
-      // ═══════════════════════════════════════════════════
-      // RESULTS TABLE
-      // ═══════════════════════════════════════════════════
-      function distBadge(t) {
-        const cls = {
-          POISSON: "badge-blue",
-          NB: "badge-green",
-          ZINB: "badge-amber",
-          ZERO_ONLY: "badge-gray",
-          NO_HISTORY: "badge-gray",
-          NORMAL_FALLBACK: "badge-gray",
-        };
-        return `<span class="badge ${cls[t] || "badge-gray"}">${t}</span>`;
-      }
-
-      function renderTable(data) {
-        const tbody = document.getElementById("results-tbody");
-        if (!data || data.length === 0) {
-          tbody.innerHTML =
-            '<tr><td colspan="10" style="text-align:center;padding:3rem;color:var(--gray-400)">Sin resultados.</td></tr>';
-          return;
-        }
-        tbody.innerHTML = data
-          .map((r) => {
-            const delta = r.deltaMeta || 0;
-            const deltaClass =
-              delta > 0 ? "delta-pos" : delta < 0 ? "delta-neg" : "delta-zero";
-            const deltaStr = (delta > 0 ? "+" : "") + delta.toFixed(0);
-            const svc = ((r.serviceAchieved || 0) * 100).toFixed(1) + "%";
-            const score = ((r.totalScore || 0) * 100).toFixed(1);
-            return `<tr>
-      <td class="td-mono">${r.SKU || "—"}</td>
-      <td>${r.Ubicacion || "—"}</td>
-      <td>${r.Producto || "—"}</td>
-      <td>${distBadge(r.distributionType || "NORMAL_FALLBACK")}</td>
-      <td class="td-mono">${(r.metaInitial || 0).toFixed(0)}</td>
-      <td class="td-mono" style="font-weight:500;color:var(--blue-600)">${(r.metaOptimized || 0).toFixed(0)}</td>
-      <td class="td-mono ${deltaClass}">${deltaStr}</td>
-      <td class="td-mono">${svc}</td>
-      <td class="td-mono">${score}</td>
-      <td>${r.feasible ? '<span class="badge badge-green">Sí</span>' : '<span class="badge badge-red">No</span>'}</td>
-    </tr>`;
+        document.getElementById("dist-bars").innerHTML = Object.entries(dc)
+          .sort(function (a, b) {
+            return b[1] - a[1];
+          })
+          .map(function (e) {
+            return (
+              '<div class="br-row"><div class="br-lbl">' +
+              e[0] +
+              '</div><div class="br-track"><div class="br-fill ' +
+              (dcol[e[0]] || "f-gray") +
+              '" style="width:' +
+              ((e[1] / mdist) * 100).toFixed(1) +
+              '%"></div></div><div class="br-val">' +
+              e[1] +
+              " SKUs</div></div>"
+            );
           })
           .join("");
+
+        // top score
+        var top = results
+          .slice()
+          .sort(function (a, b) {
+            return (b.totalScore || 0) - (a.totalScore || 0);
+          })
+          .slice(0, 12);
+        var msc = top[0] ? top[0].totalScore || 1 : 1;
+        document.getElementById("score-bars").innerHTML = top
+          .map(function (r) {
+            return (
+              '<div class="br-row"><div class="br-lbl" title="' +
+              (r.SKU || "") +
+              '">' +
+              (r.SKU || r.Producto || "—") +
+              '</div><div class="br-track"><div class="br-fill f-blue" style="width:' +
+              (((r.totalScore || 0) / msc) * 100).toFixed(1) +
+              '%"></div></div><div class="br-val">' +
+              ((r.totalScore || 0) * 100).toFixed(1) +
+              " pts</div></div>"
+            );
+          })
+          .join("");
+
+        // match breakdown
+        var mc2 = { composite: 0, sku_exact: 0, sku_parse: 0, fallback: 0 };
+        results.forEach(function (r) {
+          if (r.matchSource) mc2[r.matchSource] = (mc2[r.matchSource] || 0) + 1;
+          else mc2.fallback++;
+        });
+        var mm = Math.max.apply(null, Object.values(mc2).concat([1]));
+        var mlbl = {
+          composite: "Composite (U+P)",
+          sku_exact: "SKU exacto",
+          sku_parse: "SKU parseado",
+          fallback: "Sin match (fallback)",
+        };
+        var mcol = {
+          composite: "f-green",
+          sku_exact: "f-blue",
+          sku_parse: "f-amber",
+          fallback: "f-gray",
+        };
+        document.getElementById("match-bars").innerHTML = Object.entries(mc2)
+          .map(function (e) {
+            return (
+              '<div class="br-row"><div class="br-lbl">' +
+              (mlbl[e[0]] || e[0]) +
+              '</div><div class="br-track"><div class="br-fill ' +
+              (mcol[e[0]] || "f-gray") +
+              '" style="width:' +
+              ((e[1] / mm) * 100).toFixed(1) +
+              '%"></div></div><div class="br-val">' +
+              e[1] +
+              " SKUs</div></div>"
+            );
+          })
+          .join("");
+
+        document.getElementById("charts-wrap").style.display = "block";
       }
 
-      let filteredResults = [];
+      // ═══════ TABLE ════════════════════════════════════════════
+      var DBADGE = {
+        POISSON: "bb",
+        NB: "bg",
+        ZINB: "ba",
+        ZERO_ONLY: "bx",
+        NO_HISTORY: "bx",
+        NORMAL_FALLBACK: "bx",
+        NO_HISTORY_FALLBACK: "bx",
+        POISSON_FALLBACK: "bx",
+        NB_FALLBACK: "bx",
+        ZINB_FALLBACK: "bx",
+        UNKNOWN_FALLBACK: "bx",
+      };
+      function db(t) {
+        return (
+          '<span class="badge ' +
+          (DBADGE[t] || "bx") +
+          '">' +
+          (t || "—") +
+          "</span>"
+        );
+      }
+      function p2(v) {
+        return ((+v || 0) * 100).toFixed(1) + "%";
+      }
+      function n2(v, d) {
+        return (+v || 0).toFixed(d == null ? 0 : d);
+      }
 
-      function filterTable() {
-        const q = document.getElementById("search-table").value.toLowerCase();
-        const dist = document.getElementById("filter-dist").value;
-        const feas = document.getElementById("filter-feasible").value;
-        filteredResults = results.filter((r) => {
-          const text = `${r.SKU} ${r.Ubicacion} ${r.Producto}`.toLowerCase();
-          if (q && !text.includes(q)) return false;
-          if (dist && r.distributionType !== dist) return false;
-          if (feas !== "" && String(r.feasible) !== feas) return false;
+      function applyF() {
+        var q = (document.getElementById("srch").value || "").toLowerCase();
+        var fd = document.getElementById("f-dist").value;
+        var ff = document.getElementById("f-feas").value;
+        var fb = document.getElementById("f-fb").value;
+        displayRows = results.filter(function (r) {
+          if (
+            q &&
+            !(
+              (r.SKU || "") +
+              " " +
+              (r.Ubicacion || "") +
+              " " +
+              (r.Producto || "")
+            )
+              .toLowerCase()
+              .includes(q)
+          )
+            return false;
+          if (fd && r.distributionType !== fd) return false;
+          if (ff !== "" && String(r.feasible) !== ff) return false;
+          if (fb !== "" && String(r.distributionFallback) !== fb) return false;
           return true;
         });
-        renderTable(filteredResults);
+        displayRows.sort(function (a, b) {
+          var va = a[sortKey] ?? "",
+            vb = b[sortKey] ?? "";
+          if (typeof va === "number") return (va - vb) * sortDir;
+          return String(va).localeCompare(String(vb)) * sortDir;
+        });
+        renderTbl(displayRows);
+        document.getElementById("tc").textContent =
+          displayRows.length + " de " + results.length + " SKUs";
       }
-
-      function sortTable(key) {
+      function srt(key) {
         if (sortKey === key) sortDir *= -1;
         else {
           sortKey = key;
           sortDir = -1;
         }
-        const data = filteredResults.length > 0 ? filteredResults : results;
-        data.sort((a, b) => {
-          const va = a[key] ?? "",
-            vb = b[key] ?? "";
-          if (typeof va === "number") return (va - vb) * sortDir;
-          return String(va).localeCompare(String(vb)) * sortDir;
-        });
-        renderTable(data);
+        applyF();
+      }
+      function renderTbl(rows) {
+        var tb = document.getElementById("res-tbody");
+        if (!rows || !rows.length) {
+          tb.innerHTML =
+            '<tr><td colspan="16" style="text-align:center;padding:3rem;color:var(--gray-400)">Sin resultados.</td></tr>';
+          return;
+        }
+        tb.innerHTML = rows
+          .map(function (r) {
+            var dl = r.deltaMeta || 0;
+            var dc2 = dl > 0.5 ? "dp" : dl < -0.5 ? "dn" : "d0";
+            var dstr = (dl >= 0 ? "+" : "") + n2(dl, 0);
+            var sgp = ((r.serviceGap || 0) * 100).toFixed(1);
+            var sgc = (r.serviceGap || 0) >= 0 ? "dp" : "dn";
+            return (
+              "<tr>" +
+              '<td class="td-m">' +
+              (r.SKU || "—") +
+              "</td>" +
+              "<td>" +
+              (r.Ubicacion || "—") +
+              "</td>" +
+              "<td>" +
+              (r.Producto || "—") +
+              "</td>" +
+              "<td>" +
+              db(r.distributionType) +
+              "</td>" +
+              "<td>" +
+              (r.distributionFallback
+                ? '<span class="badge ba">fallback</span>'
+                : '<span class="badge bg">real</span>') +
+              "</td>" +
+              '<td><span class="badge bx">' +
+              (r.matchSource || "—") +
+              "</span></td>" +
+              '<td class="td-m">' +
+              n2(r.metaInitial, 0) +
+              "</td>" +
+              '<td class="td-m" style="font-weight:600;color:var(--blue-600)">' +
+              n2(r.metaOptimized, 0) +
+              "</td>" +
+              '<td class="td-m ' +
+              dc2 +
+              '">' +
+              dstr +
+              "</td>" +
+              '<td class="td-m">' +
+              p2(r.serviceTarget) +
+              "</td>" +
+              '<td class="td-m">' +
+              p2(r.serviceAchieved) +
+              "</td>" +
+              '<td class="td-m ' +
+              sgc +
+              '">' +
+              (r.serviceGap >= 0 ? "+" : "") +
+              sgp +
+              "%</td>" +
+              '<td class="td-m">' +
+              n2(r.shortageRatio, 4) +
+              "</td>" +
+              '<td class="td-m">' +
+              n2(r.overstockRatio, 4) +
+              "</td>" +
+              '<td class="td-m" style="font-weight:500">' +
+              n2(r.totalScorePct, 1) +
+              "</td>" +
+              "<td>" +
+              (r.feasible
+                ? '<span class="badge bg">Sí</span>'
+                : '<span class="badge br">No</span>') +
+              "</td>" +
+              "</tr>"
+            );
+          })
+          .join("");
       }
 
-      // ═══════════════════════════════════════════════════
-      // EXPORT CSV
-      // ═══════════════════════════════════════════════════
+      // ═══════ EXPORT CSV ══════════════════════════════════════
       function exportCSV() {
         if (!results.length) return;
-        const headers = [
+        var cols = [
           "SKU",
           "Ubicacion",
           "Producto",
+          "Clasificacion",
+          "matchSource",
+          "distKey",
+          "distribucion_demanda",
           "distributionType",
+          "distributionFallback",
+          "distribucion_p0",
+          "distribucion_mu",
+          "distribucion_variance",
           "metaInitial",
           "metaOptimized",
+          "metaOptimizedRaw",
           "deltaMeta",
           "serviceTarget",
           "serviceAchieved",
           "serviceGap",
+          "serviceGapAbs",
           "feasible",
+          "serviceFloorMet",
+          "customerFillRateAchieved",
           "avgEndingInventory",
+          "expectedNeed",
+          "avgShortageUnits",
           "shortageRatio",
+          "shortageScore",
+          "avgOverstockUnits",
           "overstockRatio",
+          "overstockScore",
+          "serviceScore",
           "totalScore",
           "totalScorePct",
-          "serviceScore",
-          "shortageScore",
-          "overstockScore",
-          "expectedNeed",
+          "avgTotalDemand",
+          "avgTotalServed",
+          "avgTotalOrdered",
+          "avgTotalDelivered",
+          "avgStockoutCycles",
+          "avgOkCycles",
+          "avgTotalCycles",
+          "avgSimulatedDays",
           "iterations",
+          "cacheSize",
+          "coarseReplications",
+          "finalReplications",
+          "metaToNeedRatio",
         ];
-        const rows = results.map((r) =>
-          headers
-            .map((h) => {
-              const v = r[h];
+        var rows = results.map(function (r) {
+          return cols
+            .map(function (c) {
+              var v = r[c];
               if (v === null || v === undefined) return "";
               if (typeof v === "boolean") return v ? "TRUE" : "FALSE";
-              if (typeof v === "number") return v.toFixed(4);
-              return `"${String(v).replace(/"/g, '""')}"`;
+              if (typeof v === "number")
+                return Number.isInteger(v) ? v : v.toFixed(6);
+              if (typeof v === "object")
+                return '"' + JSON.stringify(v).replace(/"/g, "'") + '"';
+              return '"' + String(v).replace(/"/g, '""') + '"';
             })
-            .join(","),
-        );
-        const csv = headers.join(",") + "\n" + rows.join("\n");
-        const a = document.createElement("a");
+            .join(",");
+        });
+        var csv = cols.join(",") + "\n" + rows.join("\n");
+        var a = document.createElement("a");
         a.href = URL.createObjectURL(
           new Blob([csv], { type: "text/csv;charset=utf-8" }),
         );
-        a.download = `resultados_simulaciones_${new Date().toISOString().slice(0, 10)}.csv`;
+        a.download =
+          "resultados_montecarlo_META_" +
+          new Date().toISOString().slice(0, 10) +
+          ".csv";
         a.click();
         toast("CSV exportado correctamente");
       }
+
+      // ═══════ INIT ════════════════════════════════════════════
+      onW();
     </script>
   </body>
 </html>
