@@ -926,10 +926,7 @@
 
         <!-- FILE: Histórico -->
         <div>
-          <div class="s-lbl">
-            Histórico de demanda
-            <span class="s-lbl-opt">(para flujo completo)</span>
-          </div>
+          <div class="s-lbl">Histórico de demanda</div>
           <div
             class="file-drop"
             id="dp-hist"
@@ -962,16 +959,15 @@
           </div>
           <div class="fs" id="fs-hist">
             <span class="dot" id="fd-hist"></span
-            ><span id="fl-hist">Opcional — activa clasificación D00</span>
+            ><span id="fl-hist"
+              >Opcional — calcula la distribucion de la demanda</span
+            >
           </div>
         </div>
 
         <!-- FILE: Distribución directa -->
         <div>
-          <div class="s-lbl">
-            Distribución ya clasificada
-            <span class="s-lbl-opt">(flujo directo)</span>
-          </div>
+          <div class="s-lbl">Distribución de la demanda</div>
           <div
             class="file-drop"
             id="dp-dist"
@@ -1006,7 +1002,9 @@
           </div>
           <div class="fs" id="fs-dist">
             <span class="dot" id="fd-dist"></span
-            ><span id="fl-dist">Opcional — omite clasificación D00</span>
+            ><span id="fl-dist"
+              >Opcional — omite la distrubucion de la demanda</span
+            >
           </div>
         </div>
 
@@ -1402,9 +1400,8 @@
             <h3>Sin datos aún</h3>
             <p>
               Carga <strong>ui_all_pol_inv</strong> más
-              <strong>historico_demanda</strong> (flujo completo) o
-              <strong>distribucion_demanda_diaria</strong> (flujo directo),
-              luego ejecuta.
+              <strong>historico_demanda</strong> o
+              <strong>distribucion_demanda_diaria</strong>, luego ejecuta.
             </p>
           </div>
         </div>
