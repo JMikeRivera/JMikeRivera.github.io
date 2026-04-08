@@ -1982,13 +1982,14 @@
         } else if (mode === "full") {
           banner.className = "mode-banner mode-full";
           dot.className = "mode-dot mode-dot-full";
-          txt.textContent = "Modo completo: Clasificar D00 + Monte Carlo";
+          txt.textContent =
+            "Modo completo: Distribución de la demanda + Monte Carlo";
           btnLbl.textContent = "Clasificar y simular";
           btn.disabled = running;
         } else if (mode === "direct") {
           banner.className = "mode-banner mode-direct";
           dot.className = "mode-dot mode-dot-direct";
-          txt.textContent = "Modo directo: usar distribución cargada";
+          txt.textContent = "Modo directo: Usando la distribución cargada";
           btnLbl.textContent = "Ejecutar simulación";
           btn.disabled = running;
         } else if (mode === "both") {
@@ -2336,8 +2337,8 @@
         log(
           "[SimOpti] Iniciando proceso — modo: " +
             (useHist
-              ? "Clasificar D00 + Monte Carlo"
-              : "Simular con distribución existente"),
+              ? "Distribución de la demanda + Monte Carlo"
+              : "Usando la distribución cargada"),
           "i",
         );
 
