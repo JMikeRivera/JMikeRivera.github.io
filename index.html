@@ -34,7 +34,9 @@
         --red-50: #fcebeb;
         --red-100: #f7c1c1;
         --red-400: #e24b4a;
-        --white: #fff;
+        --purple-50: #eeedfe;
+        --purple-400: #7f77dd;
+        --purple-600: #534ab7;
         --r-sm: 6px;
         --r-md: 10px;
         --r-lg: 14px;
@@ -56,6 +58,8 @@
         line-height: 1.6;
         min-height: 100vh;
       }
+
+      /* NAV */
       nav {
         background: var(--blue-900);
         color: #fff;
@@ -67,6 +71,7 @@
         position: sticky;
         top: 0;
         z-index: 100;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
       }
       .nav-brand {
         display: flex;
@@ -74,14 +79,15 @@
         gap: 10px;
         font-size: 15px;
         font-weight: 600;
+        letter-spacing: 0.01em;
       }
       .nav-badge {
         background: var(--blue-700);
         color: var(--blue-100);
-        font-size: 11px;
+        font-size: 10px;
         padding: 2px 8px;
         border-radius: 20px;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.05em;
         text-transform: uppercase;
       }
       .nav-links {
@@ -104,36 +110,94 @@
         background: rgba(255, 255, 255, 0.1);
         color: #fff;
       }
+
+      /* LAYOUT */
       .main {
         display: grid;
-        grid-template-columns: 300px 1fr;
+        grid-template-columns: 310px 1fr;
         min-height: calc(100vh - 56px);
       }
       .sidebar {
         background: #fff;
         border-right: 1px solid var(--gray-200);
-        padding: 1.5rem;
+        padding: 1.4rem;
         display: flex;
         flex-direction: column;
-        gap: 1.1rem;
+        gap: 1rem;
         overflow-y: auto;
       }
       .content {
         padding: 2rem;
         overflow: auto;
+        min-height: 0;
       }
+
+      /* MODE BANNER */
+      .mode-banner {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0.55rem 0.85rem;
+        border-radius: var(--r-md);
+        font-size: 11px;
+        font-weight: 500;
+        border: 1px solid;
+        margin-bottom: 0.2rem;
+      }
+      .mode-full {
+        background: var(--purple-50);
+        border-color: var(--purple-400);
+        color: var(--purple-600);
+      }
+      .mode-direct {
+        background: var(--blue-50);
+        border-color: var(--blue-400);
+        color: var(--blue-600);
+      }
+      .mode-none {
+        background: var(--gray-100);
+        border-color: var(--gray-200);
+        color: var(--gray-600);
+      }
+      .mode-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .mode-dot-full {
+        background: var(--purple-400);
+      }
+      .mode-dot-direct {
+        background: var(--blue-400);
+      }
+      .mode-dot-none {
+        background: var(--gray-400);
+      }
+
+      /* SIDEBAR LABELS */
       .s-lbl {
         font-size: 10px;
         font-weight: 600;
         letter-spacing: 0.09em;
         text-transform: uppercase;
         color: var(--gray-400);
-        margin-bottom: 0.55rem;
+        margin-bottom: 0.5rem;
       }
+      .s-lbl-opt {
+        font-size: 9px;
+        font-weight: 400;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--gray-400);
+        margin-left: 4px;
+      }
+
+      /* FILE DROPS */
       .file-drop {
         border: 1.5px dashed var(--gray-200);
         border-radius: var(--r-lg);
-        padding: 0.85rem;
+        padding: 0.8rem;
         text-align: center;
         cursor: pointer;
         background: var(--gray-50);
@@ -151,7 +215,7 @@
       .drop-icon {
         width: 26px;
         height: 26px;
-        margin: 0 auto 0.35rem;
+        margin: 0 auto 0.3rem;
         background: var(--blue-50);
         border-radius: var(--r-sm);
         display: flex;
@@ -162,22 +226,33 @@
       .file-drop p {
         font-size: 11px;
         color: var(--gray-600);
-        line-height: 1.35;
+        line-height: 1.3;
       }
       .file-drop p strong {
         color: var(--blue-600);
         font-weight: 500;
       }
+      .file-drop.required-missing {
+        border-color: var(--red-400);
+        background: var(--red-50);
+      }
+      .file-drop.required-missing .drop-icon {
+        background: var(--red-50);
+        color: var(--red-400);
+      }
+
+      /* FILE STATUS PILLS */
       .fs {
         display: flex;
         align-items: center;
         gap: 5px;
-        padding: 0.35rem 0.65rem;
+        padding: 0.3rem 0.65rem;
         border-radius: var(--r-md);
         font-size: 10px;
-        margin-top: 0.35rem;
+        margin-top: 0.3rem;
         background: var(--gray-50);
         border: 1px solid var(--gray-200);
+        min-height: 26px;
       }
       .fs.ok {
         background: var(--green-50);
@@ -189,6 +264,11 @@
         border-color: var(--red-100);
         color: var(--red-400);
       }
+      .fs.warn {
+        background: var(--amber-50);
+        border-color: var(--amber-100);
+        color: var(--amber-400);
+      }
       .dot {
         width: 5px;
         height: 5px;
@@ -199,15 +279,23 @@
       .dot-ok {
         background: var(--green-400);
       }
+      .dot-warn {
+        background: var(--amber-400);
+      }
+      .dot-err {
+        background: var(--red-400);
+      }
+
+      /* CONFIG */
       .cfg-row {
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.55rem;
       }
       .cfg-row label {
         display: flex;
         justify-content: space-between;
         font-size: 11px;
         color: var(--gray-600);
-        margin-bottom: 2px;
+        margin-bottom: 1px;
       }
       .cfg-row label span {
         font-weight: 500;
@@ -227,6 +315,8 @@
         text-align: right;
         margin-top: 1px;
       }
+
+      /* BUTTONS */
       .btn {
         display: inline-flex;
         align-items: center;
@@ -240,6 +330,7 @@
         font-weight: 500;
         cursor: pointer;
         transition: 0.15s;
+        white-space: nowrap;
       }
       .btn:active {
         transform: scale(0.98);
@@ -269,6 +360,19 @@
         font-size: 10px;
         border-radius: var(--r-sm);
       }
+      .btn-purple {
+        background: var(--purple-600);
+        color: #fff;
+      }
+      .btn-purple:hover:not(:disabled) {
+        background: var(--purple-400);
+      }
+      .btn-purple:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      /* TABS */
       .tab-panel {
         display: none;
       }
@@ -301,6 +405,8 @@
       .tab-btn:hover:not(.active) {
         color: var(--gray-800);
       }
+
+      /* METRIC CARDS */
       .mg {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -340,22 +446,84 @@
       .mc.amber .mc-val {
         color: var(--amber-400);
       }
-      .mc.red .mc-val {
-        color: var(--red-400);
+      .mc.purple .mc-val {
+        color: var(--purple-600);
+      }
+
+      /* PROGRESS */
+      .prog-wrap {
+        margin-bottom: 1rem;
+        display: none;
+      }
+      .prog-header {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        color: var(--gray-600);
+        margin-bottom: 2px;
       }
       .prog-bar {
         background: var(--gray-100);
         border-radius: 20px;
         height: 5px;
         overflow: hidden;
-        margin: 0.35rem 0;
+        margin: 0.3rem 0;
       }
       .prog-fill {
         height: 100%;
-        background: var(--blue-600);
         border-radius: 20px;
-        transition: width 0.2s;
+        transition: width 0.25s;
       }
+      .prog-fill-d00 {
+        background: var(--purple-600);
+      }
+      .prog-fill-mc {
+        background: var(--blue-600);
+      }
+      .prog-detail {
+        font-size: 10px;
+        color: var(--gray-400);
+        margin-top: 2px;
+      }
+
+      /* PHASE INDICATOR */
+      .phase-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 1rem;
+        align-items: center;
+      }
+      .phase-step {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 20px;
+        border: 1px solid var(--gray-200);
+        color: var(--gray-400);
+      }
+      .phase-step.done {
+        border-color: #c0dd97;
+        background: var(--green-50);
+        color: var(--green-600);
+      }
+      .phase-step.active {
+        border-color: var(--blue-400);
+        background: var(--blue-50);
+        color: var(--blue-600);
+      }
+      .phase-step.active-purple {
+        border-color: var(--purple-400);
+        background: var(--purple-50);
+        color: var(--purple-600);
+      }
+      .phase-arrow {
+        color: var(--gray-300);
+        font-size: 12px;
+      }
+
+      /* TABLE */
       .tw {
         overflow-x: auto;
         border: 1px solid var(--gray-200);
@@ -402,6 +570,8 @@
         font-family: var(--mono);
         font-size: 10px;
       }
+
+      /* BADGES */
       .badge {
         display: inline-block;
         padding: 1px 6px;
@@ -431,6 +601,10 @@
         background: var(--gray-100);
         color: var(--gray-600);
       }
+      .bp {
+        background: var(--purple-50);
+        color: var(--purple-600);
+      }
       .dp {
         color: var(--green-600);
         font-weight: 500;
@@ -442,6 +616,8 @@
       .d0 {
         color: var(--gray-400);
       }
+
+      /* LOG */
       .logbox {
         background: var(--gray-900);
         color: #a6e3a1;
@@ -450,7 +626,7 @@
         font-family: var(--mono);
         font-size: 10px;
         line-height: 1.9;
-        max-height: 520px;
+        max-height: 560px;
         overflow-y: auto;
       }
       .li {
@@ -462,18 +638,23 @@
       .le {
         color: #f38ba8;
       }
+      .ls {
+        color: #cba6f7;
+      }
+
+      /* CHARTS */
       .chart-box {
         background: #fff;
         border: 1px solid var(--gray-200);
         border-radius: var(--r-lg);
         padding: 1rem;
-        margin-bottom: 1.1rem;
+        margin-bottom: 1rem;
       }
       .ct {
         font-size: 10px;
         font-weight: 600;
         color: var(--gray-400);
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
       }
@@ -484,7 +665,7 @@
         margin-bottom: 4px;
       }
       .br-lbl {
-        width: 115px;
+        width: 120px;
         font-size: 10px;
         color: var(--gray-600);
         text-align: right;
@@ -517,12 +698,17 @@
       .f-gray {
         background: var(--gray-200);
       }
+      .f-purple {
+        background: var(--purple-400);
+      }
       .br-val {
-        width: 72px;
+        width: 80px;
         font-family: var(--mono);
         font-size: 10px;
         color: var(--gray-600);
       }
+
+      /* EMPTY STATE */
       .empty {
         display: flex;
         flex-direction: column;
@@ -544,29 +730,29 @@
       }
       .empty p {
         font-size: 12px;
-        max-width: 270px;
+        max-width: 290px;
         line-height: 1.5;
       }
-      #toast {
-        position: fixed;
-        bottom: 1.5rem;
-        right: 1.5rem;
-        background: var(--gray-900);
-        color: #fff;
-        padding: 0.6rem 1rem;
-        border-radius: var(--r-md);
-        font-size: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transform: translateY(1.5rem);
-        opacity: 0;
-        transition: 0.25s;
-        pointer-events: none;
-        z-index: 999;
+
+      /* DIST TABLE (D00 preview) */
+      .dist-preview {
+        background: var(--purple-50);
+        border: 1px solid var(--purple-400);
+        border-radius: var(--r-lg);
+        padding: 0.85rem 1rem;
+        margin-bottom: 1rem;
       }
-      #toast.show {
-        transform: translateY(0);
-        opacity: 1;
+      .dist-preview-title {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--purple-600);
+        margin-bottom: 0.6rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
+
+      /* TOOLBAR */
       .toolbar {
         display: flex;
         justify-content: space-between;
@@ -607,7 +793,37 @@
         background-position: right 6px center;
         outline: none;
       }
-      @media (max-width: 860px) {
+
+      /* TOAST */
+      #toast {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        background: var(--gray-900);
+        color: #fff;
+        padding: 0.6rem 1rem;
+        border-radius: var(--r-md);
+        font-size: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(1.5rem);
+        opacity: 0;
+        transition: 0.25s;
+        pointer-events: none;
+        z-index: 999;
+      }
+      #toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      /* DIVIDER */
+      .sdiv {
+        height: 1px;
+        background: var(--gray-100);
+        margin: 0.2rem 0;
+      }
+
+      @media (max-width: 900px) {
         .main {
           grid-template-columns: 1fr;
         }
@@ -643,19 +859,32 @@
         <button class="nav-link active" onclick="navTo('dashboard', this)">
           Dashboard
         </button>
+        <button class="nav-link" onclick="navTo('d00', this)">
+          Clasificación D00
+        </button>
         <button class="nav-link" onclick="navTo('results', this)">
-          Resultados
+          Resultados MC
         </button>
         <button class="nav-link" onclick="navTo('log', this)">Consola</button>
       </div>
     </nav>
 
     <div class="main">
+      <!-- ═══════════════ SIDEBAR ═══════════════ -->
       <aside class="sidebar">
+        <!-- MODE BANNER -->
+        <div id="mode-banner" class="mode-banner mode-none">
+          <span class="mode-dot mode-dot-none" id="mode-dot"></span>
+          <span id="mode-text">Sin datos — carga archivos para continuar</span>
+        </div>
+
+        <!-- FILE: Políticas -->
         <div>
-          <div class="s-lbl">Políticas de inventario</div>
+          <div class="s-lbl">
+            Políticas de inventario <span style="color: var(--red-400)">*</span>
+          </div>
           <div
-            class="file-drop"
+            class="file-drop required-missing"
             id="dp-pol"
             onclick="document.getElementById('fp-pol').click()"
             ondragover="dov(event, this)"
@@ -689,14 +918,59 @@
           </div>
           <div class="fs" id="fs-pol">
             <span class="dot" id="fd-pol"></span
-            ><span id="fl-pol">Sin archivo</span>
+            ><span id="fl-pol">Requerido</span>
           </div>
         </div>
 
+        <div class="sdiv"></div>
+
+        <!-- FILE: Histórico -->
         <div>
           <div class="s-lbl">
-            Distribuciones de demanda
-            <em style="font-style: normal; opacity: 0.6">(opcional)</em>
+            Histórico de demanda
+            <span class="s-lbl-opt">(para flujo completo)</span>
+          </div>
+          <div
+            class="file-drop"
+            id="dp-hist"
+            onclick="document.getElementById('fp-hist').click()"
+            ondragover="dov(event, this)"
+            ondragleave="dol(this)"
+            ondrop="ddr(event, this, 'hist')"
+          >
+            <input
+              type="file"
+              id="fp-hist"
+              accept=".json,.csv"
+              onchange="loadFile('hist', this.files[0])"
+            />
+            <div class="drop-icon">
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <p>
+              <strong>Clic o arrastra</strong><br />historico_demanda.json/.csv
+            </p>
+          </div>
+          <div class="fs" id="fs-hist">
+            <span class="dot" id="fd-hist"></span
+            ><span id="fl-hist">Opcional — activa clasificación D00</span>
+          </div>
+        </div>
+
+        <!-- FILE: Distribución directa -->
+        <div>
+          <div class="s-lbl">
+            Distribución ya clasificada
+            <span class="s-lbl-opt">(flujo directo)</span>
           </div>
           <div
             class="file-drop"
@@ -721,7 +995,8 @@
                 stroke="currentColor"
                 stroke-width="2"
               >
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M9 9h6M9 13h4" />
               </svg>
             </div>
             <p>
@@ -731,12 +1006,86 @@
           </div>
           <div class="fs" id="fs-dist">
             <span class="dot" id="fd-dist"></span
-            ><span id="fl-dist">Sin archivo — usará fallback normal</span>
+            ><span id="fl-dist">Opcional — omite clasificación D00</span>
           </div>
         </div>
 
+        <!-- SOURCE TOGGLE: shown when both hist and dist are loaded -->
+        <div
+          id="source-toggle-wrap"
+          style="
+            display: none;
+            background: var(--amber-50);
+            border: 1px solid var(--amber-100);
+            border-radius: var(--r-md);
+            padding: 0.6rem 0.8rem;
+            font-size: 11px;
+          "
+        >
+          <div
+            style="
+              font-weight: 500;
+              color: var(--amber-400);
+              margin-bottom: 0.4rem;
+            "
+          >
+            ⚠ Tienes histórico y distribución cargados
+          </div>
+          <div
+            style="
+              color: var(--gray-600);
+              margin-bottom: 0.5rem;
+              font-size: 10px;
+            "
+          >
+            ¿Cuál fuente usar para la simulación?
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.3rem">
+            <label
+              style="
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                cursor: pointer;
+                font-size: 11px;
+              "
+            >
+              <input
+                type="radio"
+                name="src"
+                value="hist"
+                id="src-hist"
+                checked
+                onchange="updateMode()"
+              />
+              <span>Clasificar desde histórico (D00)</span>
+            </label>
+            <label
+              style="
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                cursor: pointer;
+                font-size: 11px;
+              "
+            >
+              <input
+                type="radio"
+                name="src"
+                value="dist"
+                id="src-dist"
+                onchange="updateMode()"
+              />
+              <span>Usar distribución ya cargada</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="sdiv"></div>
+
+        <!-- CONFIG -->
         <div>
-          <div class="s-lbl">Simulación</div>
+          <div class="s-lbl">Simulación Monte Carlo</div>
           <div class="cfg-row">
             <label>Replicaciones finales<span id="vr">200</span></label
             ><input
@@ -800,7 +1149,7 @@
             />
           </div>
           <div class="cfg-row">
-            <label>Clamp σ (fallback normal)<span id="vkc">2</span></label
+            <label>Clamp σ fallback<span id="vkc">2</span></label
             ><input
               type="range"
               id="ckc"
@@ -854,6 +1203,7 @@
           <div class="w-note" id="wn">Normalizados: 55% / 30% / 15%</div>
         </div>
 
+        <!-- ACTION BUTTONS -->
         <div
           style="
             margin-top: auto;
@@ -862,7 +1212,7 @@
             gap: 0.35rem;
           "
         >
-          <button class="btn btn-p" id="btn-run" onclick="runSim()" disabled>
+          <button class="btn btn-p" id="btn-run" onclick="runAll()" disabled>
             <svg
               width="11"
               height="11"
@@ -873,7 +1223,7 @@
             >
               <polygon points="5 3 19 12 5 21 5 3" />
             </svg>
-            Ejecutar simulación
+            <span id="btn-run-lbl">Ejecutar simulación</span>
           </button>
           <button
             class="btn btn-g btn-sm"
@@ -895,75 +1245,148 @@
             </svg>
             Exportar CSV completo
           </button>
+          <button
+            class="btn btn-g btn-sm"
+            id="btn-exp-dist"
+            onclick="exportDistCSV()"
+            disabled
+          >
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Exportar distribucion_demanda_diaria
+          </button>
         </div>
       </aside>
 
+      <!-- ═══════════════ CONTENT ═══════════════ -->
       <main class="content">
-        <!-- DASHBOARD -->
+        <!-- ── DASHBOARD ── -->
         <div class="tab-panel active" id="panel-dashboard">
           <div class="mg">
             <div class="mc">
-              <div class="mc-lbl">SKUs cargados</div>
+              <div class="mc-lbl">SKUs políticas</div>
               <div class="mc-val" id="m-skus">—</div>
-              <div class="mc-sub">políticas válidas</div>
+              <div class="mc-sub">válidos cargados</div>
+            </div>
+            <div class="mc purple">
+              <div class="mc-lbl">SKUs clasificados</div>
+              <div class="mc-val" id="m-clsf">—</div>
+              <div class="mc-sub">por D00</div>
             </div>
             <div class="mc blue">
-              <div class="mc-lbl">Procesados</div>
+              <div class="mc-lbl">SKUs simulados</div>
               <div class="mc-val" id="m-proc">—</div>
-              <div class="mc-sub">simulación actual</div>
+              <div class="mc-sub">Monte Carlo</div>
             </div>
             <div class="mc green">
               <div class="mc-lbl">Score promedio</div>
               <div class="mc-val" id="m-score">—</div>
               <div class="mc-sub">sobre 100 pts</div>
             </div>
-            <div class="mc amber">
-              <div class="mc-lbl">Δ META promedio</div>
-              <div class="mc-val" id="m-delta">—</div>
-              <div class="mc-sub">vs. política actual</div>
+          </div>
+
+          <!-- PHASE PROGRESS -->
+          <div id="phase-row" class="phase-row" style="display: none">
+            <div class="phase-step" id="ph-pol">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                />
+              </svg>
+              Políticas
+            </div>
+            <span class="phase-arrow">›</span>
+            <div class="phase-step" id="ph-d00">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+              Clasificación D00
+            </div>
+            <span class="phase-arrow">›</span>
+            <div class="phase-step" id="ph-mc">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              Monte Carlo
             </div>
           </div>
-          <div id="prog-wrap" style="display: none; margin-bottom: 1.1rem">
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                font-size: 11px;
-                color: var(--gray-600);
-                margin-bottom: 2px;
-              "
-            >
-              <span id="prog-lbl">Iniciando…</span><span id="prog-pct">0%</span>
+
+          <div id="prog-wrap" class="prog-wrap">
+            <div class="prog-header">
+              <span id="prog-lbl">Procesando…</span
+              ><span id="prog-pct">0%</span>
             </div>
             <div class="prog-bar">
               <div class="prog-fill" id="prog-fill" style="width: 0%"></div>
             </div>
+            <div class="prog-detail" id="prog-detail"></div>
           </div>
+
           <div id="charts-wrap" style="display: none">
             <div
               style="
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 1rem;
-                margin-bottom: 1.1rem;
+                margin-bottom: 1rem;
               "
             >
               <div class="chart-box">
-                <div class="ct">Distribución por tipo de demanda</div>
+                <div class="ct">Clasificación de demanda (D00)</div>
                 <div id="dist-bars"></div>
               </div>
               <div class="chart-box">
-                <div class="ct">Top SKUs — score compuesto</div>
+                <div class="ct">Top SKUs — score Monte Carlo</div>
                 <div id="score-bars"></div>
               </div>
             </div>
-            <div class="chart-box">
-              <div class="ct">
-                Cobertura de matching (distribución vs políticas)
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem"
+            >
+              <div class="chart-box">
+                <div class="ct">
+                  Cobertura de matching (distribución↔política)
+                </div>
+                <div id="match-bars"></div>
               </div>
-              <div id="match-bars"></div>
+              <div class="chart-box">
+                <div class="ct">Δ META — distribución de cambios</div>
+                <div id="delta-bars"></div>
+              </div>
             </div>
           </div>
+
           <div class="empty" id="empty-dash">
             <svg
               width="44"
@@ -978,13 +1401,82 @@
             </svg>
             <h3>Sin datos aún</h3>
             <p>
-              Carga el archivo de políticas y ejecuta la simulación para ver los
-              resultados.
+              Carga <strong>ui_all_pol_inv</strong> más
+              <strong>historico_demanda</strong> (flujo completo) o
+              <strong>distribucion_demanda_diaria</strong> (flujo directo),
+              luego ejecuta.
             </p>
           </div>
         </div>
 
-        <!-- RESULTADOS -->
+        <!-- ── D00 PREVIEW ── -->
+        <div class="tab-panel" id="panel-d00">
+          <div class="toolbar">
+            <div class="tl">
+              <input
+                type="text"
+                id="srch-d00"
+                placeholder="Buscar SKU, Ubicación, Producto…"
+                style="width: 220px"
+                oninput="applyD00Filter()"
+              />
+              <select id="f-d00-dist" onchange="applyD00Filter()">
+                <option value="">Todas las distribuciones</option>
+                <option>POISSON</option>
+                <option>NB</option>
+                <option>ZINB</option>
+                <option>NO_HISTORY</option>
+                <option>ZERO_ONLY</option>
+              </select>
+              <select id="f-d00-hist" onchange="applyD00Filter()">
+                <option value="">Con/sin histórico</option>
+                <option value="true">Con histórico</option>
+                <option value="false">Sin histórico</option>
+              </select>
+            </div>
+            <span
+              style="font-size: 10px; color: var(--gray-400)"
+              id="tc-d00"
+            ></span>
+          </div>
+          <div class="tw" style="max-height: 580px; overflow-y: auto">
+            <table>
+              <thead>
+                <tr>
+                  <th onclick="srtD00('SKU')">SKU</th>
+                  <th onclick="srtD00('Ubicacion')">Ubicación</th>
+                  <th onclick="srtD00('Producto')">Producto</th>
+                  <th onclick="srtD00('distribucion')">Distribución</th>
+                  <th onclick="srtD00('n_dias')">N días</th>
+                  <th onclick="srtD00('mu')">μ (media)</th>
+                  <th onclick="srtD00('variance')">σ² (varianza)</th>
+                  <th onclick="srtD00('p0')">p₀</th>
+                  <th onclick="srtD00('total_demand')">Demanda total</th>
+                  <th>λ</th>
+                  <th>nb_n</th>
+                  <th>nb_p</th>
+                  <th>Histórico</th>
+                </tr>
+              </thead>
+              <tbody id="d00-tbody">
+                <tr>
+                  <td
+                    colspan="13"
+                    style="
+                      text-align: center;
+                      padding: 3rem;
+                      color: var(--gray-400);
+                    "
+                  >
+                    Ejecuta la clasificación primero.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ── RESULTADOS MC ── -->
         <div class="tab-panel" id="panel-results">
           <div class="toolbar">
             <div class="tl">
@@ -992,7 +1484,7 @@
                 type="text"
                 id="srch"
                 placeholder="Buscar SKU, Ubicación, Producto…"
-                style="width: 220px"
+                style="width: 210px"
                 oninput="applyF()"
               />
               <select id="f-dist" onchange="applyF()">
@@ -1036,8 +1528,8 @@
                   <th onclick="srt('serviceTarget')">Target svc</th>
                   <th onclick="srt('serviceAchieved')">Svc logrado</th>
                   <th onclick="srt('serviceGap')">Gap svc</th>
-                  <th onclick="srt('shortageRatio')">Shortage ratio</th>
-                  <th onclick="srt('overstockRatio')">Overstock ratio</th>
+                  <th onclick="srt('shortageRatio')">Shortage</th>
+                  <th onclick="srt('overstockRatio')">Overstock</th>
                   <th onclick="srt('totalScorePct')">Score</th>
                   <th onclick="srt('feasible')">Factible</th>
                 </tr>
@@ -1060,7 +1552,7 @@
           </div>
         </div>
 
-        <!-- LOG -->
+        <!-- ── LOG ── -->
         <div class="tab-panel" id="panel-log">
           <div
             style="
@@ -1096,18 +1588,362 @@
       </main>
     </div>
     <div id="toast"></div>
-
     <script>
-      // ═══════ STATE ═══════════════════════════════════════════
-      var policyData = null,
-        distData = null,
-        results = [],
-        displayRows = [];
+      "use strict";
+      // ═══════════════════════════════════════════════════════════
+      // STATE
+      // ═══════════════════════════════════════════════════════════
+      var policyData = null; // rows from ui_all_pol_inv
+      var histData = null; // rows from historico_demanda
+      var distDataRaw = null; // rows from distribucion_demanda_diaria (file)
+      var generatedDist = null; // distribucion computed by D00 engine
+      var results = []; // MC results
+      var d00Rows = []; // D00 classified rows for preview tab
+      var displayRows = []; // filtered MC results
+      var d00Display = []; // filtered D00 rows
       var sortKey = "totalScore",
-        sortDir = -1,
-        running = false;
+        sortDir = -1;
+      var sortKeyD00 = "distribucion",
+        sortDirD00 = -1;
+      var running = false;
 
-      // ═══════ NAV ═════════════════════════════════════════════
+      // ═══════════════════════════════════════════════════════════
+      // UTILITY FUNCTIONS (mirrors D00 backend exactly)
+      // ═══════════════════════════════════════════════════════════
+      function normPart(v) {
+        if (v === undefined || v === null) return null;
+        var s = String(v).trim();
+        return s.length ? s : null;
+      }
+      function buildKey(u, p) {
+        var uu = normPart(u),
+          pp = normPart(p);
+        if (!uu || !pp) return null;
+        return uu + "_" + pp;
+      }
+      // mirrors parsePolicySku from D00
+      function parseSKUToKey(sku) {
+        var s = normPart(sku);
+        if (!s) return null;
+        if (s.indexOf("@") !== -1) {
+          var pts = s.split("@");
+          if (pts.length === 2) {
+            var prod = normPart(pts[0]),
+              ubic = normPart(pts[1]);
+            if (ubic && prod)
+              return {
+                key: ubic + "_" + prod,
+                Ubicacion: ubic,
+                Producto: prod,
+              };
+          }
+        }
+        if (s.indexOf("_") !== -1) {
+          var idx = s.indexOf("_");
+          var u2 = normPart(s.slice(0, idx)),
+            p2 = normPart(s.slice(idx + 1));
+          if (u2 && p2)
+            return { key: u2 + "_" + p2, Ubicacion: u2, Producto: p2 };
+        }
+        return null;
+      }
+      // mirrors normalizeDate from D00 exactly
+      function normalizeDate(value) {
+        if (!value) return null;
+        if (value instanceof Date && !isNaN(value.getTime())) {
+          return new Date(
+            value.getFullYear(),
+            value.getMonth(),
+            value.getDate(),
+          );
+        }
+        if (typeof value === "string") {
+          var t = value.trim();
+          // dd/mm/yyyy
+          var m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+          if (m) {
+            var d2 = new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+            if (!isNaN(d2.getTime()))
+              return new Date(d2.getFullYear(), d2.getMonth(), d2.getDate());
+          }
+          // yyyy-mm-dd and other ISO strings
+          var d3 = new Date(t);
+          if (!isNaN(d3.getTime()))
+            return new Date(d3.getFullYear(), d3.getMonth(), d3.getDate());
+        }
+        if (typeof value === "number") {
+          var d4 = new Date(value);
+          if (!isNaN(d4.getTime()))
+            return new Date(d4.getFullYear(), d4.getMonth(), d4.getDate());
+        }
+        return null;
+      }
+      function formatDateKey(date) {
+        var y = date.getFullYear();
+        var mo = String(date.getMonth() + 1).padStart(2, "0");
+        var d = String(date.getDate()).padStart(2, "0");
+        return y + "-" + mo + "-" + d;
+      }
+      function diffDaysInclusive(start, end) {
+        return Math.floor((end - start) / (24 * 60 * 60 * 1000)) + 1;
+      }
+      function meanArr(arr) {
+        if (!arr.length) return 0;
+        var s = 0;
+        for (var i = 0; i < arr.length; i++) s += arr[i];
+        return s / arr.length;
+      }
+      function variancePopulation(arr, mu) {
+        if (!arr.length) return 0;
+        var s = 0;
+        for (var i = 0; i < arr.length; i++) {
+          var d = arr[i] - mu;
+          s += d * d;
+        }
+        return s / arr.length;
+      }
+      // mirrors classifyDistribution from D00 exactly
+      function classifyDistribution(hasHistory, mu, variance, p0, totalDemand) {
+        if (!hasHistory) return "NO_HISTORY";
+        if (totalDemand === 0) return "ZERO_ONLY";
+        if (p0 >= 0.3) return "ZINB";
+        if (variance >= 1.2 * mu) return "NB";
+        return "POISSON";
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // D00 ENGINE (runs synchronously in main thread — data fits in RAM)
+      // Faithful port of D00_Clasifica_Distribucion_Demanda.js
+      // ═══════════════════════════════════════════════════════════
+      function runD00Engine(policies, historico) {
+        log("[D00] Iniciando clasificación de distribuciones de demanda…", "s");
+
+        // 1) Build SKU universe from policies (mirrors policySkuMap)
+        var policySkuMap = new Map();
+        var policyInvalid = 0;
+        policies.forEach(function (doc) {
+          var key = buildKey(doc.Ubicacion, doc.Producto);
+          var ubicacion = normPart(doc.Ubicacion);
+          var producto = normPart(doc.Producto);
+          if (!key) {
+            var parsed = parseSKUToKey(doc.SKU);
+            if (parsed) {
+              key = parsed.key;
+              ubicacion = parsed.Ubicacion;
+              producto = parsed.Producto;
+            }
+          }
+          if (!key) {
+            policyInvalid++;
+            return;
+          }
+          if (!policySkuMap.has(key)) {
+            policySkuMap.set(key, {
+              SKU: key,
+              Ubicacion: ubicacion,
+              Producto: producto,
+            });
+          }
+        });
+        log(
+          "[D00] SKUs únicos base desde políticas: " +
+            policySkuMap.size +
+            " (" +
+            policyInvalid +
+            " inválidos omitidos)",
+          "s",
+        );
+
+        // 2) Read historico and group daily demand (mirrors histMap)
+        var histMap = new Map();
+        var histInvalid = 0;
+        historico.forEach(function (doc) {
+          var ubicacion = normPart(doc.Ubicacion);
+          var producto = normPart(doc.Producto);
+          var fecha = normalizeDate(doc.Fecha);
+          var cantidad = Number(doc.Cantidad != null ? doc.Cantidad : 0);
+          var key = buildKey(ubicacion, producto);
+          if (!key || !fecha || isNaN(cantidad)) {
+            histInvalid++;
+            return;
+          }
+          if (!histMap.has(key)) {
+            histMap.set(key, {
+              dailyMap: new Map(),
+              minDate: fecha,
+              maxDate: fecha,
+            });
+          }
+          var entry = histMap.get(key);
+          var dk = formatDateKey(fecha);
+          entry.dailyMap.set(dk, (entry.dailyMap.get(dk) || 0) + cantidad);
+          if (fecha < entry.minDate) entry.minDate = fecha;
+          if (fecha > entry.maxDate) entry.maxDate = fecha;
+        });
+        log(
+          "[D00] Registros históricos procesados: " +
+            historico.length +
+            " (" +
+            histInvalid +
+            " inválidos). SKUs con histórico: " +
+            histMap.size,
+          "s",
+        );
+
+        // 3) Classify each SKU in universe (mirrors main classification loop)
+        var results = [];
+        var withHist = 0,
+          withoutHist = 0;
+
+        policySkuMap.forEach(function (baseSku) {
+          var SKU = baseSku.SKU,
+            Ubicacion = baseSku.Ubicacion,
+            Producto = baseSku.Producto;
+          var histEntry = histMap.get(SKU) || null;
+          var hasHistory = !!histEntry;
+          if (hasHistory) withHist++;
+          else withoutHist++;
+
+          var nDays = 0,
+            zeroDays = 0,
+            mu = 0,
+            variance = 0,
+            p0 = 1,
+            totalDemand = 0;
+          var fechaInicio = null,
+            fechaFin = null;
+
+          if (hasHistory) {
+            var dm = histEntry.dailyMap,
+              minD = histEntry.minDate,
+              maxD = histEntry.maxDate;
+            fechaInicio = minD;
+            fechaFin = maxD;
+            nDays = diffDaysInclusive(minD, maxD);
+            var series = [];
+            // reconstruct full daily series, filling gaps with 0 (critical for p0)
+            var cur = new Date(minD.getTime());
+            while (cur <= maxD) {
+              var dk = formatDateKey(cur);
+              var qty = Number(dm.get(dk) || 0);
+              series.push(qty);
+              totalDemand += qty;
+              if (qty === 0) zeroDays++;
+              cur.setDate(cur.getDate() + 1);
+            }
+            mu = meanArr(series);
+            variance = variancePopulation(series, mu);
+            p0 = nDays > 0 ? zeroDays / nDays : 1;
+          }
+
+          var distribucion = classifyDistribution(
+            hasHistory,
+            mu,
+            variance,
+            p0,
+            totalDemand,
+          );
+
+          // Generate distribution parameters (mirrors D00 exactly)
+          var poissonLambda = null,
+            nb_n = null,
+            nb_p = null;
+          if (distribucion === "POISSON") {
+            poissonLambda = mu;
+          } else if (distribucion === "NB" || distribucion === "ZINB") {
+            if (variance > mu && mu > 0) {
+              var _n = (mu * mu) / (variance - mu);
+              var _p = _n / (_n + mu);
+              if (Number.isFinite(_n) && _n > 0) nb_n = _n;
+              else nb_n = null;
+              if (Number.isFinite(_p) && _p > 0 && _p < 1) nb_p = _p;
+              else nb_p = null;
+            }
+          }
+
+          results.push({
+            SKU: SKU,
+            Ubicacion: Ubicacion,
+            Producto: Producto,
+            fecha_inicio: fechaInicio,
+            fecha_fin: fechaFin,
+            n_dias: nDays,
+            dias_con_cero: zeroDays,
+            mu: mu,
+            variance: variance,
+            p0: p0,
+            total_demand: totalDemand,
+            distribucion: distribucion,
+            parametros: { lambda: poissonLambda, nb_n: nb_n, nb_p: nb_p },
+            metadata: {
+              tiene_historico: hasHistory,
+              horizonte_global: false,
+              source_policy_universe: "ui_all_pol_inv",
+              source_history: "historico_demanda",
+            },
+            creado_en: new Date().toISOString(),
+          });
+        });
+
+        // Summary by distribution type
+        var summary = {};
+        results.forEach(function (r) {
+          summary[r.distribucion] = (summary[r.distribucion] || 0) + 1;
+        });
+        log(
+          "[D00] Clasificación completada — " + results.length + " SKUs:",
+          "s",
+        );
+        Object.entries(summary).forEach(function (e) {
+          log("[D00]   " + e[0] + ": " + e[1] + " SKUs", "s");
+        });
+        log(
+          "[D00] Con histórico: " +
+            withHist +
+            " | Sin histórico: " +
+            withoutHist,
+          "s",
+        );
+
+        return results;
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // DISTRIBUTION MAP & MATCHING (mirrors backend matching logic)
+      // ═══════════════════════════════════════════════════════════
+      function buildDistMap(arr) {
+        var map = new Map();
+        if (!arr) return map;
+        arr.forEach(function (d) {
+          var k = buildKey(d.Ubicacion, d.Producto);
+          if (k) map.set(k, d);
+          var sku = normPart(d.SKU);
+          if (sku && !map.has(sku)) map.set(sku, d);
+          if (sku) {
+            var p = parseSKUToKey(sku);
+            if (p && !map.has(p.key)) map.set(p.key, d);
+          }
+        });
+        return map;
+      }
+      function matchDist(row, distMap) {
+        var k1 = buildKey(row.Ubicacion, row.Producto);
+        if (k1 && distMap.has(k1))
+          return { distInfo: distMap.get(k1), matchSource: "composite" };
+        var sku = normPart(row.SKU);
+        if (sku && distMap.has(sku))
+          return { distInfo: distMap.get(sku), matchSource: "sku_exact" };
+        if (sku) {
+          var p = parseSKUToKey(sku);
+          if (p && distMap.has(p.key))
+            return { distInfo: distMap.get(p.key), matchSource: "sku_parse" };
+        }
+        return { distInfo: null, matchSource: null };
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // NAV, MODE, WEIGHTS
+      // ═══════════════════════════════════════════════════════════
       function navTo(panel, btn) {
         document.querySelectorAll(".nav-link").forEach(function (b) {
           b.classList.remove("active");
@@ -1119,7 +1955,78 @@
         document.getElementById("panel-" + panel).classList.add("active");
       }
 
-      // ═══════ WEIGHTS ══════════════════════════════════════════
+      function getMode() {
+        // Returns: 'full' (hist), 'direct' (dist), 'both' (choose), 'none'
+        var hasPol = policyData && policyData.length > 0;
+        var hasHist = histData && histData.length > 0;
+        var hasDist = distDataRaw && distDataRaw.length > 0;
+        if (!hasPol) return "none";
+        if (hasHist && hasDist) return "both";
+        if (hasHist) return "full";
+        if (hasDist) return "direct";
+        return "none";
+      }
+
+      function updateMode() {
+        var mode = getMode();
+        var banner = document.getElementById("mode-banner");
+        var dot = document.getElementById("mode-dot");
+        var txt = document.getElementById("mode-text");
+        var tog = document.getElementById("source-toggle-wrap");
+        var btnLbl = document.getElementById("btn-run-lbl");
+        var btn = document.getElementById("btn-run");
+        tog.style.display = "none";
+
+        if (mode === "none") {
+          banner.className = "mode-banner mode-none";
+          dot.className = "mode-dot mode-dot-none";
+          txt.textContent = "Sin datos suficientes — carga archivos";
+          btn.disabled = true;
+        } else if (mode === "full") {
+          banner.className = "mode-banner mode-full";
+          dot.className = "mode-dot mode-dot-full";
+          txt.textContent = "Modo completo: Clasificar D00 + Monte Carlo";
+          btnLbl.textContent = "Clasificar y simular";
+          btn.disabled = running;
+        } else if (mode === "direct") {
+          banner.className = "mode-banner mode-direct";
+          dot.className = "mode-dot mode-dot-direct";
+          txt.textContent = "Modo directo: usar distribución cargada";
+          btnLbl.textContent = "Ejecutar simulación";
+          btn.disabled = running;
+        } else if (mode === "both") {
+          banner.className = "mode-banner mode-none";
+          dot.className = "mode-dot mode-dot-warn";
+          dot.style.background = "var(--amber-400)";
+          txt.textContent =
+            "Histórico Y distribución cargados — elige fuente abajo";
+          tog.style.display = "block";
+          // determine which radio is selected
+          var srcHist = document.getElementById("src-hist").checked;
+          if (srcHist) {
+            btnLbl.textContent = "Clasificar y simular";
+          } else {
+            btnLbl.textContent = "Ejecutar simulación";
+          }
+          btn.disabled = running;
+        }
+        updateBtn();
+      }
+
+      function updateBtn() {
+        var mode = getMode();
+        var hasPol = policyData && policyData.length > 0;
+        if (!hasPol || running) {
+          document.getElementById("btn-run").disabled = true;
+          return;
+        }
+        if (mode === "none") {
+          document.getElementById("btn-run").disabled = true;
+          return;
+        }
+        document.getElementById("btn-run").disabled = false;
+      }
+
       function onW() {
         var ws = +document.getElementById("ws").value;
         var wf = +document.getElementById("wf").value;
@@ -1141,7 +2048,9 @@
           ws + wf + wo === 0 ? "var(--red-400)" : "var(--gray-400)";
       }
 
-      // ═══════ DRAG & DROP ═════════════════════════════════════
+      // ═══════════════════════════════════════════════════════════
+      // FILE LOADING
+      // ═══════════════════════════════════════════════════════════
       function dov(e, el) {
         e.preventDefault();
         el.classList.add("drag");
@@ -1156,7 +2065,6 @@
         if (f) loadFile(key, f);
       }
 
-      // ═══════ FILE LOADING ════════════════════════════════════
       function loadFile(key, file) {
         if (!file) return;
         var r = new FileReader();
@@ -1165,6 +2073,7 @@
         };
         r.readAsText(file, "UTF-8");
       }
+
       function processFile(key, name, raw) {
         var ext = name.split(".").pop().toLowerCase();
         var data;
@@ -1172,8 +2081,8 @@
           try {
             data = JSON.parse(raw);
           } catch (e) {
-            setStatus(key, false, "JSON inválido");
-            toast("Error: JSON inválido en " + name);
+            setStatus(key, false, "JSON inválido en " + name);
+            toast("Error: JSON inválido");
             return;
           }
           if (!Array.isArray(data))
@@ -1194,7 +2103,6 @@
         }
 
         if (key === "pol") {
-          // Exclude Ignorado=1, keep rows with enough data to simulate
           policyData = data.filter(function (r) {
             if (r.Ignorado === 1 || r.Ignorado === "1" || r.Ignorado === true)
               return false;
@@ -1208,50 +2116,68 @@
           setStatus(
             "pol",
             true,
-            policyData.length +
-              " SKUs válidos (" +
-              (data.length - policyData.length) +
-              " excluidos)",
+            policyData.length + " SKUs válidos (" + name + ")",
           );
           document.getElementById("m-skus").textContent = policyData.length;
+          document
+            .getElementById("dp-pol")
+            .classList.remove("required-missing");
           document.getElementById("empty-dash").style.display = "none";
           log(
-            "[INFO] Políticas: " +
+            "[INFO] Políticas cargadas: " +
               policyData.length +
               " SKUs válidos de " +
               data.length +
-              " totales (archivo: " +
+              " totales (" +
               name +
               ")",
             "i",
           );
-        } else {
-          distData = data;
-          setStatus("dist", true, data.length + " distribuciones cargadas");
+        } else if (key === "hist") {
+          histData = data;
+          setStatus(
+            "hist",
+            true,
+            data.length + " registros históricos (" + name + ")",
+          );
           log(
-            "[INFO] Distribuciones: " +
+            "[INFO] Histórico de demanda cargado: " +
               data.length +
-              " registros (archivo: " +
+              " registros (" +
+              name +
+              ")",
+            "i",
+          );
+        } else if (key === "dist") {
+          distDataRaw = data;
+          setStatus(
+            "dist",
+            true,
+            data.length + " distribuciones cargadas (" + name + ")",
+          );
+          log(
+            "[INFO] Distribución pre-calculada cargada: " +
+              data.length +
+              " registros (" +
               name +
               ")",
             "i",
           );
         }
-        updateBtn();
+        updateMode();
       }
+
       function setStatus(key, ok, text) {
         var fs = document.getElementById("fs-" + key);
         var fd = document.getElementById("fd-" + key);
-        fs.className = "fs" + (ok ? " ok" : " err");
+        fs.className = "fs" + (ok ? " ok" : "");
         fd.className = "dot" + (ok ? " dot-ok" : "");
         document.getElementById("fl-" + key).textContent = text;
       }
-      function updateBtn() {
-        document.getElementById("btn-run").disabled =
-          !policyData || policyData.length === 0 || running;
-      }
 
-      // ═══════ CSV PARSER (robust, RFC-4180 compatible) ════════
+      // ═══════════════════════════════════════════════════════════
+      // CSV PARSER
+      // ═══════════════════════════════════════════════════════════
       function parseCSV(raw) {
         var lines = raw
           .replace(/\r\n/g, "\n")
@@ -1304,81 +2230,9 @@
         return res;
       }
 
-      // ═══════ KEY NORMALIZATION (mirrors backend exactly) ══════
-      function normPart(v) {
-        if (v === undefined || v === null) return null;
-        var s = String(v).trim();
-        return s.length ? s : null;
-      }
-      function buildKey(u, p) {
-        var uu = normPart(u),
-          pp = normPart(p);
-        if (!uu || !pp) return null;
-        return uu + "_" + pp;
-      }
-      // Parse SKU in "Producto@Ubicacion" or "Ubicacion_Producto" formats (mirrors backend parsePolicySku)
-      function parseSKUToKey(sku) {
-        var s = normPart(sku);
-        if (!s) return null;
-        if (s.indexOf("@") !== -1) {
-          var parts = s.split("@");
-          if (parts.length === 2) {
-            var prod = normPart(parts[0]),
-              ubic = normPart(parts[1]);
-            if (ubic && prod)
-              return {
-                key: ubic + "_" + prod,
-                Ubicacion: ubic,
-                Producto: prod,
-              };
-          }
-        }
-        if (s.indexOf("_") !== -1) {
-          var idx = s.indexOf("_");
-          var ubic2 = normPart(s.slice(0, idx)),
-            prod2 = normPart(s.slice(idx + 1));
-          if (ubic2 && prod2)
-            return {
-              key: ubic2 + "_" + prod2,
-              Ubicacion: ubic2,
-              Producto: prod2,
-            };
-        }
-        return null;
-      }
-
-      // ═══════ DIST MAP BUILD & MATCH (mirrors backend) ═════════
-      function buildDistMap(arr) {
-        var map = new Map();
-        if (!arr) return map;
-        arr.forEach(function (d) {
-          var k = buildKey(d.Ubicacion, d.Producto);
-          if (k) map.set(k, d);
-          var sku = normPart(d.SKU);
-          if (sku && !map.has(sku)) map.set(sku, d);
-          if (sku) {
-            var p = parseSKUToKey(sku);
-            if (p && !map.has(p.key)) map.set(p.key, d);
-          }
-        });
-        return map;
-      }
-      function matchDist(row, distMap) {
-        var k1 = buildKey(row.Ubicacion, row.Producto);
-        if (k1 && distMap.has(k1))
-          return { distInfo: distMap.get(k1), matchSource: "composite" };
-        var sku = normPart(row.SKU);
-        if (sku && distMap.has(sku))
-          return { distInfo: distMap.get(sku), matchSource: "sku_exact" };
-        if (sku) {
-          var p = parseSKUToKey(sku);
-          if (p && distMap.has(p.key))
-            return { distInfo: distMap.get(p.key), matchSource: "sku_parse" };
-        }
-        return { distInfo: null, matchSource: null };
-      }
-
-      // ═══════ CONFIG FROM UI ═══════════════════════════════════
+      // ═══════════════════════════════════════════════════════════
+      // CONFIG
+      // ═══════════════════════════════════════════════════════════
       function buildCFG() {
         var ws = +document.getElementById("ws").value;
         var wf = +document.getElementById("wf").value;
@@ -1405,11 +2259,14 @@
         };
       }
 
-      // ═══════ LOG / TOAST ═════════════════════════════════════
+      // ═══════════════════════════════════════════════════════════
+      // LOG / TOAST
+      // ═══════════════════════════════════════════════════════════
       function log(msg, t) {
         var box = document.getElementById("logbox");
         var d = document.createElement("div");
-        d.className = t === "w" ? "lw" : t === "e" ? "le" : "li";
+        d.className =
+          t === "w" ? "lw" : t === "e" ? "le" : t === "s" ? "ls" : "li";
         d.textContent = msg;
         box.appendChild(d);
         box.scrollTop = box.scrollHeight;
@@ -1423,325 +2280,124 @@
         }, 3000);
       }
 
-      // ═══════ WEB WORKER SOURCE ═══════════════════════════════
-      // This is a faithful port of the worker section of run_montecarlo_meta.js
-      // Every function matches the backend naming and logic exactly.
-      var WORKER_SRC = [
-        "'use strict';",
-        "function clamp(x,lo,hi){return Math.max(lo,Math.min(hi,x))}",
-        "function normSvc(x){var v=Number(x);if(!isFinite(v))return 0;return v>1.0001?v/100:v}",
+      // ═══════════════════════════════════════════════════════════
+      // PHASE INDICATORS
+      // ═══════════════════════════════════════════════════════════
+      function setPhase(ph) {
+        // ph: 'pol', 'd00', 'mc', 'done'
+        document.getElementById("phase-row").style.display = "flex";
+        var steps = ["pol", "d00", "mc"];
+        var order = { pol: 0, d00: 1, mc: 2, done: 3 };
+        var cur = order[ph];
+        steps.forEach(function (s, i) {
+          var el = document.getElementById("ph-" + s);
+          el.className = "phase-step";
+          if (i < cur) el.classList.add("done");
+          else if (i === cur)
+            el.classList.add(s === "d00" ? "active-purple" : "active");
+        });
+      }
+      function setProgress(pct, label, detail, type) {
+        var w = document.getElementById("prog-wrap");
+        w.style.display = "block";
+        document.getElementById("prog-pct").textContent = Math.round(pct) + "%";
+        document.getElementById("prog-fill").style.width =
+          Math.round(pct) + "%";
+        document.getElementById("prog-fill").className =
+          "prog-fill " + (type === "d00" ? "prog-fill-d00" : "prog-fill-mc");
+        document.getElementById("prog-lbl").textContent = label;
+        document.getElementById("prog-detail").textContent = detail || "";
+      }
 
-        // ── RNG ──
-        "function randNormal(m,s){",
-        "  var u1=Math.max(Math.random(),1e-12),u2=Math.random();",
-        "  return m+s*Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);",
-        "}",
-
-        // ── samplePoisson: exact for lambda<30, normal approx for >=30 ──
-        "function samplePoisson(lambda){",
-        "  var lam=Math.max(0,Number(lambda)||0);",
-        "  if(lam<=0)return 0;",
-        "  if(lam<30){var L=Math.exp(-lam),k=0,p=1;do{k++;p*=Math.random();}while(p>L);return k-1;}",
-        "  return Math.max(0,Math.round(randNormal(lam,Math.sqrt(lam))));",
-        "}",
-
-        // ── sampleGamma: Marsaglia-Tsang algorithm ──
-        "function sampleGamma(shape,scale){",
-        "  var k=Number(shape)||0,theta=Math.max(Number(scale)||0,0);",
-        "  if(k<=0||theta<=0)return 0;",
-        "  if(k<1){var u=Math.max(Math.random(),1e-12);return sampleGamma(k+1,theta)*Math.pow(u,1/k);}",
-        "  var d=k-1/3,c=1/Math.sqrt(9*d);",
-        "  while(true){var x,v;do{x=randNormal(0,1);v=1+c*x;}while(v<=0);",
-        "    v=v*v*v;var u=Math.random();",
-        "    if(u<1-0.0331*Math.pow(x,4))return d*v*theta;",
-        "    if(Math.log(u)<0.5*x*x+d*(1-v+Math.log(v)))return d*v*theta;",
-        "  }",
-        "}",
-
-        // ── sampleNegativeBinomial: Gamma-Poisson mixture (real-valued n) ──
-        "function sampleNB(n,p){",
-        "  var nn=Number(n),pp=Number(p);",
-        "  if(!isFinite(nn)||!isFinite(pp))return null;",
-        "  if(nn<=0||pp<=0||pp>=1)return null;",
-        "  return samplePoisson(sampleGamma(nn,(1-pp)/pp));",
-        "}",
-
-        // ── normalFallback: truncated normal ──
-        "function normalFallback(mu,sigma,k){",
-        "  var m=Math.max(Number(mu)||0,0),s=Math.max(Number(sigma)||0,0);",
-        "  var d=randNormal(m,Math.max(s,1e-9));",
-        "  return Math.max(0,clamp(d,Math.max(0,m-k*s),Math.max(0,m+k*s)));",
-        "}",
-
-        // ── sampleDailyDemand: exact dispatch from backend ──
-        "function sampleDailyDemand(row,cfg){",
-        "  var dist=row.distInfo;",
-        "  if(!dist||!dist.distribucion)return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NORMAL_FALLBACK',fallback:true};",
-        "  var t=String(dist.distribucion).toUpperCase();",
-        "  var p0=clamp(Number(dist.p0)||0,0,1);",
-        "  var lam=Math.max(0,Number(dist.parametros&&dist.parametros.lambda)||0);",
-        "  var nb_n=Number(dist.parametros&&dist.parametros.nb_n);",
-        "  var nb_p=Number(dist.parametros&&dist.parametros.nb_p);",
-        "  if(t==='NO_HISTORY')return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NO_HISTORY_FALLBACK',fallback:true};",
-        "  if(t==='ZERO_ONLY')return{demand:0,usedDist:'ZERO_ONLY',fallback:false};",
-        "  if(t==='POISSON'){",
-        "    if(lam>0)return{demand:samplePoisson(lam),usedDist:'POISSON',fallback:false};",
-        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'POISSON_FALLBACK',fallback:true};",
-        "  }",
-        "  if(t==='NB'){",
-        "    var nb=sampleNB(nb_n,nb_p);",
-        "    if(nb!=null)return{demand:nb,usedDist:'NB',fallback:false};",
-        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NB_FALLBACK',fallback:true};",
-        "  }",
-        "  if(t==='ZINB'){",
-        "    if(Math.random()<=p0)return{demand:0,usedDist:'ZINB',fallback:false};",
-        "    var nb2=sampleNB(nb_n,nb_p);",
-        "    if(nb2!=null)return{demand:nb2,usedDist:'ZINB',fallback:false};",
-        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'ZINB_FALLBACK',fallback:true};",
-        "  }",
-        "  return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'UNKNOWN_FALLBACK',fallback:true};",
-        "}",
-
-        // ── applyDelivery: full delivery, no partial fills ──
-        "function applyDelivery(qty){return Math.max(0,Number(qty)||0);}",
-
-        // ── simulateMetricsByCycle: exact replica of backend ──
-        "function simulateMetricsByCycle(row,meta,cfg){",
-        "  var S=Math.max(0,meta);",
-        "  var R=Math.max(1,Math.round(Number(row.Frecuencia_Revision_dias)||1));",
-        "  var LT=Math.max(0,Math.round(Number(row.Lead_Time_Abasto)||0));",
-        "  var totalCycles=Math.max(1,Math.floor(cfg.horizonDays/R));",
-        "  var onHand=S,pipeline=[];",
-        "  var okCycles=0,stockoutCycles=0;",
-        "  var totalDemand=0,totalServed=0,totalOrdered=0,totalDelivered=0,totalShortageUnits=0;",
-        "  var endingInventorySum=0,simulatedDays=0;",
-        "  for(var cycle=1;cycle<=totalCycles;cycle++){",
-        "    var cycleHadStockout=false;",
-        "    for(var d=1;d<=R;d++){",
-        "      var day=(cycle-1)*R+d;",
-        "      for(var i=pipeline.length-1;i>=0;i--){",
-        "        if(pipeline[i].arrivesOnDay===day){",
-        "          var del=applyDelivery(pipeline[i].qty);",
-        "          onHand+=del;totalDelivered+=del;pipeline.splice(i,1);",
-        "        }",
-        "      }",
-        "      var sampled=sampleDailyDemand(row,cfg);",
-        "      var demand=Math.max(0,Number(sampled.demand)||0);",
-        "      totalDemand+=demand;",
-        "      if(onHand>=demand){onHand-=demand;totalServed+=demand;}",
-        "      else{totalServed+=onHand;totalShortageUnits+=demand-onHand;onHand=0;cycleHadStockout=true;}",
-        "      endingInventorySum+=onHand;simulatedDays++;",
-        "    }",
-        "    if(!cycleHadStockout)okCycles++;else stockoutCycles++;",
-        "    var pipeQty=pipeline.reduce(function(a,p){return a+p.qty;},0);",
-        "    var invPos=onHand+pipeQty;",
-        "    var orderQty=Math.max(0,S-invPos);",
-        "    if(orderQty>0){pipeline.push({arrivesOnDay:cycle*R+LT,qty:orderQty});totalOrdered+=orderQty;}",
-        "  }",
-        "  return{",
-        "    cycleServiceLevel:okCycles/Math.max(1,totalCycles),",
-        "    customerFillRate:totalServed/Math.max(1,totalDemand),",
-        "    avgEndingInventory:endingInventorySum/Math.max(1,simulatedDays),",
-        "    totalDemand:totalDemand,totalServed:totalServed,totalOrdered:totalOrdered,totalDelivered:totalDelivered,",
-        "    totalShortageUnits:totalShortageUnits,",
-        "    shortageRatio:totalShortageUnits/Math.max(1,totalDemand),",
-        "    totalCycles:totalCycles,stockoutCycles:stockoutCycles,okCycles:okCycles,simulatedDays:simulatedDays",
-        "  };",
-        "}",
-
-        // ── computeCompositeScore: exact replica of backend ──
-        "function computeCompositeScore(row,meta,metrics,cfg){",
-        "  var w=cfg.scoring.weights;",
-        "  var target=clamp(normSvc(row.Nivel_Servicio),0,1);",
-        "  var tol=Math.max(1e-9,Number(cfg.scoring.serviceTolerance)||0.1);",
-        "  var svcGap=metrics.cycleServiceLevel-target;",
-        "  var svcGapAbs=Math.abs(svcGap);",
-        "  var svcScore=clamp(1-svcGapAbs/tol,0,1);",
-        "  var shortUnits=Math.max(0,Number(metrics.totalShortageUnits)||Math.max(0,(Number(metrics.totalDemand)||0)-(Number(metrics.totalServed)||0)));",
-        "  var shortRatio=clamp(shortUnits/Math.max(1,Number(metrics.totalDemand)||0),0,1);",
-        "  var shortScore=clamp(1-shortRatio,0,1);",
-        "  var expNeed=(Number(row.Demanda_Promedio_Diaria)||1)*((Number(row.Lead_Time_Abasto)||1)+(Number(row.Frecuencia_Revision_dias)||1));",
-        "  var ovUnits=Math.max(0,(Number(metrics.avgEndingInventory)||0)-expNeed);",
-        "  var ovRatio=ovUnits/Math.max(1,expNeed);",
-        "  var ovScore=1/(1+ovRatio);",
-        "  var total=svcScore*w.service+shortScore*w.shortage+ovScore*w.overstock;",
-        "  var mRatio=meta/Math.max(1,expNeed);",
-        "  if(cfg.scoring.penalizeMetaFarAboveNeed){",
-        "    if(mRatio>10)total*=0.6;",
-        "    if(mRatio>20)total*=0.3;",
-        "    if(mRatio>50)total*=0.1;",
-        "  }",
-        "  if(svcGapAbs>tol)total*=0.25;",
-        "  return{serviceScore:svcScore,shortageScore:shortScore,overstockScore:ovScore,totalScore:total,totalScorePct:total*100,",
-        "    serviceGap:svcGap,serviceGapAbs:svcGapAbs,serviceTolerance:tol,",
-        "    shortageUnits:shortUnits,shortageRatio:shortRatio,",
-        "    overstockRatio:ovRatio,overstockUnits:ovUnits,",
-        "    metaToNeedRatio:mRatio,expectedNeed:expNeed};",
-        "}",
-
-        // ── evaluateMetaScore ──
-        "function evalMeta(row,meta,cfg,reps){",
-        "  var r=Math.max(1,Math.round(reps));",
-        "  var acc={cycleServiceLevel:0,customerFillRate:0,avgEndingInventory:0,",
-        "    totalDemand:0,totalServed:0,totalOrdered:0,totalDelivered:0,",
-        "    totalShortageUnits:0,shortageRatio:0,totalCycles:0,stockoutCycles:0,okCycles:0,simulatedDays:0};",
-        "  for(var i=0;i<r;i++){var m=simulateMetricsByCycle(row,meta,cfg);for(var k in acc)acc[k]+=(m[k]||0);}",
-        "  for(var k in acc)acc[k]/=r;",
-        "  var sc=computeCompositeScore(row,meta,acc,cfg);",
-        "  return{meta:meta,metrics:acc,scores:sc,repsUsed:r};",
-        "}",
-
-        // ── compareEvaluations: tiebreak mirrors backend ──
-        "function cmpEval(a,b,target){",
-        "  if(!a)return b;if(!b)return a;",
-        "  var sa=Number(a.scores&&a.scores.totalScore)||0,sb=Number(b.scores&&b.scores.totalScore)||0;",
-        "  if(sb>sa)return b;if(sb<sa)return a;",
-        "  var ga=Math.abs((Number(a.metrics&&a.metrics.cycleServiceLevel)||0)-target);",
-        "  var gb=Math.abs((Number(b.metrics&&b.metrics.cycleServiceLevel)||0)-target);",
-        "  if(gb<ga)return b;if(gb>ga)return a;",
-        "  var shA=Number(a.scores&&a.scores.shortageRatio)||0,shB=Number(b.scores&&b.scores.shortageRatio)||0;",
-        "  if(shB<shA)return b;if(shB>shA)return a;",
-        "  var ovA=Number(a.scores&&a.scores.overstockRatio)||0,ovB=Number(b.scores&&b.scores.overstockRatio)||0;",
-        "  if(ovB<ovA)return b;if(ovB>ovA)return a;",
-        "  return(b.meta<a.meta)?b:a;",
-        "}",
-
-        // ── uniqueSorted ──
-        "function uniqSort(vals){",
-        "  return[...new Set(vals.filter(function(x){return isFinite(x);}).map(function(x){return Math.max(0,Math.round(x));}))].sort(function(a,b){return a-b;});",
-        "}",
-
-        // ── generateInitialCandidates ──
-        "function initCands(row,cfg){",
-        "  var m0=clamp(Math.round(Number(row.META)||0),cfg.minMeta,cfg.maxMeta);",
-        "  var dd=Math.max(0,Number(row.Demanda_Promedio_Diaria)||0);",
-        "  var R=Math.max(1,Math.round(Number(row.Frecuencia_Revision_dias)||1));",
-        "  var LT=Math.max(0,Math.round(Number(row.Lead_Time_Abasto)||0));",
-        "  var need=Math.max(0,dd*(R+LT));",
-        "  var cs=[cfg.minMeta,m0,m0*0.25,m0*0.5,m0*0.75,m0*0.9,m0*1.1,m0*1.25,m0*1.5,m0*2,",
-        "    need*0.25,need*0.5,need*0.75,need,need*1.25,need*1.5,need*2,need*3];",
-        "  return uniqSort(cs.map(function(x){return clamp(Math.round(x),cfg.minMeta,cfg.maxMeta);}));",
-        "}",
-
-        // ── generateNeighborCandidates ──
-        "function neighbors(base,cfg){",
-        "  var m=Math.max(0,Math.round(base||0));",
-        "  var abs=[1,2,5,10,20,35,50,75,100];",
-        "  var pct=[0.85,0.9,0.95,0.98,1.02,1.05,1.1,1.15];",
-        "  var vs=[m];",
-        "  abs.forEach(function(s){vs.push(m-s,m+s);});",
-        "  pct.forEach(function(p){vs.push(m*p);});",
-        "  return uniqSort(vs.map(function(x){return clamp(Math.round(x),cfg.minMeta,cfg.maxMeta);}));",
-        "}",
-
-        // ── optimizeMeta: 3-phase strategy from backend ──
-        "function optimizeMeta(row,cfg){",
-        "  var target=clamp(normSvc(row.Nivel_Servicio),0,1);",
-        "  var cache=new Map();var iterations=0;",
-        "  function ec(meta,reps){",
-        "    var m=clamp(Math.round(meta),cfg.minMeta,cfg.maxMeta);",
-        "    var r=Math.max(1,Math.round(reps));",
-        "    var key=m+'|'+r;",
-        "    if(cache.has(key))return cache.get(key);",
-        "    var res=evalMeta(row,m,cfg,r);var full=Object.assign({meta:m},res);",
-        "    cache.set(key,full);iterations++;return full;",
-        "  }",
-        "  var cReps=Math.min(cfg.coarseReplications||cfg.nReplications,cfg.nReplications);",
-        "  var topK=Math.max(1,Math.round((cfg.scoring&&cfg.scoring.topKCoarse)||4));",
-        "  var meta0=Math.round(Number(row.META)||0);",
-        "  // Phase 1: coarse",
-        "  var ic=initCands(row,cfg);",
-        "  var cr=ic.map(function(m){return ec(m,cReps);});",
-        "  cr.sort(function(a,b){return b.scores.totalScore-a.scores.totalScore;});",
-        "  var seeds=cr.slice(0,topK).map(function(x){return x.meta;});",
-        "  if(seeds.indexOf(meta0)===-1)seeds.push(meta0);",
-        "  seeds=uniqSort(seeds);",
-        "  // Phase 2: refine",
-        "  var rcands=uniqSort(seeds.reduce(function(a,m){return a.concat(neighbors(m,cfg));},[]));",
-        "  var rr=rcands.map(function(m){return ec(m,cReps);});",
-        "  rr.sort(function(a,b){return b.scores.totalScore-a.scores.totalScore;});",
-        "  var fin=rr.slice(0,topK).map(function(x){return x.meta;});",
-        "  if(fin.indexOf(meta0)===-1)fin.push(meta0);",
-        "  // Phase 3: final full-rep evaluation",
-        "  var fcands=uniqSort(fin.reduce(function(a,m){return a.concat(neighbors(m,cfg));},[]));",
-        "  var best=null;",
-        "  fcands.forEach(function(m){best=cmpEval(best,ec(m,cfg.nReplications),target);});",
-        "  if(!best)best=ec(meta0,cfg.nReplications);",
-        "  var fMeta=best.meta;",
-        "  if(cfg.rounding==='ceil')fMeta=Math.ceil(fMeta);",
-        "  else if(cfg.rounding==='round')fMeta=Math.round(fMeta);",
-        "  else if(cfg.rounding==='floor')fMeta=Math.floor(fMeta);",
-        "  fMeta=Math.max(0,fMeta);",
-        "  var distType=String(row.distInfo&&row.distInfo.distribucion||'NORMAL_FALLBACK').toUpperCase();",
-        "  return{",
-        "    metaInitial:Number(row.META)||0,metaOptimized:fMeta,metaOptimizedRaw:best.meta,",
-        "    deltaMeta:fMeta-(Number(row.META)||0),",
-        "    serviceTarget:target,serviceAchieved:best.metrics.cycleServiceLevel,",
-        "    serviceGap:best.metrics.cycleServiceLevel-target,",
-        "    feasible:best.metrics.cycleServiceLevel>=target,",
-        "    serviceFloorMet:best.scores.serviceGapAbs<=best.scores.serviceTolerance,",
-        "    serviceGapAbs:best.scores.serviceGapAbs,",
-        "    customerFillRateAchieved:best.metrics.customerFillRate,",
-        "    avgEndingInventory:best.metrics.avgEndingInventory,",
-        "    avgShortageUnits:best.scores.shortageUnits,",
-        "    shortageRatio:best.scores.shortageRatio,shortageScore:best.scores.shortageScore,",
-        "    avgOverstockUnits:best.scores.overstockUnits,",
-        "    overstockRatio:best.scores.overstockRatio,overstockScore:best.scores.overstockScore,",
-        "    expectedNeed:best.scores.expectedNeed,metaToNeedRatio:best.scores.metaToNeedRatio,",
-        "    serviceScore:best.scores.serviceScore,totalScore:best.scores.totalScore,totalScorePct:best.scores.totalScorePct,",
-        "    avgTotalDemand:best.metrics.totalDemand,avgTotalServed:best.metrics.totalServed,",
-        "    avgTotalOrdered:best.metrics.totalOrdered,avgTotalDelivered:best.metrics.totalDelivered,",
-        "    avgStockoutCycles:best.metrics.stockoutCycles,avgOkCycles:best.metrics.okCycles,",
-        "    avgTotalCycles:best.metrics.totalCycles,avgSimulatedDays:best.metrics.simulatedDays,",
-        "    iterations:iterations,cacheSize:cache.size,",
-        "    coarseReplications:cReps,finalReplications:cfg.nReplications,",
-        "    distributionType:distType,distributionFallback:!row.distInfo||distType==='NO_HISTORY'",
-        "  };",
-        "}",
-
-        // ── message handler ──
-        "self.onmessage=function(e){",
-        "  var d=e.data;",
-        "  try{var res=optimizeMeta(d.row,d.cfg);self.postMessage({jobId:d.jobId,res:res});}",
-        "  catch(err){self.postMessage({jobId:d.jobId,error:String(err&&err.message||err)});}",
-        "};",
-      ].join("\n");
-
-      // ═══════ RUN SIMULATION ══════════════════════════════════
-      function runSim() {
-        if (running || !policyData || !policyData.length) return;
+      // ═══════════════════════════════════════════════════════════
+      // MAIN ORCHESTRATOR: runAll
+      // ═══════════════════════════════════════════════════════════
+      function runAll() {
+        if (running) return;
+        var mode = getMode();
+        if (mode === "none") return;
         running = true;
         results = [];
+        d00Rows = [];
         displayRows = [];
+        d00Display = [];
         document.getElementById("btn-run").disabled = true;
         document.getElementById("btn-exp").disabled = true;
-        document.getElementById("prog-wrap").style.display = "block";
-        document.getElementById("charts-wrap").style.display = "none";
+        document.getElementById("btn-exp-dist").disabled = true;
         document.getElementById("empty-dash").style.display = "none";
+        document.getElementById("charts-wrap").style.display = "none";
 
-        var cfg = buildCFG();
-        var distMap = buildDistMap(distData);
+        // Determine which distribution source to use
+        var useHist =
+          mode === "full" ||
+          (mode === "both" && document.getElementById("src-hist").checked);
+        var distSource = useHist ? "generated" : "loaded";
 
-        var mc = 0,
-          mse = 0,
-          msp = 0,
-          mf = 0;
-        var enriched = policyData.map(function (row) {
-          var m = matchDist(row, distMap);
-          if (m.distInfo) {
-            if (m.matchSource === "composite") mc++;
-            else if (m.matchSource === "sku_exact") mse++;
-            else if (m.matchSource === "sku_parse") msp++;
-          } else mf++;
-          return Object.assign({}, row, {
-            distInfo: m.distInfo,
-            matchSource: m.matchSource,
-          });
-        });
-
-        log("[INFO] Iniciando simulación: " + enriched.length + " SKUs", "i");
+        setPhase("pol");
+        log("", "i");
+        log("═════════════════════════════════════", "i");
         log(
-          "[INFO] Reps finales: " +
+          "[SimOpti] Iniciando proceso — modo: " +
+            (useHist
+              ? "Clasificar D00 + Monte Carlo"
+              : "Simular con distribución existente"),
+          "i",
+        );
+
+        var effectiveDist;
+
+        if (useHist) {
+          // Step 1: Run D00 engine
+          setPhase("d00");
+          setProgress(
+            0,
+            "Clasificando distribuciones (D00)…",
+            "Procesando histórico de demanda…",
+            "d00",
+          );
+          // Use setTimeout to let UI repaint before blocking computation
+          setTimeout(function () {
+            try {
+              generatedDist = runD00Engine(policyData, histData);
+              d00Rows = generatedDist;
+              document.getElementById("m-clsf").textContent =
+                generatedDist.length;
+              document.getElementById("btn-exp-dist").disabled = false;
+              setProgress(
+                100,
+                "Clasificación D00 completada",
+                "" + generatedDist.length + " SKUs clasificados",
+                "d00",
+              );
+              applyD00Filter();
+              effectiveDist = generatedDist;
+              // Step 2: Run MC
+              setTimeout(function () {
+                runMonteCarlo(effectiveDist, distSource);
+              }, 50);
+            } catch (e) {
+              log("[ERROR] Fallo en D00: " + e.message, "e");
+              running = false;
+              updateMode();
+            }
+          }, 30);
+        } else {
+          effectiveDist = distDataRaw;
+          runMonteCarlo(effectiveDist, distSource);
+        }
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // MONTE CARLO RUNNER
+      // ═══════════════════════════════════════════════════════════
+      function runMonteCarlo(distArr, distSource) {
+        setPhase("mc");
+        var cfg = buildCFG();
+        var distMap = buildDistMap(distArr);
+
+        log("[MC] Iniciando simulación Monte Carlo…", "i");
+        log(
+          "[MC] Reps finales: " +
             cfg.nReplications +
             " | Reps gruesas: " +
             cfg.coarseReplications +
@@ -1751,7 +2407,7 @@
           "i",
         );
         log(
-          "[INFO] Pesos — Servicio: " +
+          "[MC] Pesos — Servicio: " +
             (cfg.scoring.weights.service * 100).toFixed(0) +
             "% | Faltante: " +
             (cfg.scoring.weights.shortage * 100).toFixed(0) +
@@ -1760,14 +2416,33 @@
             "%",
           "i",
         );
+        log("[MC] Fuente de distribución: " + distSource, "i");
+
+        // Enrich policy rows with distribution info
+        var mc2 = 0,
+          mse = 0,
+          msp = 0,
+          mf = 0;
+        var enriched = policyData.map(function (row) {
+          var m = matchDist(row, distMap);
+          if (m.distInfo) {
+            if (m.matchSource === "composite") mc2++;
+            else if (m.matchSource === "sku_exact") mse++;
+            else if (m.matchSource === "sku_parse") msp++;
+          } else mf++;
+          return Object.assign({}, row, {
+            distInfo: m.distInfo,
+            matchSource: m.matchSource,
+          });
+        });
         log(
-          "[INFO] Match — composite: " +
-            mc +
+          "[MC] Match — composite: " +
+            mc2 +
             " | sku_exact: " +
             mse +
             " | sku_parse: " +
             msp +
-            " | fallback: " +
+            " | fallback normal: " +
             mf,
           "i",
         );
@@ -1786,18 +2461,25 @@
           done = 0,
           total = enriched.length;
 
-        function setP(n) {
-          var pct = total > 0 ? Math.round((n / total) * 100) : 0;
-          document.getElementById("prog-pct").textContent = pct + "%";
-          document.getElementById("prog-fill").style.width = pct + "%";
-          document.getElementById("prog-lbl").textContent =
-            n + " / " + total + " SKUs procesados";
+        function setMCProgress(n) {
+          var pct = total > 0 ? (n / total) * 100 : 0;
+          setProgress(
+            pct,
+            "Simulación Monte Carlo — " + n + "/" + total + " SKUs",
+            "Réplicas: " +
+              cfg.nReplications +
+              " | Horizonte: " +
+              cfg.horizonDays +
+              " días",
+            "mc",
+          );
           document.getElementById("m-proc").textContent = n;
         }
+        setMCProgress(0);
 
-        var resolve;
+        var resolveP;
         var p = new Promise(function (res) {
-          resolve = res;
+          resolveP = res;
         });
 
         function pump(w) {
@@ -1807,7 +2489,7 @@
           w.onmessage = function (e) {
             if (e.data.error) {
               log(
-                "[ERROR] " +
+                "[ERROR] SKU " +
                   (row.SKU || row.Ubicacion || "?") +
                   ": " +
                   e.data.error,
@@ -1831,26 +2513,37 @@
                     distribucion_parametros: row.distInfo
                       ? row.distInfo.parametros
                       : null,
-                    distribucion_p0: row.distInfo ? row.distInfo.p0 : null,
-                    distribucion_mu: row.distInfo ? row.distInfo.mu : null,
-                    distribucion_variance: row.distInfo
-                      ? row.distInfo.variance
+                    distribucion_p0: row.distInfo
+                      ? row.distInfo.p0 != null
+                        ? row.distInfo.p0
+                        : null
                       : null,
+                    distribucion_mu: row.distInfo
+                      ? row.distInfo.mu != null
+                        ? row.distInfo.mu
+                        : null
+                      : null,
+                    distribucion_variance: row.distInfo
+                      ? row.distInfo.variance != null
+                        ? row.distInfo.variance
+                        : null
+                      : null,
+                    distSource: distSource,
                   },
                   r,
                 ),
               );
             }
             done++;
-            setP(done);
+            setMCProgress(done);
             if (done % 100 === 0)
-              log("[INFO] Procesados " + done + "/" + total + "…", "i");
+              log("[MC] Procesados " + done + "/" + total + "…", "i");
             if (done === total) {
               workers.forEach(function (ww) {
                 ww.terminate();
               });
               URL.revokeObjectURL(burl);
-              resolve();
+              resolveP();
             } else pump(w);
           };
         }
@@ -1860,46 +2553,44 @@
 
         p.then(function () {
           log(
-            "[INFO] Simulación completada. " +
+            "[MC] Simulación completada. " +
               results.length +
-              " resultados. " +
+              " resultados. Fallback normal: " +
               mf +
-              " SKUs usaron fallback normal.",
+              " SKUs.",
             "i",
           );
           running = false;
+          setPhase("done");
           document.getElementById("btn-run").disabled = false;
           document.getElementById("btn-exp").disabled = results.length === 0;
           toast("Completado: " + results.length + " SKUs procesados");
           renderDash();
           applyF();
+          updateMode();
         });
       }
 
-      // ═══════ DASHBOARD ═══════════════════════════════════════
+      // ═══════════════════════════════════════════════════════════
+      // DASHBOARD
+      // ═══════════════════════════════════════════════════════════
       function renderDash() {
         if (!results.length) return;
         var avgSc =
           results.reduce(function (a, r) {
             return a + (r.totalScore || 0);
           }, 0) / results.length;
-        var avgDl =
-          results.reduce(function (a, r) {
-            return a + (r.deltaMeta || 0);
-          }, 0) / results.length;
         document.getElementById("m-score").textContent = (avgSc * 100).toFixed(
           1,
         );
-        document.getElementById("m-delta").textContent =
-          (avgDl >= 0 ? "+" : "") + avgDl.toFixed(1);
 
-        // dist breakdown
+        // Distribution breakdown
         var dc = {};
         results.forEach(function (r) {
           var t = r.distributionType || "NORMAL_FALLBACK";
           dc[t] = (dc[t] || 0) + 1;
         });
-        var mdist = Math.max.apply(null, Object.values(dc).concat([1]));
+        var md = Math.max.apply(null, Object.values(dc).concat([1]));
         var dcol = {
           POISSON: "f-blue",
           NB: "f-green",
@@ -1913,56 +2604,42 @@
             return b[1] - a[1];
           })
           .map(function (e) {
-            return (
-              '<div class="br-row"><div class="br-lbl">' +
-              e[0] +
-              '</div><div class="br-track"><div class="br-fill ' +
-              (dcol[e[0]] || "f-gray") +
-              '" style="width:' +
-              ((e[1] / mdist) * 100).toFixed(1) +
-              '%"></div></div><div class="br-val">' +
-              e[1] +
-              " SKUs</div></div>"
-            );
+            return brow(e[0], e[1], md, dcol[e[0]] || "f-gray", e[1] + " SKUs");
           })
           .join("");
 
-        // top score
+        // Top score
         var top = results
           .slice()
           .sort(function (a, b) {
             return (b.totalScore || 0) - (a.totalScore || 0);
           })
           .slice(0, 12);
-        var msc = top[0] ? top[0].totalScore || 1 : 1;
+        var ms = top[0] ? top[0].totalScore || 1 : 1;
         document.getElementById("score-bars").innerHTML = top
           .map(function (r) {
-            return (
-              '<div class="br-row"><div class="br-lbl" title="' +
-              (r.SKU || "") +
-              '">' +
-              (r.SKU || r.Producto || "—") +
-              '</div><div class="br-track"><div class="br-fill f-blue" style="width:' +
-              (((r.totalScore || 0) / msc) * 100).toFixed(1) +
-              '%"></div></div><div class="br-val">' +
-              ((r.totalScore || 0) * 100).toFixed(1) +
-              " pts</div></div>"
+            return brow(
+              r.SKU || r.Producto || "—",
+              r.totalScore || 0,
+              ms,
+              "f-blue",
+              ((r.totalScore || 0) * 100).toFixed(1) + " pts",
             );
           })
           .join("");
 
-        // match breakdown
-        var mc2 = { composite: 0, sku_exact: 0, sku_parse: 0, fallback: 0 };
+        // Match breakdown
+        var mc = { composite: 0, sku_exact: 0, sku_parse: 0, fallback: 0 };
         results.forEach(function (r) {
-          if (r.matchSource) mc2[r.matchSource] = (mc2[r.matchSource] || 0) + 1;
-          else mc2.fallback++;
+          if (r.matchSource) mc[r.matchSource] = (mc[r.matchSource] || 0) + 1;
+          else mc.fallback++;
         });
-        var mm = Math.max.apply(null, Object.values(mc2).concat([1]));
+        var mm = Math.max.apply(null, Object.values(mc).concat([1]));
         var mlbl = {
           composite: "Composite (U+P)",
           sku_exact: "SKU exacto",
           sku_parse: "SKU parseado",
-          fallback: "Sin match (fallback)",
+          fallback: "Sin match",
         };
         var mcol = {
           composite: "f-green",
@@ -1970,26 +2647,194 @@
           sku_parse: "f-amber",
           fallback: "f-gray",
         };
-        document.getElementById("match-bars").innerHTML = Object.entries(mc2)
+        document.getElementById("match-bars").innerHTML = Object.entries(mc)
           .map(function (e) {
-            return (
-              '<div class="br-row"><div class="br-lbl">' +
-              (mlbl[e[0]] || e[0]) +
-              '</div><div class="br-track"><div class="br-fill ' +
-              (mcol[e[0]] || "f-gray") +
-              '" style="width:' +
-              ((e[1] / mm) * 100).toFixed(1) +
-              '%"></div></div><div class="br-val">' +
-              e[1] +
-              " SKUs</div></div>"
+            return brow(
+              mlbl[e[0]] || e[0],
+              e[1],
+              mm,
+              mcol[e[0]] || "f-gray",
+              e[1] + " SKUs",
             );
+          })
+          .join("");
+
+        // Delta META distribution
+        var deltaBuckets = {
+          "< -50": 0,
+          "-50 a -10": 0,
+          "-10 a 0": 0,
+          0: 0,
+          "0 a +10": 0,
+          "+10 a +50": 0,
+          "> +50": 0,
+        };
+        results.forEach(function (r) {
+          var d = r.deltaMeta || 0;
+          if (d < -50) deltaBuckets["< -50"]++;
+          else if (d < -10) deltaBuckets["-50 a -10"]++;
+          else if (d < 0) deltaBuckets["-10 a 0"]++;
+          else if (d === 0) deltaBuckets["0"]++;
+          else if (d <= 10) deltaBuckets["0 a +10"]++;
+          else if (d <= 50) deltaBuckets["+10 a +50"]++;
+          else deltaBuckets["> +50"]++;
+        });
+        var mdb = Math.max.apply(null, Object.values(deltaBuckets).concat([1]));
+        document.getElementById("delta-bars").innerHTML = Object.entries(
+          deltaBuckets,
+        )
+          .map(function (e) {
+            var col =
+              e[0].indexOf("-") !== -1
+                ? "f-amber"
+                : e[0] === "0"
+                  ? "f-gray"
+                  : "f-blue";
+            return brow(e[0], e[1], mdb, col, e[1] + " SKUs");
           })
           .join("");
 
         document.getElementById("charts-wrap").style.display = "block";
       }
 
-      // ═══════ TABLE ════════════════════════════════════════════
+      function brow(lbl, val, max, cls, valStr) {
+        var w = max > 0 ? ((val / max) * 100).toFixed(1) : 0;
+        return (
+          '<div class="br-row"><div class="br-lbl" title="' +
+          lbl +
+          '">' +
+          lbl +
+          "</div>" +
+          '<div class="br-track"><div class="br-fill ' +
+          cls +
+          '" style="width:' +
+          w +
+          '%"></div></div>' +
+          '<div class="br-val">' +
+          valStr +
+          "</div></div>"
+        );
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // D00 TABLE
+      // ═══════════════════════════════════════════════════════════
+      var DBADGE_D00 = {
+        POISSON: "bb",
+        NB: "bg",
+        ZINB: "ba",
+        ZERO_ONLY: "bx",
+        NO_HISTORY: "bx",
+      };
+      function applyD00Filter() {
+        var q = (document.getElementById("srch-d00").value || "").toLowerCase();
+        var fd = document.getElementById("f-d00-dist").value;
+        var fh = document.getElementById("f-d00-hist").value;
+        d00Display = d00Rows.filter(function (r) {
+          if (
+            q &&
+            !(
+              (r.SKU || "") +
+              " " +
+              (r.Ubicacion || "") +
+              " " +
+              (r.Producto || "")
+            )
+              .toLowerCase()
+              .includes(q)
+          )
+            return false;
+          if (fd && r.distribucion !== fd) return false;
+          if (
+            fh !== "" &&
+            String(r.metadata && r.metadata.tiene_historico) !== fh
+          )
+            return false;
+          return true;
+        });
+        d00Display.sort(function (a, b) {
+          var va = a[sortKeyD00] ?? "",
+            vb = b[sortKeyD00] ?? "";
+          if (typeof va === "number") return (va - vb) * sortDirD00;
+          return String(va).localeCompare(String(vb)) * sortDirD00;
+        });
+        renderD00Table(d00Display);
+        document.getElementById("tc-d00").textContent =
+          d00Display.length + " de " + d00Rows.length + " SKUs";
+      }
+      function srtD00(key) {
+        if (sortKeyD00 === key) sortDirD00 *= -1;
+        else {
+          sortKeyD00 = key;
+          sortDirD00 = -1;
+        }
+        applyD00Filter();
+      }
+      function renderD00Table(rows) {
+        var tb = document.getElementById("d00-tbody");
+        if (!rows || !rows.length) {
+          tb.innerHTML =
+            '<tr><td colspan="13" style="text-align:center;padding:3rem;color:var(--gray-400)">Sin datos de clasificación D00.</td></tr>';
+          return;
+        }
+        tb.innerHTML = rows
+          .map(function (r) {
+            var p = r.parametros || {};
+            var hist = r.metadata && r.metadata.tiene_historico;
+            return (
+              "<tr>" +
+              '<td class="td-m">' +
+              (r.SKU || "—") +
+              "</td>" +
+              "<td>" +
+              (r.Ubicacion || "—") +
+              "</td>" +
+              "<td>" +
+              (r.Producto || "—") +
+              "</td>" +
+              '<td><span class="badge ' +
+              (DBADGE_D00[r.distribucion] || "bx") +
+              '">' +
+              r.distribucion +
+              "</span></td>" +
+              '<td class="td-m">' +
+              (r.n_dias || 0) +
+              "</td>" +
+              '<td class="td-m">' +
+              (r.mu != null ? r.mu.toFixed(4) : "—") +
+              "</td>" +
+              '<td class="td-m">' +
+              (r.variance != null ? r.variance.toFixed(4) : "—") +
+              "</td>" +
+              '<td class="td-m">' +
+              (r.p0 != null ? (r.p0 * 100).toFixed(1) + "%" : "—") +
+              "</td>" +
+              '<td class="td-m">' +
+              (r.total_demand != null ? r.total_demand.toFixed(0) : "—") +
+              "</td>" +
+              '<td class="td-m">' +
+              (p.lambda != null ? p.lambda.toFixed(4) : "—") +
+              "</td>" +
+              '<td class="td-m">' +
+              (p.nb_n != null ? p.nb_n.toFixed(4) : "—") +
+              "</td>" +
+              '<td class="td-m">' +
+              (p.nb_p != null ? p.nb_p.toFixed(4) : "—") +
+              "</td>" +
+              "<td>" +
+              (hist
+                ? '<span class="badge bg">Sí</span>'
+                : '<span class="badge bx">No</span>') +
+              "</td>" +
+              "</tr>"
+            );
+          })
+          .join("");
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // MC RESULTS TABLE
+      // ═══════════════════════════════════════════════════════════
       var DBADGE = {
         POISSON: "bb",
         NB: "bg",
@@ -2003,15 +2848,6 @@
         ZINB_FALLBACK: "bx",
         UNKNOWN_FALLBACK: "bx",
       };
-      function db(t) {
-        return (
-          '<span class="badge ' +
-          (DBADGE[t] || "bx") +
-          '">' +
-          (t || "—") +
-          "</span>"
-        );
-      }
       function p2(v) {
         return ((+v || 0) * 100).toFixed(1) + "%";
       }
@@ -2071,9 +2907,9 @@
         tb.innerHTML = rows
           .map(function (r) {
             var dl = r.deltaMeta || 0;
-            var dc2 = dl > 0.5 ? "dp" : dl < -0.5 ? "dn" : "d0";
+            var dc = dl > 0.5 ? "dp" : dl < -0.5 ? "dn" : "d0";
             var dstr = (dl >= 0 ? "+" : "") + n2(dl, 0);
-            var sgp = ((r.serviceGap || 0) * 100).toFixed(1);
+            var sg = ((r.serviceGap || 0) * 100).toFixed(1);
             var sgc = (r.serviceGap || 0) >= 0 ? "dp" : "dn";
             return (
               "<tr>" +
@@ -2086,9 +2922,11 @@
               "<td>" +
               (r.Producto || "—") +
               "</td>" +
-              "<td>" +
-              db(r.distributionType) +
-              "</td>" +
+              '<td><span class="badge ' +
+              (DBADGE[r.distributionType] || "bx") +
+              '">' +
+              (r.distributionType || "—") +
+              "</span></td>" +
               "<td>" +
               (r.distributionFallback
                 ? '<span class="badge ba">fallback</span>'
@@ -2104,7 +2942,7 @@
               n2(r.metaOptimized, 0) +
               "</td>" +
               '<td class="td-m ' +
-              dc2 +
+              dc +
               '">' +
               dstr +
               "</td>" +
@@ -2118,7 +2956,7 @@
               sgc +
               '">' +
               (r.serviceGap >= 0 ? "+" : "") +
-              sgp +
+              sg +
               "%</td>" +
               '<td class="td-m">' +
               n2(r.shortageRatio, 4) +
@@ -2140,7 +2978,9 @@
           .join("");
       }
 
-      // ═══════ EXPORT CSV ══════════════════════════════════════
+      // ═══════════════════════════════════════════════════════════
+      // EXPORTS
+      // ═══════════════════════════════════════════════════════════
       function exportCSV() {
         if (!results.length) return;
         var cols = [
@@ -2151,6 +2991,7 @@
           "matchSource",
           "distKey",
           "distribucion_demanda",
+          "distSource",
           "distributionType",
           "distributionFallback",
           "distribucion_p0",
@@ -2192,12 +3033,54 @@
           "finalReplications",
           "metaToNeedRatio",
         ];
-        var rows = results.map(function (r) {
+        dlCSV(cols, results, "resultados_montecarlo_META_" + ts() + ".csv");
+        toast("CSV de resultados exportado");
+      }
+      function exportDistCSV() {
+        var arr = generatedDist || distDataRaw;
+        if (!arr || !arr.length) return;
+        var cols = [
+          "SKU",
+          "Ubicacion",
+          "Producto",
+          "distribucion",
+          "n_dias",
+          "dias_con_cero",
+          "mu",
+          "variance",
+          "p0",
+          "total_demand",
+          "fecha_inicio",
+          "fecha_fin",
+        ];
+        // flatten parametros
+        var flat = arr.map(function (r) {
+          var p = r.parametros || {};
+          return Object.assign({}, r, {
+            "parametros.lambda": p.lambda,
+            "parametros.nb_n": p.nb_n,
+            "parametros.nb_p": p.nb_p,
+            "metadata.tiene_historico":
+              r.metadata && r.metadata.tiene_historico,
+          });
+        });
+        var cols2 = cols.concat([
+          "parametros.lambda",
+          "parametros.nb_n",
+          "parametros.nb_p",
+          "metadata.tiene_historico",
+        ]);
+        dlCSV(cols2, flat, "distribucion_demanda_diaria_" + ts() + ".csv");
+        toast("CSV de distribuciones exportado");
+      }
+      function dlCSV(cols, rows, filename) {
+        var data = rows.map(function (r) {
           return cols
             .map(function (c) {
               var v = r[c];
               if (v === null || v === undefined) return "";
               if (typeof v === "boolean") return v ? "TRUE" : "FALSE";
+              if (v instanceof Date) return v.toISOString().slice(0, 10);
               if (typeof v === "number")
                 return Number.isInteger(v) ? v : v.toFixed(6);
               if (typeof v === "object")
@@ -2206,21 +3089,245 @@
             })
             .join(",");
         });
-        var csv = cols.join(",") + "\n" + rows.join("\n");
+        var csv = cols.join(",") + "\n" + data.join("\n");
         var a = document.createElement("a");
         a.href = URL.createObjectURL(
           new Blob([csv], { type: "text/csv;charset=utf-8" }),
         );
-        a.download =
-          "resultados_montecarlo_META_" +
-          new Date().toISOString().slice(0, 10) +
-          ".csv";
+        a.download = filename;
         a.click();
-        toast("CSV exportado correctamente");
+      }
+      function ts() {
+        return new Date().toISOString().slice(0, 10);
       }
 
-      // ═══════ INIT ════════════════════════════════════════════
+      // ═══════════════════════════════════════════════════════════
+      // WEB WORKER SOURCE
+      // Faithful port of run_montecarlo_meta.js worker section
+      // ═══════════════════════════════════════════════════════════
+      var WORKER_SRC = [
+        "'use strict';",
+        "function clamp(x,lo,hi){return Math.max(lo,Math.min(hi,x))}",
+        "function normSvc(x){var v=Number(x);if(!isFinite(v))return 0;return v>1.0001?v/100:v}",
+        "function randNormal(m,s){var u1=Math.max(Math.random(),1e-12),u2=Math.random();return m+s*Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2);}",
+        // samplePoisson: exact for lambda<30, normal approx for >=30
+        "function samplePoisson(lambda){",
+        "  var lam=Math.max(0,Number(lambda)||0);if(lam<=0)return 0;",
+        "  if(lam<30){var L=Math.exp(-lam),k=0,p=1;do{k++;p*=Math.random();}while(p>L);return k-1;}",
+        "  return Math.max(0,Math.round(randNormal(lam,Math.sqrt(lam))));",
+        "}",
+        // sampleGamma: Marsaglia-Tsang
+        "function sampleGamma(shape,scale){",
+        "  var k=Number(shape)||0,theta=Math.max(Number(scale)||0,0);",
+        "  if(k<=0||theta<=0)return 0;",
+        "  if(k<1){var u=Math.max(Math.random(),1e-12);return sampleGamma(k+1,theta)*Math.pow(u,1/k);}",
+        "  var d=k-1/3,c=1/Math.sqrt(9*d);",
+        "  while(true){var x,v;do{x=randNormal(0,1);v=1+c*x;}while(v<=0);",
+        "    v=v*v*v;var u=Math.random();",
+        "    if(u<1-0.0331*Math.pow(x,4))return d*v*theta;",
+        "    if(Math.log(u)<0.5*x*x+d*(1-v+Math.log(v)))return d*v*theta;}",
+        "}",
+        // sampleNB: Gamma-Poisson mixture with real n
+        "function sampleNB(n,p){",
+        "  var nn=Number(n),pp=Number(p);",
+        "  if(!isFinite(nn)||!isFinite(pp))return null;",
+        "  if(nn<=0||pp<=0||pp>=1)return null;",
+        "  return samplePoisson(sampleGamma(nn,(1-pp)/pp));",
+        "}",
+        // normalFallback: truncated normal
+        "function normalFallback(mu,sigma,k){",
+        "  var m=Math.max(Number(mu)||0,0),s=Math.max(Number(sigma)||0,0);",
+        "  var d=randNormal(m,Math.max(s,1e-9));",
+        "  return Math.max(0,clamp(d,Math.max(0,m-k*s),Math.max(0,m+k*s)));",
+        "}",
+        // sampleDailyDemand: exact dispatch matching backend
+        "function sampleDailyDemand(row,cfg){",
+        "  var dist=row.distInfo;",
+        "  if(!dist||!dist.distribucion)return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NORMAL_FALLBACK',fallback:true};",
+        "  var t=String(dist.distribucion).toUpperCase();",
+        "  var p0=clamp(Number(dist.p0)||0,0,1);",
+        "  var lam=Math.max(0,Number(dist.parametros&&dist.parametros.lambda)||0);",
+        "  var nb_n=Number(dist.parametros&&dist.parametros.nb_n);",
+        "  var nb_p=Number(dist.parametros&&dist.parametros.nb_p);",
+        "  if(t==='NO_HISTORY')return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NO_HISTORY_FALLBACK',fallback:true};",
+        "  if(t==='ZERO_ONLY')return{demand:0,usedDist:'ZERO_ONLY',fallback:false};",
+        "  if(t==='POISSON'){",
+        "    if(lam>0)return{demand:samplePoisson(lam),usedDist:'POISSON',fallback:false};",
+        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'POISSON_FALLBACK',fallback:true};",
+        "  }",
+        "  if(t==='NB'){var nb=sampleNB(nb_n,nb_p);if(nb!=null)return{demand:nb,usedDist:'NB',fallback:false};",
+        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'NB_FALLBACK',fallback:true};}",
+        "  if(t==='ZINB'){",
+        "    if(Math.random()<=p0)return{demand:0,usedDist:'ZINB',fallback:false};",
+        "    var nb2=sampleNB(nb_n,nb_p);if(nb2!=null)return{demand:nb2,usedDist:'ZINB',fallback:false};",
+        "    return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'ZINB_FALLBACK',fallback:true};",
+        "  }",
+        "  return{demand:normalFallback(row.Demanda_Promedio_Diaria,row.DS_Demanda,cfg.kStdClamp),usedDist:'UNKNOWN_FALLBACK',fallback:true};",
+        "}",
+        // applyDelivery: full, no partial fills
+        "function applyDelivery(qty){return Math.max(0,Number(qty)||0);}",
+        // simulateMetricsByCycle: exact replica
+        "function simulateMetricsByCycle(row,meta,cfg){",
+        "  var S=Math.max(0,meta),R=Math.max(1,Math.round(Number(row.Frecuencia_Revision_dias)||1));",
+        "  var LT=Math.max(0,Math.round(Number(row.Lead_Time_Abasto)||0));",
+        "  var totalCycles=Math.max(1,Math.floor(cfg.horizonDays/R));",
+        "  var onHand=S,pipeline=[],okCycles=0,stockoutCycles=0;",
+        "  var totalDemand=0,totalServed=0,totalOrdered=0,totalDelivered=0,totalShortageUnits=0;",
+        "  var endingSum=0,simDays=0;",
+        "  for(var cycle=1;cycle<=totalCycles;cycle++){",
+        "    var hadStockout=false;",
+        "    for(var d=1;d<=R;d++){",
+        "      var day=(cycle-1)*R+d;",
+        "      for(var i=pipeline.length-1;i>=0;i--){",
+        "        if(pipeline[i].arrivesOnDay===day){",
+        "          var del=applyDelivery(pipeline[i].qty);onHand+=del;totalDelivered+=del;pipeline.splice(i,1);}",
+        "      }",
+        "      var smp=sampleDailyDemand(row,cfg);",
+        "      var demand=Math.max(0,Number(smp.demand)||0);totalDemand+=demand;",
+        "      if(onHand>=demand){onHand-=demand;totalServed+=demand;}",
+        "      else{totalServed+=onHand;totalShortageUnits+=demand-onHand;onHand=0;hadStockout=true;}",
+        "      endingSum+=onHand;simDays++;",
+        "    }",
+        "    if(!hadStockout)okCycles++;else stockoutCycles++;",
+        "    var pq=pipeline.reduce(function(a,p){return a+p.qty;},0);",
+        "    var invPos=onHand+pq,orderQty=Math.max(0,S-invPos);",
+        "    if(orderQty>0){pipeline.push({arrivesOnDay:cycle*R+LT,qty:orderQty});totalOrdered+=orderQty;}",
+        "  }",
+        "  return{cycleServiceLevel:okCycles/Math.max(1,totalCycles),",
+        "    customerFillRate:totalServed/Math.max(1,totalDemand),",
+        "    avgEndingInventory:endingSum/Math.max(1,simDays),",
+        "    totalDemand:totalDemand,totalServed:totalServed,totalOrdered:totalOrdered,totalDelivered:totalDelivered,",
+        "    totalShortageUnits:totalShortageUnits,shortageRatio:totalShortageUnits/Math.max(1,totalDemand),",
+        "    totalCycles:totalCycles,stockoutCycles:stockoutCycles,okCycles:okCycles,simulatedDays:simDays};",
+        "}",
+        // computeCompositeScore: exact replica with all 3 components + penalties
+        "function computeCompositeScore(row,meta,metrics,cfg){",
+        "  var w=cfg.scoring.weights,target=clamp(normSvc(row.Nivel_Servicio),0,1);",
+        "  var tol=Math.max(1e-9,Number(cfg.scoring.serviceTolerance)||0.1);",
+        "  var svcGap=metrics.cycleServiceLevel-target,svcGapAbs=Math.abs(svcGap);",
+        "  var svcScore=clamp(1-svcGapAbs/tol,0,1);",
+        "  var shortUnits=Math.max(0,Number(metrics.totalShortageUnits)||Math.max(0,(Number(metrics.totalDemand)||0)-(Number(metrics.totalServed)||0)));",
+        "  var shortRatio=clamp(shortUnits/Math.max(1,Number(metrics.totalDemand)||0),0,1);",
+        "  var shortScore=clamp(1-shortRatio,0,1);",
+        "  var expNeed=(Number(row.Demanda_Promedio_Diaria)||1)*((Number(row.Lead_Time_Abasto)||1)+(Number(row.Frecuencia_Revision_dias)||1));",
+        "  var ovUnits=Math.max(0,(Number(metrics.avgEndingInventory)||0)-expNeed);",
+        "  var ovRatio=ovUnits/Math.max(1,expNeed),ovScore=1/(1+ovRatio);",
+        "  var total=svcScore*w.service+shortScore*w.shortage+ovScore*w.overstock;",
+        "  var mRatio=meta/Math.max(1,expNeed);",
+        "  if(cfg.scoring.penalizeMetaFarAboveNeed){",
+        "    if(mRatio>10)total*=0.6;if(mRatio>20)total*=0.3;if(mRatio>50)total*=0.1;}",
+        "  if(svcGapAbs>tol)total*=0.25;",
+        "  return{serviceScore:svcScore,shortageScore:shortScore,overstockScore:ovScore,totalScore:total,totalScorePct:total*100,",
+        "    serviceGap:svcGap,serviceGapAbs:svcGapAbs,serviceTolerance:tol,",
+        "    shortageUnits:shortUnits,shortageRatio:shortRatio,overstockRatio:ovRatio,overstockUnits:ovUnits,",
+        "    metaToNeedRatio:mRatio,expectedNeed:expNeed};",
+        "}",
+        // evalMeta
+        "function evalMeta(row,meta,cfg,reps){",
+        "  var r=Math.max(1,Math.round(reps));",
+        "  var acc={cycleServiceLevel:0,customerFillRate:0,avgEndingInventory:0,",
+        "    totalDemand:0,totalServed:0,totalOrdered:0,totalDelivered:0,",
+        "    totalShortageUnits:0,shortageRatio:0,totalCycles:0,stockoutCycles:0,okCycles:0,simulatedDays:0};",
+        "  for(var i=0;i<r;i++){var m=simulateMetricsByCycle(row,meta,cfg);for(var k in acc)acc[k]+=(m[k]||0);}",
+        "  for(var k in acc)acc[k]/=r;",
+        "  var sc=computeCompositeScore(row,meta,acc,cfg);",
+        "  return{meta:meta,metrics:acc,scores:sc,repsUsed:r};",
+        "}",
+        // compareEvaluations: exact tiebreak from backend
+        "function cmpEval(a,b,target){",
+        "  if(!a)return b;if(!b)return a;",
+        "  var sa=Number(a.scores&&a.scores.totalScore)||0,sb=Number(b.scores&&b.scores.totalScore)||0;",
+        "  if(sb>sa)return b;if(sb<sa)return a;",
+        "  var ga=Math.abs((Number(a.metrics&&a.metrics.cycleServiceLevel)||0)-target);",
+        "  var gb=Math.abs((Number(b.metrics&&b.metrics.cycleServiceLevel)||0)-target);",
+        "  if(gb<ga)return b;if(gb>ga)return a;",
+        "  var shA=Number(a.scores&&a.scores.shortageRatio)||0,shB=Number(b.scores&&b.scores.shortageRatio)||0;",
+        "  if(shB<shA)return b;if(shB>shA)return a;",
+        "  var ovA=Number(a.scores&&a.scores.overstockRatio)||0,ovB=Number(b.scores&&b.scores.overstockRatio)||0;",
+        "  if(ovB<ovA)return b;if(ovB>ovA)return a;",
+        "  return(b.meta<a.meta)?b:a;",
+        "}",
+        "function uniqSort(vals){return[...new Set(vals.filter(function(x){return isFinite(x);}).map(function(x){return Math.max(0,Math.round(x));}))].sort(function(a,b){return a-b;});}",
+        // generateInitialCandidates
+        "function initCands(row,cfg){",
+        "  var m0=clamp(Math.round(Number(row.META)||0),cfg.minMeta,cfg.maxMeta);",
+        "  var dd=Math.max(0,Number(row.Demanda_Promedio_Diaria)||0);",
+        "  var R=Math.max(1,Math.round(Number(row.Frecuencia_Revision_dias)||1));",
+        "  var LT=Math.max(0,Math.round(Number(row.Lead_Time_Abasto)||0));",
+        "  var need=Math.max(0,dd*(R+LT));",
+        "  var cs=[cfg.minMeta,m0,m0*0.25,m0*0.5,m0*0.75,m0*0.9,m0*1.1,m0*1.25,m0*1.5,m0*2,",
+        "    need*0.25,need*0.5,need*0.75,need,need*1.25,need*1.5,need*2,need*3];",
+        "  return uniqSort(cs.map(function(x){return clamp(Math.round(x),cfg.minMeta,cfg.maxMeta);}));",
+        "}",
+        // generateNeighborCandidates
+        "function neighbors(base,cfg){",
+        "  var m=Math.max(0,Math.round(base||0));",
+        "  var abs=[1,2,5,10,20,35,50,75,100],pct=[0.85,0.9,0.95,0.98,1.02,1.05,1.1,1.15],vs=[m];",
+        "  abs.forEach(function(s){vs.push(m-s,m+s);});",
+        "  pct.forEach(function(p){vs.push(m*p);});",
+        "  return uniqSort(vs.map(function(x){return clamp(Math.round(x),cfg.minMeta,cfg.maxMeta);}));",
+        "}",
+        // optimizeMeta: 3-phase strategy from backend
+        "function optimizeMeta(row,cfg){",
+        "  var target=clamp(normSvc(row.Nivel_Servicio),0,1);",
+        "  var cache=new Map();var iterations=0;",
+        "  function ec(meta,reps){",
+        "    var m=clamp(Math.round(meta),cfg.minMeta,cfg.maxMeta),r=Math.max(1,Math.round(reps));",
+        "    var key=m+'|'+r;if(cache.has(key))return cache.get(key);",
+        "    var res=evalMeta(row,m,cfg,r);var full=Object.assign({meta:m},res);cache.set(key,full);iterations++;return full;",
+        "  }",
+        "  var cReps=Math.min(cfg.coarseReplications||cfg.nReplications,cfg.nReplications);",
+        "  var topK=Math.max(1,Math.round((cfg.scoring&&cfg.scoring.topKCoarse)||4));",
+        "  var meta0=Math.round(Number(row.META)||0);",
+        "  var ic=initCands(row,cfg);",
+        "  var cr=ic.map(function(m){return ec(m,cReps);});",
+        "  cr.sort(function(a,b){return b.scores.totalScore-a.scores.totalScore;});",
+        "  var seeds=cr.slice(0,topK).map(function(x){return x.meta;});",
+        "  if(seeds.indexOf(meta0)===-1)seeds.push(meta0);seeds=uniqSort(seeds);",
+        "  var rcands=uniqSort(seeds.reduce(function(a,m){return a.concat(neighbors(m,cfg));},[]));",
+        "  var rr=rcands.map(function(m){return ec(m,cReps);});",
+        "  rr.sort(function(a,b){return b.scores.totalScore-a.scores.totalScore;});",
+        "  var fin=rr.slice(0,topK).map(function(x){return x.meta;});",
+        "  if(fin.indexOf(meta0)===-1)fin.push(meta0);",
+        "  var fcands=uniqSort(fin.reduce(function(a,m){return a.concat(neighbors(m,cfg));},[]));",
+        "  var best=null;",
+        "  fcands.forEach(function(m){best=cmpEval(best,ec(m,cfg.nReplications),target);});",
+        "  if(!best)best=ec(meta0,cfg.nReplications);",
+        "  var fMeta=best.meta;",
+        "  if(cfg.rounding==='ceil')fMeta=Math.ceil(fMeta);",
+        "  else if(cfg.rounding==='round')fMeta=Math.round(fMeta);",
+        "  else if(cfg.rounding==='floor')fMeta=Math.floor(fMeta);",
+        "  fMeta=Math.max(0,fMeta);",
+        "  var distType=String(row.distInfo&&row.distInfo.distribucion||'NORMAL_FALLBACK').toUpperCase();",
+        "  return{",
+        "    metaInitial:Number(row.META)||0,metaOptimized:fMeta,metaOptimizedRaw:best.meta,",
+        "    deltaMeta:fMeta-(Number(row.META)||0),",
+        "    serviceTarget:target,serviceAchieved:best.metrics.cycleServiceLevel,",
+        "    serviceGap:best.metrics.cycleServiceLevel-target,",
+        "    feasible:best.metrics.cycleServiceLevel>=target,",
+        "    serviceFloorMet:best.scores.serviceGapAbs<=best.scores.serviceTolerance,",
+        "    serviceGapAbs:best.scores.serviceGapAbs,",
+        "    customerFillRateAchieved:best.metrics.customerFillRate,",
+        "    avgEndingInventory:best.metrics.avgEndingInventory,",
+        "    avgShortageUnits:best.scores.shortageUnits,shortageRatio:best.scores.shortageRatio,shortageScore:best.scores.shortageScore,",
+        "    avgOverstockUnits:best.scores.overstockUnits,overstockRatio:best.scores.overstockRatio,overstockScore:best.scores.overstockScore,",
+        "    expectedNeed:best.scores.expectedNeed,metaToNeedRatio:best.scores.metaToNeedRatio,",
+        "    serviceScore:best.scores.serviceScore,totalScore:best.scores.totalScore,totalScorePct:best.scores.totalScorePct,",
+        "    avgTotalDemand:best.metrics.totalDemand,avgTotalServed:best.metrics.totalServed,",
+        "    avgTotalOrdered:best.metrics.totalOrdered,avgTotalDelivered:best.metrics.totalDelivered,",
+        "    avgStockoutCycles:best.metrics.stockoutCycles,avgOkCycles:best.metrics.okCycles,",
+        "    avgTotalCycles:best.metrics.totalCycles,avgSimulatedDays:best.metrics.simulatedDays,",
+        "    iterations:iterations,cacheSize:cache.size,coarseReplications:cReps,finalReplications:cfg.nReplications,",
+        "    distributionType:distType,distributionFallback:!row.distInfo||distType==='NO_HISTORY'};",
+        "}",
+        "self.onmessage=function(e){var d=e.data;try{var res=optimizeMeta(d.row,d.cfg);self.postMessage({jobId:d.jobId,res:res});}catch(err){self.postMessage({jobId:d.jobId,error:String(err&&err.message||err)});}};",
+      ].join("\n");
+
+      // ═══════════════════════════════════════════════════════════
+      // INIT
+      // ═══════════════════════════════════════════════════════════
       onW();
+      updateMode();
     </script>
   </body>
 </html>
