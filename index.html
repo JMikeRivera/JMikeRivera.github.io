@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Optismart — Optimización Monte Carlo</title>
+    <title>Optismart — Monte Carlo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
@@ -823,6 +823,244 @@
         margin: 0.2rem 0;
       }
 
+      /* TRACE PANEL */
+      #trace-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(4, 44, 83, 0.45);
+        z-index: 200;
+        align-items: flex-start;
+        justify-content: flex-end;
+      }
+      #trace-overlay.open {
+        display: flex;
+      }
+      #trace-panel {
+        background: #fff;
+        width: min(92vw, 1100px);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.18);
+        overflow: hidden;
+      }
+      .trace-header {
+        background: var(--blue-900);
+        color: #fff;
+        padding: 0.9rem 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+      .trace-title {
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .trace-close {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: 0.15s;
+        display: flex;
+        align-items: center;
+      }
+      .trace-close:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+      }
+      .trace-sku-bar {
+        background: var(--blue-800);
+        padding: 0.65rem 1.25rem;
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+      }
+      .trace-sku-field {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+      .trace-sku-label {
+        font-size: 9px;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .trace-sku-val {
+        font-size: 11px;
+        font-weight: 500;
+        color: #fff;
+        font-family: var(--mono);
+      }
+      .trace-controls {
+        padding: 0.75rem 1.25rem;
+        border-bottom: 1px solid var(--gray-200);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+        background: var(--gray-50);
+      }
+      .trace-ctrl-group {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .trace-ctrl-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--gray-400);
+      }
+      .trace-seg {
+        display: flex;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-md);
+        overflow: hidden;
+      }
+      .trace-seg button {
+        background: #fff;
+        border: none;
+        padding: 4px 12px;
+        font: inherit;
+        font-size: 11px;
+        color: var(--gray-600);
+        cursor: pointer;
+        transition: 0.15s;
+        border-right: 1px solid var(--gray-200);
+      }
+      .trace-seg button:last-child {
+        border-right: none;
+      }
+      .trace-seg button.active {
+        background: var(--blue-600);
+        color: #fff;
+      }
+      .trace-seg button:hover:not(.active) {
+        background: var(--gray-100);
+      }
+      .trace-warn {
+        background: var(--amber-50);
+        border: 1px solid var(--amber-100);
+        border-radius: var(--r-md);
+        padding: 0.4rem 0.75rem;
+        font-size: 10px;
+        color: var(--amber-400);
+        display: none;
+      }
+      .trace-body {
+        flex: 1;
+        overflow: auto;
+        padding: 1rem 1.25rem;
+      }
+      .trace-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        margin-bottom: 1rem;
+      }
+      .trace-stat {
+        background: var(--gray-50);
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-md);
+        padding: 0.6rem 0.75rem;
+      }
+      .trace-stat-lbl {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--gray-400);
+        margin-bottom: 2px;
+      }
+      .trace-stat-val {
+        font-size: 15px;
+        font-weight: 600;
+        font-family: var(--mono);
+        color: var(--gray-900);
+      }
+      .trace-stat-val.good {
+        color: var(--green-600);
+      }
+      .trace-stat-val.bad {
+        color: var(--red-400);
+      }
+      .trace-stat-val.blue {
+        color: var(--blue-600);
+      }
+      /* trace table */
+      .trace-tw {
+        overflow-x: auto;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-lg);
+        background: #fff;
+      }
+      .trace-tw table {
+        font-size: 10px;
+      }
+      .trace-tw thead th {
+        font-size: 9px;
+        padding: 0.45rem 0.65rem;
+        background: var(--gray-50);
+      }
+      .trace-tw tbody td {
+        padding: 0.4rem 0.65rem;
+        font-size: 10px;
+      }
+      .trace-tw .td-m {
+        font-size: 9px;
+      }
+      .evt-stockout {
+        background: var(--red-50) !important;
+      }
+      .evt-arrive {
+        background: var(--green-50) !important;
+      }
+      .evt-order {
+        background: var(--blue-50) !important;
+      }
+      .cycle-sep td {
+        border-top: 2px solid var(--blue-200) !important;
+        background: var(--blue-50) !important;
+        font-weight: 600;
+      }
+      .trace-footer {
+        padding: 0.6rem 1.25rem;
+        border-top: 1px solid var(--gray-200);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+        background: var(--gray-50);
+      }
+      .range-inputs {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 11px;
+        color: var(--gray-600);
+      }
+      .range-inputs input[type="number"] {
+        width: 62px;
+        padding: 3px 6px;
+        border: 1px solid var(--gray-200);
+        border-radius: var(--r-sm);
+        font: inherit;
+        font-size: 10px;
+        text-align: center;
+      }
+
       @media (max-width: 900px) {
         .main {
           grid-template-columns: 1fr;
@@ -860,10 +1098,21 @@
           Dashboard
         </button>
         <button class="nav-link" onclick="navTo('d00', this)">
-          Distrubución de la demanda
+          Distribucion de la demanda
         </button>
         <button class="nav-link" onclick="navTo('results', this)">
-          Resultados
+          Resultados MC
+        </button>
+        <button
+          class="nav-link"
+          id="nl-trace"
+          onclick="
+            navTo('results', this);
+            openTraceFromNav();
+          "
+          style="display: none"
+        >
+          Traza SKU
         </button>
         <button class="nav-link" onclick="navTo('log', this)">Consola</button>
       </div>
@@ -926,7 +1175,9 @@
 
         <!-- FILE: Histórico -->
         <div>
-          <div class="s-lbl">Histórico de demanda</div>
+          <div class="s-lbl">
+            Histórico de demanda
+          </div>
           <div
             class="file-drop"
             id="dp-hist"
@@ -959,15 +1210,15 @@
           </div>
           <div class="fs" id="fs-hist">
             <span class="dot" id="fd-hist"></span
-            ><span id="fl-hist"
-              >Opcional — calcula la distribucion de la demanda</span
-            >
+            ><span id="fl-hist">Opcional — activa distribucion de la demanda</span>
           </div>
         </div>
 
         <!-- FILE: Distribución directa -->
         <div>
-          <div class="s-lbl">Distribución de la demanda</div>
+          <div class="s-lbl">
+            Distribución ya clasificada
+          </div>
           <div
             class="file-drop"
             id="dp-dist"
@@ -1002,9 +1253,7 @@
           </div>
           <div class="fs" id="fs-dist">
             <span class="dot" id="fd-dist"></span
-            ><span id="fl-dist"
-              >Opcional — omite la distrubucion de la demanda</span
-            >
+            ><span id="fl-dist">Opcional — omite distribucion de la demanda</span>
           </div>
         </div>
 
@@ -1056,7 +1305,7 @@
                 checked
                 onchange="updateMode()"
               />
-              <span>Clasificar desde histórico (D00)</span>
+              <span>Clasificar su distribucion de la demanda</span>
             </label>
             <label
               style="
@@ -1241,7 +1490,7 @@
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Exportar CSV de resultados
+            Exportar CSV completo
           </button>
           <button
             class="btn btn-g btn-sm"
@@ -1261,7 +1510,7 @@
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Exportar CSV de la distribución de la demanda
+            Exportar distribucion_demanda_diaria
           </button>
         </div>
       </aside>
@@ -1279,17 +1528,17 @@
             <div class="mc purple">
               <div class="mc-lbl">SKUs clasificados</div>
               <div class="mc-val" id="m-clsf">—</div>
-              <div class="mc-sub">por distribución de la demanda</div>
+              <div class="mc-sub">Calculados su distribucion</div>
             </div>
             <div class="mc blue">
               <div class="mc-lbl">SKUs simulados</div>
               <div class="mc-val" id="m-proc">—</div>
-              <div class="mc-sub">por Monte Carlo</div>
+              <div class="mc-sub">Monte Carlo</div>
             </div>
             <div class="mc green">
               <div class="mc-lbl">Score promedio</div>
               <div class="mc-val" id="m-score">—</div>
-              <div class="mc-sub">sobre 100 puntos</div>
+              <div class="mc-sub">sobre 100 pts</div>
             </div>
           </div>
 
@@ -1322,7 +1571,7 @@
               >
                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
               </svg>
-              Clasificación D00
+              Distribucion de la demanda
             </div>
             <span class="phase-arrow">›</span>
             <div class="phase-step" id="ph-mc">
@@ -1361,7 +1610,7 @@
               "
             >
               <div class="chart-box">
-                <div class="ct">Clasificación de demanda (D00)</div>
+                <div class="ct">Distribucion de la demanda</div>
                 <div id="dist-bars"></div>
               </div>
               <div class="chart-box">
@@ -1400,8 +1649,9 @@
             <h3>Sin datos aún</h3>
             <p>
               Carga <strong>ui_all_pol_inv</strong> más
-              <strong>historico_demanda</strong> o
-              <strong>distribucion_demanda_diaria</strong>, luego ejecuta.
+              <strong>historico_demanda</strong> (flujo completo) o
+              <strong>distribucion_demanda_diaria</strong> (flujo directo),
+              luego ejecuta.
             </p>
           </div>
         </div>
@@ -1529,6 +1779,7 @@
                   <th onclick="srt('overstockRatio')">Overstock</th>
                   <th onclick="srt('totalScorePct')">Score</th>
                   <th onclick="srt('feasible')">Factible</th>
+                  <th>Traza</th>
                 </tr>
               </thead>
               <tbody id="res-tbody">
@@ -1585,6 +1836,251 @@
       </main>
     </div>
     <div id="toast"></div>
+
+    <!-- ═══════════════ TRACE PANEL (slide-in drawer) ═══════════════ -->
+    <div id="trace-overlay" onclick="closeTrace(event)">
+      <div id="trace-panel">
+        <div class="trace-header">
+          <div class="trace-title">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M2 20h.01M7 20v-4" />
+              <path d="M12 20V10" />
+              <path d="M17 20V4" />
+              <path d="M22 20h.01" />
+            </svg>
+            Traza de simulación — caja negra
+          </div>
+          <button class="trace-close" onclick="closeTrace()">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- SKU summary bar -->
+        <div class="trace-sku-bar" id="trace-sku-bar">
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">SKU</div>
+            <div class="trace-sku-val" id="tr-sku">—</div>
+          </div>
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">Ubicación</div>
+            <div class="trace-sku-val" id="tr-ubic">—</div>
+          </div>
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">Producto</div>
+            <div class="trace-sku-val" id="tr-prod">—</div>
+          </div>
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">Distribución</div>
+            <div class="trace-sku-val" id="tr-dist">—</div>
+          </div>
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">META actual</div>
+            <div class="trace-sku-val" id="tr-meta0">—</div>
+          </div>
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">META óptimo</div>
+            <div class="trace-sku-val" id="tr-metaopt">—</div>
+          </div>
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">Target svc</div>
+            <div class="trace-sku-val" id="tr-tgt">—</div>
+          </div>
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">Svc logrado</div>
+            <div class="trace-sku-val" id="tr-svc">—</div>
+          </div>
+          <div class="trace-sku-field">
+            <div class="trace-sku-label">Score</div>
+            <div class="trace-sku-val" id="tr-score">—</div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="trace-controls">
+          <div class="trace-ctrl-group">
+            <span class="trace-ctrl-label">META:</span>
+            <div class="trace-seg">
+              <button
+                id="tb-orig"
+                class="active"
+                onclick="setTraceMeta('orig')"
+              >
+                Original
+              </button>
+              <button id="tb-opt" onclick="setTraceMeta('opt')">
+                Optimizado
+              </button>
+            </div>
+          </div>
+          <div class="trace-ctrl-group">
+            <span class="trace-ctrl-label">Detalle:</span>
+            <div class="trace-seg">
+              <button
+                id="tb-cycle"
+                class="active"
+                onclick="setTraceLevel('cycle')"
+              >
+                Por ciclo
+              </button>
+              <button id="tb-day" onclick="setTraceLevel('day')">
+                Por día
+              </button>
+            </div>
+          </div>
+          <div class="trace-ctrl-group" id="range-ctrl" style="display: none">
+            <span class="trace-ctrl-label">Días:</span>
+            <div class="range-inputs">
+              desde
+              <input
+                type="number"
+                id="tr-from"
+                value="1"
+                min="1"
+                onchange="renderTraceTable()"
+              />
+              hasta
+              <input
+                type="number"
+                id="tr-to"
+                value="500"
+                min="1"
+                onchange="renderTraceTable()"
+              />
+              <button class="btn btn-g btn-sm" onclick="resetTraceRange()">
+                Todo
+              </button>
+            </div>
+          </div>
+          <div id="trace-warn" class="trace-warn"></div>
+          <div style="margin-left: auto; display: flex; gap: 0.4rem">
+            <button
+              class="btn btn-g btn-sm"
+              onclick="runTrace()"
+              id="btn-trace-run"
+            >
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              Regenerar traza
+            </button>
+            <button class="btn btn-g btn-sm" onclick="exportTraceCSV()">
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Exportar CSV completo
+            </button>
+          </div>
+        </div>
+
+        <!-- Trace body -->
+        <div class="trace-body">
+          <!-- Run-level summary stats -->
+          <div
+            class="trace-summary-grid"
+            id="trace-summary-grid"
+            style="display: none"
+          ></div>
+          <!-- Main trace table -->
+          <div class="trace-tw" id="trace-tw">
+            <div
+              style="
+                text-align: center;
+                padding: 3rem;
+                color: var(--gray-400);
+                font-size: 12px;
+              "
+            >
+              Selecciona un SKU en la tabla de resultados y haz clic en "Ver
+              log".
+            </div>
+          </div>
+        </div>
+
+        <div class="trace-footer">
+          <span
+            style="font-size: 10px; color: var(--gray-400)"
+            id="trace-footer-info"
+            >—</span
+          >
+          <div
+            style="
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              font-size: 10px;
+              color: var(--gray-400);
+            "
+          >
+            <span
+              style="
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 2px;
+                background: var(--red-50);
+                border: 1px solid var(--red-100);
+              "
+            ></span
+            >Stockout
+            <span
+              style="
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 2px;
+                background: var(--green-50);
+                border: 1px solid #c0dd97;
+              "
+            ></span
+            >Llegada pedido
+            <span
+              style="
+                display: inline-block;
+                width: 8px;
+                height: 8px;
+                border-radius: 2px;
+                background: var(--blue-50);
+                border: 1px solid var(--blue-100);
+              "
+            ></span
+            >Pedido emitido
+          </div>
+        </div>
+      </div>
+    </div>
     <script>
       "use strict";
       // ═══════════════════════════════════════════════════════════
@@ -1603,6 +2099,14 @@
       var sortKeyD00 = "distribucion",
         sortDirD00 = -1;
       var running = false;
+
+      // TRACE STATE
+      var traceRow = null; // the enriched policy row being traced
+      var traceResult = null; // the MC result object for that SKU
+      var traceData = null; // {cycles:[], days:[]} from simulateWithTrace
+      var traceMetaMode = "orig"; // 'orig' | 'opt'
+      var traceLevelMode = "cycle"; // 'cycle' | 'day'
+      var traceHorizonDays = 6000; // used when generating trace
 
       // ═══════════════════════════════════════════════════════════
       // UTILITY FUNCTIONS (mirrors D00 backend exactly)
@@ -1982,14 +2486,13 @@
         } else if (mode === "full") {
           banner.className = "mode-banner mode-full";
           dot.className = "mode-dot mode-dot-full";
-          txt.textContent =
-            "Modo completo: Distribución de la demanda + Monte Carlo";
+          txt.textContent = "Modo completo: Clasificar D00 + Monte Carlo";
           btnLbl.textContent = "Clasificar y simular";
           btn.disabled = running;
         } else if (mode === "direct") {
           banner.className = "mode-banner mode-direct";
           dot.className = "mode-dot mode-dot-direct";
-          txt.textContent = "Modo directo: Usando la distribución cargada";
+          txt.textContent = "Modo directo: usar distribución cargada";
           btnLbl.textContent = "Ejecutar simulación";
           btn.disabled = running;
         } else if (mode === "both") {
@@ -2337,8 +2840,8 @@
         log(
           "[Optismart] Iniciando proceso — modo: " +
             (useHist
-              ? "Distribución de la demanda + Monte Carlo"
-              : "Usando la distribución cargada"),
+              ? "Clasificar D00 + Monte Carlo"
+              : "Simular con distribución existente"),
           "i",
         );
 
@@ -2899,11 +3402,11 @@
         var tb = document.getElementById("res-tbody");
         if (!rows || !rows.length) {
           tb.innerHTML =
-            '<tr><td colspan="16" style="text-align:center;padding:3rem;color:var(--gray-400)">Sin resultados.</td></tr>';
+            '<tr><td colspan="17" style="text-align:center;padding:3rem;color:var(--gray-400)">Sin resultados.</td></tr>';
           return;
         }
         tb.innerHTML = rows
-          .map(function (r) {
+          .map(function (r, i) {
             var dl = r.deltaMeta || 0;
             var dc = dl > 0.5 ? "dp" : dl < -0.5 ? "dn" : "d0";
             var dstr = (dl >= 0 ? "+" : "") + n2(dl, 0);
@@ -2970,10 +3473,748 @@
                 ? '<span class="badge bg">Sí</span>'
                 : '<span class="badge br">No</span>') +
               "</td>" +
+              '<td><button class="btn btn-g btn-sm" onclick="openTrace(\'' +
+              encodeURIComponent(
+                JSON.stringify({
+                  SKU: r.SKU,
+                  Ubicacion: r.Ubicacion,
+                  Producto: r.Producto,
+                }),
+              ) +
+              "'," +
+              i +
+              ')">' +
+              '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01M7 20v-4M12 20V10M17 20V4M22 20h.01"/></svg>' +
+              "Ver log</button></td>" +
               "</tr>"
             );
           })
           .join("");
+      }
+
+      // ═══════════════════════════════════════════════════════════
+      // TRACE LOGIC — on-demand simulation trace for one SKU
+      // ═══════════════════════════════════════════════════════════
+
+      // openTrace is called from table button. rowKey is JSON-stringified id, idx is display index.
+      function openTrace(rowKeyEnc, idx) {
+        if (!results.length) return;
+        // find the result row by matching SKU/Ubicacion/Producto
+        var key = JSON.parse(decodeURIComponent(rowKeyEnc));
+        var found = null;
+        for (var i = 0; i < results.length; i++) {
+          var r = results[i];
+          if (
+            r.SKU === key.SKU &&
+            r.Ubicacion === key.Ubicacion &&
+            r.Producto === key.Producto
+          ) {
+            found = r;
+            break;
+          }
+        }
+        if (!found && idx != null && displayRows[idx]) found = displayRows[idx];
+        if (!found) return;
+        traceResult = found;
+
+        // Find enriched policy row (we need distInfo for sampling)
+        traceRow = null;
+        if (policyData) {
+          for (var j = 0; j < policyData.length; j++) {
+            var pr = policyData[j];
+            if (
+              (pr.SKU && pr.SKU === found.SKU) ||
+              (pr.Ubicacion === found.Ubicacion &&
+                pr.Producto === found.Producto)
+            ) {
+              traceRow = Object.assign({}, pr);
+              break;
+            }
+          }
+        }
+        if (!traceRow)
+          traceRow = {
+            SKU: found.SKU,
+            Ubicacion: found.Ubicacion,
+            Producto: found.Producto,
+            Nivel_Servicio: found.serviceTarget,
+            META: found.metaInitial,
+            Demanda_Promedio_Diaria: 0,
+            DS_Demanda: 0,
+            Frecuencia_Revision_dias: 1,
+            Lead_Time_Abasto: 0,
+          };
+
+        // Attach distInfo from current distribution source
+        var effDist = generatedDist || distDataRaw;
+        if (effDist) {
+          var dm = buildDistMap(effDist);
+          var mth = matchDist(traceRow, dm);
+          traceRow.distInfo = mth.distInfo;
+        }
+
+        traceHorizonDays = +document.getElementById("ch").value || 6000;
+        traceMetaMode = "orig";
+        traceLevelMode = "cycle";
+
+        // Populate SKU bar
+        document.getElementById("tr-sku").textContent = found.SKU || "—";
+        document.getElementById("tr-ubic").textContent = found.Ubicacion || "—";
+        document.getElementById("tr-prod").textContent = found.Producto || "—";
+        document.getElementById("tr-dist").textContent =
+          found.distributionType || "—";
+        document.getElementById("tr-meta0").textContent = n2(
+          found.metaInitial,
+          0,
+        );
+        document.getElementById("tr-metaopt").textContent = n2(
+          found.metaOptimized,
+          0,
+        );
+        document.getElementById("tr-tgt").textContent = p2(found.serviceTarget);
+        document.getElementById("tr-svc").textContent = p2(
+          found.serviceAchieved,
+        );
+        document.getElementById("tr-score").textContent =
+          n2(found.totalScorePct, 1) + " pts";
+
+        // Reset controls
+        setTraceMetaUI("orig");
+        setTraceLevelUI("cycle");
+        document.getElementById("trace-overlay").classList.add("open");
+        document.getElementById("nl-trace").style.display = "inline-block";
+
+        runTrace();
+      }
+
+      function openTraceFromNav() {
+        if (traceResult)
+          document.getElementById("trace-overlay").classList.add("open");
+      }
+
+      function closeTrace(e) {
+        if (e && e.target !== document.getElementById("trace-overlay")) return;
+        if (!e)
+          document.getElementById("trace-overlay").classList.remove("open");
+      }
+
+      function setTraceMeta(mode) {
+        traceMetaMode = mode;
+        setTraceMetaUI(mode);
+        runTrace();
+      }
+      function setTraceMetaUI(mode) {
+        document
+          .getElementById("tb-orig")
+          .classList.toggle("active", mode === "orig");
+        document
+          .getElementById("tb-opt")
+          .classList.toggle("active", mode === "opt");
+      }
+      function setTraceLevel(mode) {
+        traceLevelMode = mode;
+        setTraceLevelUI(mode);
+        renderTraceTable();
+      }
+      function setTraceLevelUI(mode) {
+        document
+          .getElementById("tb-cycle")
+          .classList.toggle("active", mode === "cycle");
+        document
+          .getElementById("tb-day")
+          .classList.toggle("active", mode === "day");
+        document.getElementById("range-ctrl").style.display =
+          mode === "day" ? "flex" : "none";
+      }
+      function resetTraceRange() {
+        document.getElementById("tr-from").value = 1;
+        document.getElementById("tr-to").value = traceHorizonDays;
+        renderTraceTable();
+      }
+
+      // Run the deterministic trace simulation (uses fixed seed via seeded sequence)
+      function runTrace() {
+        if (!traceRow || !traceResult) return;
+        var cfg = buildCFG();
+        var meta =
+          traceMetaMode === "opt"
+            ? traceResult.metaOptimized || 0
+            : traceResult.metaInitial || 0;
+
+        // warn if horizon would produce huge day log
+        var R = Math.max(
+          1,
+          Math.round(Number(traceRow.Frecuencia_Revision_dias) || 1),
+        );
+        var totalDays = cfg.horizonDays;
+        var warn = document.getElementById("trace-warn");
+        if (totalDays > 3000) {
+          warn.style.display = "block";
+          warn.textContent =
+            "Horizonte largo (" +
+            totalDays +
+            " días). Vista por día acotada a rango seleccionado. El CSV exporta todo.";
+          document.getElementById("tr-to").value = Math.min(500, totalDays);
+        } else {
+          warn.style.display = "none";
+          document.getElementById("tr-from").value = 1;
+          document.getElementById("tr-to").value = totalDays;
+        }
+
+        // Run the trace simulation in main thread (single rep, fast)
+        traceData = simulateWithTrace(traceRow, meta, cfg);
+        renderTraceSummary();
+        renderTraceTable();
+      }
+
+      // simulateWithTrace: same policy logic as the worker, but records every event.
+      // Returns {cycles:[...], days:[...], summary:{...}}
+      function simulateWithTrace(row, meta, cfg) {
+        var S = Math.max(0, meta);
+        var R = Math.max(
+          1,
+          Math.round(Number(row.Frecuencia_Revision_dias) || 1),
+        );
+        var LT = Math.max(0, Math.round(Number(row.Lead_Time_Abasto) || 0));
+        var totalCycles = Math.max(1, Math.floor(cfg.horizonDays / R));
+
+        var dist = row.distInfo || null;
+        var distType =
+          dist && dist.distribucion
+            ? String(dist.distribucion).toUpperCase()
+            : "NORMAL_FALLBACK";
+        var p0 = dist ? Math.min(1, Math.max(0, Number(dist.p0) || 0)) : 0;
+        var lambda =
+          dist && dist.parametros
+            ? Math.max(0, Number(dist.parametros.lambda) || 0)
+            : 0;
+        var nb_n = dist && dist.parametros ? Number(dist.parametros.nb_n) : NaN;
+        var nb_p = dist && dist.parametros ? Number(dist.parametros.nb_p) : NaN;
+        var mu =
+          dist && dist.mu != null
+            ? Number(dist.mu)
+            : Number(row.Demanda_Promedio_Diaria) || 0;
+        var sigma =
+          dist && dist.variance != null
+            ? Math.sqrt(Number(dist.variance) || 0)
+            : Number(row.DS_Demanda) || 0;
+
+        var onHand = S,
+          pipeline = [];
+        var cycles = [],
+          days = [];
+        var totalDemand = 0,
+          totalServed = 0,
+          totalShortage = 0,
+          totalOrdered = 0;
+        var okCycles = 0,
+          stockoutCycles = 0;
+
+        // Use a simple seeded linear congruential generator for reproducibility
+        var seed = 12345;
+        function rng() {
+          seed = (seed * 1664525 + 1013904223) & 0xffffffff;
+          return (seed >>> 0) / 4294967296;
+        }
+        function rngNorm(m, s) {
+          var u1 = Math.max(rng(), 1e-12),
+            u2 = rng();
+          return (
+            m + s * Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2)
+          );
+        }
+        function rngPoisson(lam) {
+          if (lam <= 0) return 0;
+          if (lam < 30) {
+            var L = Math.exp(-lam),
+              k = 0,
+              p = 1;
+            do {
+              k++;
+              p *= rng();
+            } while (p > L);
+            return k - 1;
+          }
+          return Math.max(0, Math.round(rngNorm(lam, Math.sqrt(lam))));
+        }
+        function rngGamma(shape, scale) {
+          var k = Number(shape) || 0,
+            theta = Math.max(Number(scale) || 0, 0);
+          if (k <= 0 || theta <= 0) return 0;
+          if (k < 1) {
+            var u = Math.max(rng(), 1e-12);
+            return rngGamma(k + 1, theta) * Math.pow(u, 1 / k);
+          }
+          var d = k - 1 / 3,
+            c = 1 / Math.sqrt(9 * d);
+          while (true) {
+            var x, v;
+            do {
+              x = rngNorm(0, 1);
+              v = 1 + c * x;
+            } while (v <= 0);
+            v = v * v * v;
+            var u = rng();
+            if (u < 1 - 0.0331 * Math.pow(x, 4)) return d * v * theta;
+            if (Math.log(u) < 0.5 * x * x + d * (1 - v + Math.log(v)))
+              return d * v * theta;
+          }
+        }
+        function rngNB(n, p) {
+          if (!isFinite(n) || !isFinite(p) || n <= 0 || p <= 0 || p >= 1)
+            return null;
+          return rngPoisson(rngGamma(n, (1 - p) / p));
+        }
+        function sampleDemand() {
+          if (distType === "ZERO_ONLY") return { d: 0, src: "ZERO_ONLY" };
+          if (distType === "POISSON" && lambda > 0)
+            return { d: rngPoisson(lambda), src: "POISSON" };
+          if (distType === "NB") {
+            var nb = rngNB(nb_n, nb_p);
+            if (nb != null) return { d: nb, src: "NB" };
+          }
+          if (distType === "ZINB") {
+            if (rng() <= p0) return { d: 0, src: "ZINB(zero)" };
+            var nb2 = rngNB(nb_n, nb_p);
+            if (nb2 != null) return { d: nb2, src: "ZINB(nb)" };
+          }
+          // fallback normal truncated
+          var m = Math.max(mu, 0),
+            s = Math.max(sigma, 0);
+          var d = rngNorm(m, Math.max(s, 1e-9));
+          var k = cfg.kStdClamp || 2;
+          d = Math.max(
+            0,
+            Math.min(
+              Math.max(0, m + k * s),
+              Math.max(d, Math.max(0, m - k * s)),
+            ),
+          );
+          return { d: Math.max(0, d), src: "FALLBACK_NORMAL" };
+        }
+
+        for (var cycle = 1; cycle <= totalCycles; cycle++) {
+          var dayStart = (cycle - 1) * R + 1,
+            dayEnd = cycle * R;
+          var cycleDemand = 0,
+            cycleServed = 0,
+            cycleShortage = 0;
+          var cycleStartInv = onHand;
+          var hadStockout = false;
+
+          for (var d = dayStart; d <= dayEnd; d++) {
+            var arrivals = 0,
+              orderArrived = false;
+            for (var i = pipeline.length - 1; i >= 0; i--) {
+              if (pipeline[i].arrivesOnDay === d) {
+                arrivals += pipeline[i].qty;
+                onHand += pipeline[i].qty;
+                pipeline.splice(i, 1);
+                orderArrived = true;
+              }
+            }
+            var invBefore = onHand;
+            var smp = sampleDemand();
+            var demand = Math.max(0, smp.d);
+            var served = Math.min(onHand, demand);
+            var shortage = demand - served;
+            onHand -= served;
+            cycleDemand += demand;
+            cycleServed += served;
+            cycleShortage += shortage;
+            totalDemand += demand;
+            totalServed += served;
+            totalShortage += shortage;
+            if (shortage > 0) hadStockout = true;
+
+            var pipeTotal = pipeline.reduce(function (a, p) {
+              return a + p.qty;
+            }, 0);
+            days.push({
+              day: d,
+              cycle: cycle,
+              invBefore: invBefore,
+              arrivals: arrivals,
+              demand: demand,
+              served: served,
+              shortage: shortage,
+              invAfter: onHand,
+              pipelineTotal: pipeTotal,
+              distSrc: smp.src,
+              events:
+                (orderArrived ? "LLEGADA " : "") +
+                (shortage > 0 ? "STOCKOUT " : "") +
+                (d === dayEnd ? "FIN_CICLO " : ""),
+            });
+          }
+
+          if (!hadStockout) okCycles++;
+          else stockoutCycles++;
+
+          var pipeQty = pipeline.reduce(function (a, p) {
+            return a + p.qty;
+          }, 0);
+          var invPos = onHand + pipeQty;
+          var orderQty = Math.max(0, S - invPos);
+          var arriveDay = null;
+          if (orderQty > 0) {
+            arriveDay = cycle * R + LT;
+            pipeline.push({ arrivesOnDay: arriveDay, qty: orderQty });
+            totalOrdered += orderQty;
+            // annotate last day of cycle with order event
+            if (days.length > 0)
+              days[days.length - 1].events += "PEDIDO(" + orderQty + ")";
+          }
+
+          var pipeAfterOrder = pipeline.reduce(function (a, p) {
+            return a + p.qty;
+          }, 0);
+          cycles.push({
+            cycle: cycle,
+            dayStart: dayStart,
+            dayEnd: dayEnd,
+            invStart: cycleStartInv,
+            cycleDemand: cycleDemand,
+            cycleServed: cycleServed,
+            cycleShortage: cycleShortage,
+            stockout: hadStockout,
+            invEnd: onHand,
+            invPosition: invPos,
+            orderQty: orderQty,
+            orderArriveDay: arriveDay,
+            pipelineAfter: pipeAfterOrder,
+          });
+        }
+
+        return {
+          cycles: cycles,
+          days: days,
+          summary: {
+            meta: S,
+            R: R,
+            LT: LT,
+            totalCycles: totalCycles,
+            distType: distType,
+            totalDemand: totalDemand,
+            totalServed: totalServed,
+            totalShortage: totalShortage,
+            totalOrdered: totalOrdered,
+            shortageRatio: totalShortage / Math.max(1, totalDemand),
+            cycleServiceLevel: okCycles / Math.max(1, totalCycles),
+            okCycles: okCycles,
+            stockoutCycles: stockoutCycles,
+          },
+        };
+      }
+
+      function renderTraceSummary() {
+        if (!traceData) return;
+        var s = traceData.summary;
+        var target = traceResult ? traceResult.serviceTarget : 0;
+        var svcPct = (s.cycleServiceLevel * 100).toFixed(1) + "%";
+        var svcGood = s.cycleServiceLevel >= target;
+        document.getElementById("trace-summary-grid").style.display = "grid";
+        document.getElementById("trace-summary-grid").innerHTML =
+          tstat("META usado", s.meta.toFixed(0), "blue") +
+          tstat("Ciclos totales", s.totalCycles, "") +
+          tstat("Nivel de servicio", svcPct, svcGood ? "good" : "bad") +
+          tstat(
+            "Shortage ratio",
+            (s.shortageRatio * 100).toFixed(2) + "%",
+            s.shortageRatio < 0.05 ? "good" : "bad",
+          ) +
+          tstat(
+            "Ciclos con stockout",
+            s.stockoutCycles,
+            s.stockoutCycles === 0 ? "good" : "bad",
+          );
+      }
+      function tstat(lbl, val, cls) {
+        return (
+          '<div class="trace-stat"><div class="trace-stat-lbl">' +
+          lbl +
+          "</div>" +
+          '<div class="trace-stat-val ' +
+          (cls || "") +
+          '">' +
+          val +
+          "</div></div>"
+        );
+      }
+
+      function renderTraceTable() {
+        if (!traceData) return;
+        var tw = document.getElementById("trace-tw");
+        document.getElementById("trace-footer-info").textContent =
+          "META: " +
+          traceData.summary.meta +
+          " | R: " +
+          traceData.summary.R +
+          " días | LT: " +
+          traceData.summary.LT +
+          " días | " +
+          "Distribución: " +
+          traceData.summary.distType +
+          " | Ciclos: " +
+          traceData.summary.totalCycles;
+
+        if (traceLevelMode === "cycle") {
+          renderCycleTable(traceData.cycles);
+        } else {
+          renderDayTable(traceData.days);
+        }
+      }
+
+      function renderCycleTable(cycles) {
+        var tw = document.getElementById("trace-tw");
+        var hdr =
+          "<thead><tr>" +
+          "<th>Ciclo</th><th>Día inicio</th><th>Día fin</th>" +
+          "<th>Inv. inicio</th><th>Demanda</th><th>Surtido</th>" +
+          "<th>Faltante</th><th>Stockout</th><th>Inv. fin</th>" +
+          "<th>Inv. position</th><th>Pedido emitido</th><th>Llega día</th><th>Pipeline pendiente</th>" +
+          "</tr></thead>";
+        var body =
+          "<tbody>" +
+          cycles
+            .map(function (c) {
+              var cls = c.stockout
+                ? "evt-stockout"
+                : c.orderQty > 0
+                  ? "evt-order"
+                  : "";
+              return (
+                '<tr class="' +
+                cls +
+                '">' +
+                '<td class="td-m">' +
+                c.cycle +
+                "</td>" +
+                '<td class="td-m">' +
+                c.dayStart +
+                "</td>" +
+                '<td class="td-m">' +
+                c.dayEnd +
+                "</td>" +
+                '<td class="td-m">' +
+                c.invStart.toFixed(1) +
+                "</td>" +
+                '<td class="td-m">' +
+                c.cycleDemand.toFixed(2) +
+                "</td>" +
+                '<td class="td-m">' +
+                c.cycleServed.toFixed(2) +
+                "</td>" +
+                '<td class="td-m">' +
+                (c.cycleShortage > 0
+                  ? '<span style="color:var(--red-400);font-weight:600">' +
+                    c.cycleShortage.toFixed(2) +
+                    "</span>"
+                  : "0.00") +
+                "</td>" +
+                "<td>" +
+                (c.stockout
+                  ? '<span class="badge br">SÍ</span>'
+                  : '<span class="badge bg">No</span>') +
+                "</td>" +
+                '<td class="td-m">' +
+                c.invEnd.toFixed(1) +
+                "</td>" +
+                '<td class="td-m">' +
+                c.invPosition.toFixed(1) +
+                "</td>" +
+                '<td class="td-m">' +
+                (c.orderQty > 0
+                  ? '<span style="color:var(--blue-600);font-weight:600">' +
+                    c.orderQty.toFixed(0) +
+                    "</span>"
+                  : "—") +
+                "</td>" +
+                '<td class="td-m">' +
+                (c.orderArriveDay != null ? "día " + c.orderArriveDay : "—") +
+                "</td>" +
+                '<td class="td-m">' +
+                c.pipelineAfter.toFixed(0) +
+                "</td>" +
+                "</tr>"
+              );
+            })
+            .join("") +
+          "</tbody>";
+        tw.innerHTML = "<table>" + hdr + body + "</table>";
+      }
+
+      function renderDayTable(days) {
+        var tw = document.getElementById("trace-tw");
+        // Apply range filter
+        var from = Math.max(
+          1,
+          parseInt(document.getElementById("tr-from").value) || 1,
+        );
+        var to = Math.min(
+          days.length,
+          parseInt(document.getElementById("tr-to").value) || days.length,
+        );
+        var visible = days.filter(function (d) {
+          return d.day >= from && d.day <= to;
+        });
+
+        var hdr =
+          "<thead><tr>" +
+          "<th>Día</th><th>Ciclo</th><th>Inv. inicio</th>" +
+          "<th>Llegadas</th><th>Demanda</th><th>Surtido</th>" +
+          "<th>Faltante</th><th>Inv. fin</th><th>Pipeline</th>" +
+          "<th>Dist. usada</th><th>Eventos</th>" +
+          "</tr></thead>";
+
+        var prevCycle = -1;
+        var body =
+          "<tbody>" +
+          visible
+            .map(function (d) {
+              var isNewCycle = d.cycle !== prevCycle;
+              prevCycle = d.cycle;
+              var rowCls =
+                d.shortage > 0
+                  ? "evt-stockout"
+                  : d.arrivals > 0
+                    ? "evt-arrive"
+                    : d.events.indexOf("PEDIDO") >= 0
+                      ? "evt-order"
+                      : "";
+              var cycleMarker = isNewCycle
+                ? '<span style="color:var(--blue-600);font-size:8px;font-weight:600">▸C' +
+                  d.cycle +
+                  "</span> "
+                : "";
+              return (
+                '<tr class="' +
+                rowCls +
+                '">' +
+                '<td class="td-m">' +
+                d.day +
+                "</td>" +
+                '<td class="td-m">' +
+                d.cycle +
+                "</td>" +
+                '<td class="td-m">' +
+                d.invBefore.toFixed(1) +
+                "</td>" +
+                '<td class="td-m">' +
+                (d.arrivals > 0
+                  ? '<span style="color:var(--green-600);font-weight:600">+' +
+                    d.arrivals.toFixed(0) +
+                    "</span>"
+                  : "—") +
+                "</td>" +
+                '<td class="td-m">' +
+                d.demand.toFixed(2) +
+                "</td>" +
+                '<td class="td-m">' +
+                d.served.toFixed(2) +
+                "</td>" +
+                '<td class="td-m">' +
+                (d.shortage > 0
+                  ? '<span style="color:var(--red-400);font-weight:600">' +
+                    d.shortage.toFixed(2) +
+                    "</span>"
+                  : "—") +
+                "</td>" +
+                '<td class="td-m">' +
+                d.invAfter.toFixed(1) +
+                "</td>" +
+                '<td class="td-m">' +
+                d.pipelineTotal.toFixed(0) +
+                "</td>" +
+                '<td class="td-m" style="color:var(--gray-400)">' +
+                d.distSrc +
+                "</td>" +
+                '<td style="font-size:9px;color:var(--gray-600)">' +
+                cycleMarker +
+                (d.events.trim() || "—") +
+                "</td>" +
+                "</tr>"
+              );
+            })
+            .join("") +
+          "</tbody>";
+
+        var info =
+          "Mostrando días " +
+          from +
+          "–" +
+          to +
+          " de " +
+          days.length +
+          " (" +
+          visible.length +
+          " filas)";
+        document.getElementById("trace-footer-info").textContent =
+          document
+            .getElementById("trace-footer-info")
+            .textContent.split("|")
+            .slice(0, 5)
+            .join("|") +
+          "  |  " +
+          info;
+
+        tw.innerHTML = "<table>" + hdr + body + "</table>";
+      }
+
+      function exportTraceCSV() {
+        if (!traceData) return;
+        var rows, cols;
+        if (traceLevelMode === "day") {
+          cols = [
+            "day",
+            "cycle",
+            "invBefore",
+            "arrivals",
+            "demand",
+            "served",
+            "shortage",
+            "invAfter",
+            "pipelineTotal",
+            "distSrc",
+            "events",
+          ];
+          rows = traceData.days;
+        } else {
+          cols = [
+            "cycle",
+            "dayStart",
+            "dayEnd",
+            "invStart",
+            "cycleDemand",
+            "cycleServed",
+            "cycleShortage",
+            "stockout",
+            "invEnd",
+            "invPosition",
+            "orderQty",
+            "orderArriveDay",
+            "pipelineAfter",
+          ];
+          rows = traceData.cycles;
+        }
+        var skuId = (traceResult.SKU || traceResult.Producto || "sku").replace(
+          /[^a-z0-9]/gi,
+          "_",
+        );
+        dlCSV(
+          cols,
+          rows,
+          "traza_" +
+            skuId +
+            "_" +
+            traceMetaMode +
+            "_" +
+            traceLevelMode +
+            "_" +
+            ts() +
+            ".csv",
+        );
+        toast("Traza exportada a CSV");
       }
 
       // ═══════════════════════════════════════════════════════════
